@@ -346,6 +346,11 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
     ?>
         </body>
         </html>
+        <script type="text/javascript">
+            <!--
+            window.print();
+            //-->
+        </script>
     <?php
 } else {
   ?>
@@ -369,12 +374,5 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
 
   <?php
 }
-?>
-<script type="text/javascript">
-<!--
-window.print();
-//-->
-</script>
-<?php
 ob_end_flush();
 ?>
