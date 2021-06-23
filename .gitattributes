@@ -1,1 +1,2 @@
 .cpanel.yml merge=ours
+env.php merge=ours
