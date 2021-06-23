@@ -356,7 +356,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
         </head>
         <body>
             <h2>
-                <?php print( URL_PREFIX + '/heures/index.php?page=1') ; ?>
+                <?php print_r( URL_PREFIX ) ; ?>
                 <a href="<?php print_r( URL_PREFIX + '/heures/index.php?page=1' ); ?>" > Cette semaine </a><br>
                 <a href="/heures/index.php?page=2"> Semaine prochaine </a><br>
                 <a href="/heures/index.php?page=3"> Dans 2 semaines </a><br>
