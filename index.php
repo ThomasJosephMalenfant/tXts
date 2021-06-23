@@ -1,5 +1,5 @@
 <?php
-require '../env.php';
+require 'env.php';
 ?>
 <html>
 <head><meta charset="UTF-8">
