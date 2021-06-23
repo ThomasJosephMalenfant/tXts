@@ -1,4 +1,5 @@
 <?php
+require '../env.php';
 require "BibleClass.php" ;
 
 ob_start();
