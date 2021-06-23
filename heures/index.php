@@ -357,12 +357,12 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
         <body>
             <h2>
                 <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=1' ); ?>" > Cette semaine </a><br>
-                <a href="/heures/index.php?page=2"> Semaine prochaine </a><br>
-                <a href="/heures/index.php?page=3"> Dans 2 semaines </a><br>
-                <a href="/heures/index.php?page=4"> Dans 3 semaines </a><br>
-                <a href="/heures/index.php?page=5"> Dans 4 semaines </a><br>
-                <a href="/heures/index.php?page=6"> Dans 5 semaines </a><br>
-                <a href="/heures/index.php?page=7"> Dans 6 semaines </a><br>
+                <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=2' ); ?>"> Semaine prochaine </a><br>
+                <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=3' ); ?>"> Dans 2 semaines </a><br>
+                <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=4' ); ?>"> Dans 3 semaines </a><br>
+                <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=5' ); ?>"> Dans 4 semaines </a><br>
+                <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=6' ); ?>"> Dans 5 semaines </a><br>
+                <a href="<?php print_r( URL_PREFIX . '/heures/index.php?page=7' ); ?>"> Dans 6 semaines </a><br>
             </h2>
         </body>
     </html>
