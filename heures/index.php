@@ -16,7 +16,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
     $jour = new DateTime('last sunday');
     $jour->modify($ajoutsemaine);
     $jour->modify('-1 day');
-    for ($i=0; $i < 3 ; $i++) { 
+    for ($i=0; $i < 7 ; $i++) { 
             
         $jour->modify('+1 day');
         $textes = array();
