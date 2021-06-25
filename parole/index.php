@@ -6,6 +6,9 @@ ob_start();
 
 if ( $reference = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) ) { 
 	$pericope = new Pericope() ;
+	print_r($reference);
+	$pericope->analyser($reference);
+	var_dump($pericope);
 
 } else {
 	?>
@@ -17,7 +20,7 @@ if ( $reference = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) 
 	</head>
 	<body>
 		<form method="post" autocomplete="off">
-			<label for="reference">Référence:</label><br>
+			<label for="reference">Référence finale :</label><br>
 			<input type="text" id="reference" name="reference"><br>
 			<input type="submit" value="Envoyer">
 		</form>
