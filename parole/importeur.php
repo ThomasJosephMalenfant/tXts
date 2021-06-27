@@ -44,7 +44,7 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
         @$dom->loadHTML($response);
 
         foreach($dom->getElementsByTagName('p') as $ligne) {
-            print_r($ligne);
+            print_r($ligne->textContent);
         }
 
     }
