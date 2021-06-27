@@ -30,15 +30,39 @@ class Pericope
 		$ref_sans_livre = substr(strstr($ref," "),1);
 		$array_sans_livre = explode(".",$ref_sans_livre);
 		foreach ($array_sans_livre as $chunk) {
-			$extremites = explode("-",$chunk);
-			$depart_total = explode(",",$extremites[0]);
-			$depart_chapitre = trim($depart_total[0]);
-			$depart_verset = trim($depart_total[1]);
+			$pre_extremites = explode("-",$chunk);
+			$extremites = array();
+
+			// TODO : prévoir mécanisme pour référence de plein chapitre / chapitre_S_
+
+			$depart_chapitre = trim(explode(",", $pre_extremites[0])[0]);
+			$depart_verset = trim(explode(",", $pre_extremites[0])[1]);
+
+			if (isset($pre_extremites[1])) {
+				if ( strpos( $pre_extremites[1], ",")) {
+					$fin_chapitre = trim(explode(",", $pre_extremites[1])[0]) ;
+					$fin_verset = trim(explode(",", $pre_extremites[1])[1]);	
+				} else {
+					$fin_chapitre = $depart_chapitre ;
+					$fin_verset = trim($pre_extremites[1]) ;
+				}
+			} else { // Pas de tiret donc mono-verset donc $fin = $depart 
+				$fin_chapitre = $depart_chapitre ;
+				$fin_verset = $depart_verset ;
+			}
+
+			$extremites[0] = array("chapitre"=>$depart_chapitre, "verset"=>$depart_verset);
+			$extremites[1] = array("chapitre"=>$fin_chapitre, "verset"=>$fin_verset);
+
 			if ($connection->online) {
-				$query = "SELECT * FROM `textes` WHERE `livres_id`='".$this->livre."' AND `chapitre`='".$depart_chapitre."' AND `verset`='".$depart_verset."' LIMIT 1";
-				$result_verset_depart = $connection->queter($query,array("id","texte")) ;
-				$this->texte = "Verset départ ID : " . $result_verset_depart[0]["id"] . " | Texte : " . $result_verset_depart[0]["texte"] ;
+				for ($i=0; $i < 2 ; $i++) { 
+					$query = "SELECT * FROM `textes` WHERE `livres_id`='".$this->livre."' AND `chapitre`='" . $extremites[$i]["chapitre"] . "' AND `verset`='". $extremites[$i]["verset"] . "' LIMIT 1";
+					$extremites[$i]["id"] = $connection->queter($query,array("id"))[0]["id"] ;
+				}
+				$query = "SELECT * FROM `textes` WHERE `id` BETWEEN " . $extremites[0]["id"] . " AND " . $extremites[1]["id"] ; 
+				$this->versets = array_merge($this->versets, $connection->queter($query, array("id","chapitre", "verset", "texte")));
 			} else { $this->erreurs[] = "Erreur :".$connection->erreur ; }
+
 		}
 	}
 }
