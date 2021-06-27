@@ -27,7 +27,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 			}
 			.titre3 {
 				font-weight: 500;
-				font-size: 25px;
+				font-size: 22px;
 				margin: 20px 0 5px;
 			}
 			.verse_number {
