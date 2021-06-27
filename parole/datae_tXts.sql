@@ -3,6 +3,8 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
+-- Pour rendre utilisable : remove UNIQUE , VISIBLE et INVISIBLE des définitions
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -120,8 +122,10 @@ INSERT INTO `versions` (`name`, `abbr`, `description`, `corpus_id`, `langues_id`
 
 INSERT INTO `livres` (`name`, `abbr`, `titre`, `description`, `versions_id`) VALUES
 ('Genèse', 'Gn', 'Lecture du livre de la Genèse', NULL, '1');
+('Exode', 'Ex', 'Lecture du livre de l’Exode', NULL, '1');
 
 INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
+-- aelf.Gn 
 ('1', '1', 'AU COMMENCEMENT, Dieu créa le ciel et la terre.', '1'), 
 ('1', '2', 'La terre était informe et vide, les ténèbres étaient au-dessus de l’abîme et le souffle de Dieu planait au-dessus des eaux.', '1'), 
 ('1', '3', 'Dieu dit : « Que la lumière soit. » Et la lumière fut.', '1'), 
