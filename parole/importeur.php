@@ -10,41 +10,44 @@ print("
      <body>
 ");
 
-if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) ) { 
+if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) { 
+    $nb_chap = filter_input(INPUT_POST, 'nb_chap', FILTER_SANITIZE_STRING);
+    $no_db = filter_input(INPUT_POST, 'no_db', FILTER_SANITIZE_STRING);
+    
+    for ($i=1 ; $i < $nb_chap; $i++) {     
+     
+        $url = "https://www.aelf.org/bible/" . $livre . "/" . $i ;
+        
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: text/html",
+                "cache-control: no-cache"
+                ),
+            )
+        );
 
-    $url = "https://www.aelf.org/bible/Ex/8" ;
 
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_POSTFIELDS => "",
-        CURLOPT_HTTPHEADER => array(
-            "Content-Type: text/html",
-            "cache-control: no-cache"
-            ),
-        )
-    );
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
+        $dom = new DOMDocument();
 
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
+        @$dom->loadHTML($response);
 
-    $dom = new DOMDocument();
+        foreach($dom->getElementsByTagName('p') as $ligne) {
+            print_r($ligne["nodeValue"]);
+        }
 
-    @$dom->loadHTML($response);
-
-    # Iterate over all the <a> tags
-    foreach($dom->getElementsByTagName('p') as $ligne) {
-        print_r($ligne["nodeValue"]);
     }
-
-    //var_dump($response) ;
 } else {
 	?>
 	<!DOCTYPE html>
@@ -57,8 +60,10 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 		<form method="post" autocomplete="off">
 			<label for="livre">Livre :</label><br>
 			<input type="text" id="livre" name="livre"><br>
-			<label for="nb_chap">Livre :</label><br>
+			<label for="nb_chap">Nombre de chapitre :</label><br>
 			<input type="text" id="nb_chap" name="nb_chap"><br>
+			<label for="no_db">Numéro du livre sur tXtsDB :</label><br>
+			<input type="text" id="no_db" name="no_db"><br>
 			<input type="submit" value="Envoyer">
 		</form>
 	</body>
