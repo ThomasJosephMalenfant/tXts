@@ -7,6 +7,7 @@ ob_start();
 if ( $reference = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) ) { 
 	$pericope = new Pericope($reference) ;
 	var_dump($pericope->livre);
+	var_dump($pericope->texte);
 
 } else {
 	?>
