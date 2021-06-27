@@ -47,7 +47,7 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
             $ligne_txt = $ligne->textContent ;
             $ref_verset = ltrim(trim( explode(" ",$ligne_txt)[0] ), "0") ;
             $ref_txt = substr(strstr($ligne_txt," "),1);
-            if ( ! $ref_verset == "Recevez") {
+            if ( $ref_verset != "Recevez") {
                 print("('" . $i . "', '" . $ref_verset . "', '" . $ref_txt . "', '" . $no_db . "'), </br>") ;
             }
         }
