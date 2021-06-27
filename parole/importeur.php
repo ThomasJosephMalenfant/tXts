@@ -31,12 +31,15 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $err = curl_error($curl);
 
-$doc = new DOMDocument();
-$doc->loadHTML($response) ;
-$lignes = $doc->getElementsByTagName("p");
-foreach ($lignes as $ligne) {
-    echo $ligne ;
+$dom = new DOMDocument();
+
+@$dom->loadHTML($response);
+
+# Iterate over all the <a> tags
+foreach($dom->getElementsByTagName('p') as $ligne) {
+    print_r($ligne);
 }
+
 //var_dump($response) ;
 
 print("</body></html>");
