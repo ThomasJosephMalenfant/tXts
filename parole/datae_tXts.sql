@@ -16,6 +16,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Table `corpus`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `corpus` ;
 CREATE TABLE IF NOT EXISTS `corpus` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` TINYTEXT NOT NULL,
@@ -30,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `corpus` (
 -- -----------------------------------------------------
 -- Table `langues`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `langues` ;
 CREATE TABLE IF NOT EXISTS `langues` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` TINYTEXT NOT NULL,
@@ -44,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `langues` (
 -- -----------------------------------------------------
 -- Table `versions`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `versions` ;
 CREATE TABLE IF NOT EXISTS `versions` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` TINYTEXT NOT NULL,
@@ -72,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `versions` (
 -- -----------------------------------------------------
 -- Table `livres`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `livres` ;
 CREATE TABLE IF NOT EXISTS `livres` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` TINYTEXT NOT NULL,
@@ -94,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `livres` (
 -- -----------------------------------------------------
 -- Table `textes`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `textes` ;
 CREATE TABLE IF NOT EXISTS `textes` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `chapitre` INT UNSIGNED NULL,
@@ -125,11 +130,10 @@ INSERT INTO `livres` (`name`, `abbr`, `titre`, `description`, `versions_id`) VAL
 ('Exode', 'Ex', 'Lecture du livre de l’Exode', NULL, '1'),
 ('Lévitique', 'Lv', 'Lecture du livre du Lévitique', NULL, '1'),
 ('Nombre', 'Nb', 'Lecture du livre des Nombres', NULL, '1'),
-('Deutéronome', 'Dt', 'Lecture du livre du Deutéronome', NULL, '1'),
+('Deutéronome', 'Dt', 'Lecture du livre du Deutéronome', NULL, '1');
 
 
 INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
--- aelf.Gn 
 ('1', '1', 'AU COMMENCEMENT, Dieu créa le ciel et la terre.', '1'), 
 ('1', '2', 'La terre était informe et vide, les ténèbres étaient au-dessus de l’abîme et le souffle de Dieu planait au-dessus des eaux.', '1'), 
 ('1', '3', 'Dieu dit : « Que la lumière soit. » Et la lumière fut.', '1'), 
@@ -942,7 +946,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('29', '17', 'Les yeux de Léa étaient délicats, tandis que Rachel avait belle allure et beau visage.', '1'), 
 ('29', '18', 'Et Jacob se mit à aimer Rachel. Il dit : « Je te servirai sept ans pour Rachel, ta fille cadette. »', '1'), 
 ('29', '19', 'Laban répondit : « Je préfère te la donner à toi plutôt qu’à un autre ; reste donc chez moi. »', '1'), 
-('29', '20', 'Jacob travailla sept ans pour Rachel – sept ans qui lui semblèrent quelques jours, tellement il l’aimait.', '1'), 
+('29', '20', 'Jacob travailla sept ans pour Rachel – sept ans qui lui semblèrent quelques jours, tellement il l’aimait.', '1');
+INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('29', '21', 'Jacob dit alors à Laban : « Donne-moi ma femme car les jours que je te devais sont accomplis et je veux m’unir à elle. »', '1'), 
 ('29', '22', 'Laban rassembla tous les gens de l’endroit et fit un festin.', '1'), 
 ('29', '23', 'Le soir venu, il prit sa fille Léa, l’amena à Jacob et Jacob s’unit à elle.', '1'), 
@@ -1092,7 +1097,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('33', '2', 'En tête, il mit les servantes et leurs enfants, puis Léa et ses enfants, et derrière, Rachel et Joseph.', '1'), 
 ('33', '3', 'Quant à lui, il passa devant eux et il se prosterna sept fois, face contre terre, avant d’aborder son frère.', '1'), 
 ('33', '4', 'Ésaü courut à sa rencontre, l’étreignit, se jeta à son cou, l’embrassa, et tous deux pleurèrent.', '1'), 
-('33', '5', 'Ésaü leva les yeux, vit les femmes et les enfants, et dit : « Qui sont ceux-là pour toi ? » Jacob répondit : « Ce sont les enfants que Dieu a accordés à ton serviteur. »', '1'), 
+('33', '5', 'Ésaü leva les yeux, vit les femmes et les enfants, et dit : « Qui sont ceux-là pour toi ? » Jacob répondit : « Ce sont les enfants que Dieu a accordés à ton serviteur. »', '1');
+INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('33', '6', 'Alors les servantes s’avancèrent avec leurs enfants et se prosternèrent.', '1'), 
 ('33', '7', 'Puis s’avança Léa avec ses enfants, et ils se prosternèrent. Enfin s’avancèrent Joseph et Rachel, et ils se prosternèrent.', '1'), 
 ('33', '8', 'Ésaü reprit : « Qu’est-ce que toute cette troupe que j’ai rencontrée ? » Jacob répondit : « C’est pour trouver grâce aux yeux de mon seigneur. »', '1'), 
@@ -1660,7 +1666,6 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('50', '24', 'Joseph dit à ses frères : « Je vais mourir. Dieu vous visitera et vous fera remonter de ce pays dans le pays qu’il a fait serment de donner à Abraham, Isaac et Jacob. »', '1'), 
 ('50', '25', 'Joseph fit prêter serment aux fils d’Israël, en disant : « Quand Dieu vous visitera, vous ferez monter d’ici mes ossements. »', '1'), 
 ('50', '26', 'Joseph mourut à cent dix ans. On l’embauma et on le mit dans un cercueil en Égypte.', '1'),
--- aelf.Ex
 ('1', '1', 'VOICI LES NOMS des fils d’Israël venus en Égypte avec Jacob, leur père. Chacun y vint avec sa famille.', '2'),
 ('1', '2', 'C’étaient Roubène, Siméon, Lévi et Juda,', '2'),
 ('1', '3', 'Issakar, Zabulon et Benjamin,', '2'),
@@ -2042,7 +2047,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('14', '22', 'Les fils d’Israël entrèrent au milieu de la mer à pied sec, les eaux formant une muraille à leur droite et à leur gauche.', '2'),
 ('14', '23', 'Les Égyptiens les poursuivirent ; tous les chevaux de Pharaon, ses chars et ses guerriers entrèrent derrière eux jusqu’au milieu de la mer.', '2'),
 ('14', '24', 'Aux dernières heures de la nuit, le Seigneur observa, depuis la colonne de feu et de nuée, l’armée des Égyptiens, et il la frappa de panique.', '2'),
-('14', '25', 'Il faussa les roues de leurs chars, et ils eurent beaucoup de peine à les conduire. Les Égyptiens s’écrièrent : « Fuyons devant Israël, car c’est le Seigneur qui combat pour eux contre nous ! »', '2'),
+('14', '25', 'Il faussa les roues de leurs chars, et ils eurent beaucoup de peine à les conduire. Les Égyptiens s’écrièrent : « Fuyons devant Israël, car c’est le Seigneur qui combat pour eux contre nous ! »', '2') ;
+INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('14', '26', 'Le Seigneur dit à Moïse : « Étends le bras sur la mer : que les eaux reviennent sur les Égyptiens, leurs chars et leurs guerriers ! »', '2'),
 ('14', '27', 'Moïse étendit le bras sur la mer. Au point du jour, la mer reprit sa place ; dans leur fuite, les Égyptiens s’y heurtèrent, et le Seigneur les précipita au milieu de la mer.', '2'),
 ('14', '28', 'Les eaux refluèrent et recouvrirent les chars et les guerriers, toute l’armée de Pharaon qui était entrée dans la mer à la poursuite d’Israël. Il n’en resta pas un seul.', '2'),
@@ -2874,7 +2880,6 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('40', '36', 'À chaque étape, lorsque la nuée s’élevait et quittait la Demeure, les fils d’Israël levaient le camp.', '2'),
 ('40', '37', 'Si la nuée ne s’élevait pas, ils campaient jusqu’au jour où elle s’élevait.', '2'),
 ('40', '38', 'Dans la journée, la nuée du Seigneur reposait sur la Demeure, et la nuit, un feu brillait dans la nuée aux yeux de tout Israël. Et il en fut ainsi à toutes leurs étapes.', '2'),
--- aelf.Lv
 ('1', '1', 'LE SEIGNEUR APPELA Moïse et lui parla depuis la tente de la Rencontre :', '3'),
 ('1', '2', '« Parle aux fils d’Israël. Tu leur diras : Quand l’un d’entre vous apporte au Seigneur un présent réservé, il choisira ce présent parmi le gros ou le petit bétail.', '3'),
 ('1', '3', 'Si le présent réservé est ce qui est offert en holocauste de gros bétail, il apportera un mâle sans défaut ; il l’apportera à l’entrée de la tente de la Rencontre, pour qu’il soit agréé par le Seigneur.', '3'),
@@ -3017,7 +3022,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('7', '6', 'Tout homme parmi les prêtres pourra en manger. On en mangera dans un lieu saint : c’est une chose très sainte.', '3'),
 ('7', '7', 'Tel le sacrifice pour la faute, tel le sacrifice de réparation : pour eux il y a une même loi. La victime sera pour le prêtre qui a accompli le rite d’expiation.', '3'),
 ('7', '8', 'Le prêtre qui présentera un holocauste pour un homme gardera la peau de la victime de cet holocauste.', '3'),
-('7', '9', 'Toute offrande de céréales, cuite au four ou bien préparée dans un récipient ou sur une plaque, sera pour le prêtre qui l’aura présentée.', '3'),
+('7', '9', 'Toute offrande de céréales, cuite au four ou bien préparée dans un récipient ou sur une plaque, sera pour le prêtre qui l’aura présentée.', '3');
+INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('7', '10', 'Toute offrande de céréales, pétrie à l’huile ou sèche, sera pour tous les fils d’Aaron, à part égale.', '3'),
 ('7', '11', 'Voici la loi du sacrifice de paix que l’on présentera au Seigneur :', '3'),
 ('7', '12', 'S’il s’agit d’une action de grâce, on présentera pour le sacrifice d’action de grâce des gâteaux sans levain pétris à l’huile, des galettes sans levain frottées d’huile et des gâteaux faits de farine bien mélangée et pétris à l’huile.', '3'),
@@ -3734,7 +3740,6 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('27', '32', 'Toute dîme de gros ou petit bétail, c’est-à-dire chaque dixième bête qui passe sous la houlette du berger, est chose sainte pour le Seigneur.', '3'),
 ('27', '33', 'On ne fera pas le tri entre le bon et le mauvais, on ne remplacera pas l’un par l’autre. Si on le fait, la bête remplacée et l’autre seront choses saintes : on ne pourra pas les racheter. »', '3'),
 ('27', '34', 'Tels sont les commandements que le Seigneur donna à Moïse pour les fils d’Israël, sur le mont Sinaï.', '3'),
--- aelf.Nb
 ('1', '1', 'AU DESERT DU SINAÏ, le Seigneur parla à Moïse, dans la tente de la Rencontre, le premier jour du deuxième mois de la deuxième année après la sortie du pays d’Égypte. Il dit :', '4'),
 ('1', '2', '« Faites le dénombrement de toute la communauté des fils d’Israël par clans, par familles, en comptant nommément tous les hommes, un par un.', '4'),
 ('1', '3', 'Tous ceux qui ont vingt ans et plus, ceux qui, en Israël, sont aptes à rejoindre l’armée, toi et Aaron, vous les recenserez par formations de combat.', '4'),
@@ -4004,7 +4009,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('7', '21', 'puis, pour l’holocauste, un taureau, un bélier, un agneau de l’année ;', '4'),
 ('7', '22', 'ensuite un bouc destiné au sacrifice pour la faute', '4'),
 ('7', '23', 'et, pour le sacrifice de paix, deux bœufs, cinq béliers, cinq boucs, cinq agneaux de l’année. Tel fut le présent de Netanél, fils de Souar.', '4'),
-('7', '24', 'Le troisième jour, ce fut le chef des fils de Zabulon, Éliab, fils de Hélone.', '4'),
+('7', '24', 'Le troisième jour, ce fut le chef des fils de Zabulon, Éliab, fils de Hélone.', '4');
+INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('7', '25', 'Son présent comprenait un plat d’argent pesant cent trente sicles, une coupe en argent de soixante-dix sicles – selon le sicle du sanctuaire –, tous deux remplis de fleur de farine pétrie à l’huile, pour l’offrande de céréales ;', '4'),
 ('7', '26', 'puis un gobelet de dix sicles d’or rempli d’encens ;', '4'),
 ('7', '27', 'puis, pour l’holocauste, un taureau, un bélier, un agneau de l’année ;', '4'),
@@ -4997,7 +5003,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('35', '18', 'Ou encore si de sa main il l’a frappé avec un objet en bois qui peut provoquer la mort, et a effectivement causé la mort, c’est un meurtrier ; et le meurtrier doit être mis à mort.', '4'),
 ('35', '19', 'C’est le vengeur du sang qui mettra à mort le meurtrier ; dès qu’il tombera sur lui, il le mettra à mort.', '4'),
 ('35', '20', 'Si par haine un homme a bousculé quelqu’un ou a lancé quelque chose contre lui avec malveillance, et qu’ainsi il a causé la mort,', '4'),
-('35', '21', 'ou si avec hostilité il l’a frappé de la main, et qu’ainsi il a causé la mort, celui qui a frappé sera mis à mort ; c’est un meurtrier. Dès qu’il tombera sur le meurtrier, le vengeur du sang le mettra à mort.', '4'),
+('35', '21', 'ou si avec hostilité il l’a frappé de la main, et qu’ainsi il a causé la mort, celui qui a frappé sera mis à mort ; c’est un meurtrier. Dès qu’il tombera sur le meurtrier, le vengeur du sang le mettra à mort.', '4');
+INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('35', '22', 'Mais si c’est par hasard et sans hostilité qu’un homme a bousculé quelqu’un, ou lui a lancé quelque objet sans malveillance,', '4'),
 ('35', '23', 'ou encore si, sans le voir, il l’a atteint avec une pierre qui peut provoquer la mort – et qu’en faisant tomber cette pierre, il a effectivement causé la mort, tandis qu’il n’était pas son ennemi et ne lui voulait pas de mal –,', '4'),
 ('35', '24', 'alors, la communauté jugera entre celui qui a frappé et le vengeur du sang, selon le droit.', '4'),
@@ -5024,7 +5031,6 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('36', '11', 'Mahla, Tirça, Hogla, Milka et Noa, les filles de Celofehad, épousèrent des fils de leurs oncles.', '4'),
 ('36', '12', 'Elles épousèrent donc des hommes des clans des fils de Manassé, fils de Joseph, et leur part d’héritage resta dans la tribu à laquelle appartenait le clan de leur père.', '4'),
 ('36', '13', 'Voilà les commandements et les ordonnances que le Seigneur prescrivit aux fils d’Israël par l’intermédiaire de Moïse, dans les steppes de Moab, au bord du Jourdain, à la hauteur de Jéricho.', '4'),
--- aelf.Dt
 ('1', '1', 'VOICI LES PAROLES que Moïse adressa à tout Israël dans le désert, au-delà du Jourdain, dans la Araba, en face de Souf, – entre Parane, Tofel, Labane, Hacéroth et Di-Zahab.', '5'),
 ('1', '2', 'Du mont Horeb à Cadès-Barnéa, il y a onze jours de marche par la route du mont Séïr.', '5'),
 ('1', '3', 'Or, en la quarantième année après la sortie d’Égypte, le premier jour du onzième mois, Moïse parla aux fils d’Israël : il leur rapporta tout ce que le Seigneur lui avait ordonné de transmettre.', '5'),
@@ -5984,9 +5990,6 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('34', '10', 'Il ne s’est plus levé en Israël un prophète comme Moïse, lui que le Seigneur rencontrait face à face.', '5'),
 ('34', '11', 'Que de signes et de prodiges le Seigneur l’avait envoyé accomplir en Égypte, devant Pharaon, tous ses serviteurs et tout son pays !', '5'),
 ('34', '12', 'Avec quelle main puissante, quel pouvoir redoutable, Moïse avait agi aux yeux de tout Israël !', '5') ;
-
-
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
