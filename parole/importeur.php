@@ -14,7 +14,7 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
     $nb_chap = filter_input(INPUT_POST, 'nb_chap', FILTER_SANITIZE_STRING);
     $no_db = filter_input(INPUT_POST, 'no_db', FILTER_SANITIZE_STRING);
     
-    for ($i=1 ; $i < $nb_chap; $i++) {     
+    for ($i=1 ; $i <= $nb_chap; $i++) {     
      
         $url = "https://www.aelf.org/bible/" . $livre . "/" . $i ;
         
