@@ -28,10 +28,16 @@ curl_setopt_array($curl, array(
 );
 
 
- $response = curl_exec($curl);
- $err = curl_error($curl);
+$response = curl_exec($curl);
+$err = curl_error($curl);
 
-var_dump($response) ;
+$doc = new DOMDocument();
+$doc->loadHTML($response) ;
+$lignes = $doc->getElementsByTagName("p");
+foreach ($lignes as $ligne) {
+    echo $ligne ;
+}
+//var_dump($response) ;
 
 print("</body></html>");
 ?>
