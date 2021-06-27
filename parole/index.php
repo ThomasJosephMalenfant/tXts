@@ -5,10 +5,8 @@ require "BibleClass.php" ;
 ob_start();
 
 if ( $reference = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) ) { 
-	$pericope = new Pericope() ;
-	print_r($reference);
-	$pericope->analyser($reference);
-	var_dump($pericope);
+	$pericope = new Pericope($reference) ;
+	var_dump($pericope->livre);
 
 } else {
 	?>
