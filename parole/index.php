@@ -6,8 +6,23 @@ ob_start();
 
 if ( $reference = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) ) { 
 	$pericope = new Pericope($reference) ;
-	var_dump($pericope->versets);
-
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+        <meta charset="UTF-8" />
+ 		<title><?php print $reference ; ?></title>
+	</head>
+	<body>
+		<h1><?php print $pericope->titre ; ?></h1>
+		<?php
+			foreach ($pericope->versets as $verset) {
+				print "<p>" . $verset["texte"] . "</p>";
+			}
+		?>
+	</body>
+	</html>
+	<?php
 } else {
 	?>
 	<!DOCTYPE html>
