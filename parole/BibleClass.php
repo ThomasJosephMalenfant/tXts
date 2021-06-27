@@ -29,14 +29,23 @@ class Pericope
 		// Trouver verset départ
 		$ref_sans_livre = substr(strstr($ref," "),1);
 		$array_sans_livre = explode(".",$ref_sans_livre);
+		$depart_chapitre = "" ;
+		$depart_verset = "" ;
+		$fin_chapitre = "" ; 
+		$fin_verset = "" ;
+
 		foreach ($array_sans_livre as $chunk) {
 			$pre_extremites = explode("-",$chunk);
 			$extremites = array();
 
 			// TODO : prévoir mécanisme pour référence de plein chapitre / chapitre_S_
-
-			$depart_chapitre = trim(explode(",", $pre_extremites[0])[0]);
-			$depart_verset = trim(explode(",", $pre_extremites[0])[1]);
+			
+			if (strpos($pre_extremites[0], ",")) {
+				$depart_chapitre = trim(explode(",", $pre_extremites[0])[0]);
+				$depart_verset = trim(explode(",", $pre_extremites[0])[1]);
+			} else {
+				$depart_verset = $pre_extremites[0] ;
+			}
 
 			if (isset($pre_extremites[1])) {
 				if ( strpos( $pre_extremites[1], ",")) {
