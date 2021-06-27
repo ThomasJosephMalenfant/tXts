@@ -1838,7 +1838,8 @@ INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES
 ('7', '26', 'Le Seigneur dit à Moïse : « Va trouver Pharaon et dis-lui : Ainsi parle le Seigneur : “Laisse partir mon peuple, afin qu’il me serve.”', '2'), 
 ('7', '27', 'Si toi, tu refuses de le laisser partir, moi je vais infester de grenouilles tout ton territoire.', '2'), 
 ('7', '28', 'Le Nil grouillera de grenouilles ; elles monteront, elles entreront dans ta maison, dans ta chambre à coucher, sur ton lit, dans les maisons de tes serviteurs et de ton peuple, dans tes fours et dans tes pétrins.', '2'), 
-('7', '29', 'Sur toi, sur les gens de ton peuple et sur tous tes serviteurs, grimperont les grenouilles. »', '2') ;
+('7', '29', 'Sur toi, sur les gens de ton peuple et sur tous tes serviteurs, grimperont les grenouilles. »', '2'), 
+
 
 
 
