@@ -130,8 +130,12 @@ INSERT INTO `livres` (`name`, `abbr`, `titre`, `description`, `versions_id`) VAL
 ('Exode', 'Ex', 'Lecture du livre de l’Exode', NULL, '1'),
 ('Lévitique', 'Lv', 'Lecture du livre du Lévitique', NULL, '1'),
 ('Nombre', 'Nb', 'Lecture du livre des Nombres', NULL, '1'),
-('Deutéronome', 'Dt', 'Lecture du livre du Deutéronome', NULL, '1');
-
+('Deutéronome', 'Dt', 'Lecture du livre du Deutéronome', NULL, '1'),
+('Josué', 'Jos', 'Lecture du livre de Josué', NULL, '1'),
+('Juges', 'Jg', 'Lecture du livre des Juges', NULL, '1'),
+('Ruth', 'Rt', 'Lecture du livre de Ruth', NULL, '1'),
+('Samuel 1', '1S', 'Lecture du premier livre de Samuel', NULL, '1'),
+('Samuel 2', '2S', 'Lecture du deuxième livre de Samuel', NULL, '1');
 
 INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES 
 ('1', '1', 'AU COMMENCEMENT, Dieu créa le ciel et la terre.', '1'), 
