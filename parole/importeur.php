@@ -15,9 +15,9 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
     $no_db = filter_input(INPUT_POST, 'no_db', FILTER_SANITIZE_STRING);
 
     // En-tête de chapitre  : 
-    print("------------------------------ </br>") ;
-    print("-- Données du livre " . $livre . " tirées de aelf.org --- </br>") ;
-    print("------------------------------ </br>") ;
+    print("-- ---------------------------- </br>") ;
+    print("-- Données du livre " . $livre . " tirées de aelf.org </br>") ;
+    print("-- --------------------------- </br>") ;
     print("INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES </br>") ;
 
     for ($i=1 ; $i <= $nb_chap; $i++) {     
@@ -52,7 +52,7 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
         foreach($dom->getElementsByTagName('p') as $ligne) {
             $ligne_txt = $ligne->textContent ;
             $ref_verset = ltrim(trim( explode(" ",$ligne_txt)[0] ), "0") ;
-            $ref_txt = substr(strstr($ligne_txt," "),1);
+            $ref_txt = str_replace("'", "’", substr(strstr($ligne_txt," "),1));
             if ( $ref_verset != "Recevez") {
                 print("('" . $i . "', '" . $ref_verset . "', '" . $ref_txt . "', '" . $no_db . "'), </br>") ;
             }
