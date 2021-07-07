@@ -173,42 +173,41 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
             149 => 149,
             150 => 150) ;
         foreach ($map_ps as $no_ps => $expr_ps_aelf) {
-            // $url = "https://www.aelf.org/bible/Ps/" . $expr_ps_aelf ;
+            $url = "https://www.aelf.org/bible/Ps/" . $expr_ps_aelf ;
             
-            // $curl = curl_init();
-            // curl_setopt_array($curl, array(
-            //     CURLOPT_URL => $url,
-            //     CURLOPT_RETURNTRANSFER => true,
-            //     CURLOPT_ENCODING => "",
-            //     CURLOPT_MAXREDIRS => 10,
-            //     CURLOPT_TIMEOUT => 30,
-            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            //     CURLOPT_CUSTOMREQUEST => "GET",
-            //     CURLOPT_POSTFIELDS => "",
-            //     CURLOPT_HTTPHEADER => array(
-            //         "Content-Type: text/html",
-            //         "cache-control: no-cache"
-            //         ),
-            //     )
-            // );
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "",
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: text/html",
+                    "cache-control: no-cache"
+                    ),
+                )
+            );
 
 
-            // $response = curl_exec($curl);
-            // $err = curl_error($curl);
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
 
-            // $dom = new DOMDocument();
+            $dom = new DOMDocument();
 
-            // @$dom->loadHTML($response);
+            @$dom->loadHTML($response);
 
-            // foreach($dom->getElementsByTagName('p') as $ligne) {
-            //     $ligne_txt = $ligne->textContent ;
-            //     $ref_verset = ltrim(trim( explode(" ",$ligne_txt)[0] ), "0") ;
-            //     $ref_txt = str_replace("'", "’", substr(strstr($ligne_txt," "),1));
-            //     if ( $ref_verset != "Recevez") {
-            //         print("('" . $no_ps . "', '" . $ref_verset . "', '" . $ref_txt . "', '" . $no_db . "'), </br>") ;
-            //     }
-            // }
-            print($no_ps . " => " . $expr_ps_aelf );
+            foreach($dom->getElementsByTagName('p') as $ligne) {
+                $ligne_txt = $ligne->textContent ;
+                $ref_verset = ltrim(trim( explode(" ",$ligne_txt)[0] ), "0") ;
+                $ref_txt = str_replace("'", "’", substr(strstr($ligne_txt," "),1));
+                if ( $ref_verset != "Recevez") {
+                    print("('" . $no_ps . "', '" . $ref_verset . "', '" . $ref_txt . "', '" . $no_db . "'), </br>") ;
+                }
+            }
         }
     } else {
         for ($i=1 ; $i <= $nb_chap; $i++) {
