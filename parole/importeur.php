@@ -20,7 +20,7 @@ if ( $livre = filter_input(INPUT_POST, 'livre', FILTER_SANITIZE_STRING) ) {
     print("-- --------------------------- </br>") ;
     print("INSERT INTO `textes` (`chapitre`, `verset`, `texte`, `livres_id`) VALUES </br>") ;
 
-    if ($no_db === 46 ) {   // Spécial Psaumes
+    if ($no_db == 46 ) {   // Spécial Psaumes
         $map_ps = array(    // Mapping des livres sur aelf
             1 => 1,
             2 => 2,
