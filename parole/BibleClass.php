@@ -31,7 +31,6 @@ class Pericope
 				$this->livre = $result_livre[0]["id"] ;
 				$this->titre = $result_livre[0]["titre"];
 
-				// Trouver verset départ
 				$ref_sans_livre = substr(strstr($ref," "),1);
 				$array_sans_livre = explode(".",$ref_sans_livre);
 				$depart_chapitre = "" ;
@@ -41,28 +40,47 @@ class Pericope
 
 				foreach ($array_sans_livre as $chunk) {
 					$pre_extremites = explode("-",$chunk);
-					$extremites = array();
+					$extremites = array(); 
+					if (strpos($pre_extremites[0], ",") OR $depart_chapitre) {
+						if (strpos($pre_extremites[0], ",")) {
+							$depart_chapitre = trim(explode(",", $pre_extremites[0])[0]);
+							$depart_verset = trim(explode(",", $pre_extremites[0])[1]);
+						} else {
+							$depart_verset = trim($pre_extremites[0]) ;
+						}
 
-					// TODO : prévoir mécanisme pour référence de plein chapitre / chapitre_S_
-					
-					if (strpos($pre_extremites[0], ",")) {
-						$depart_chapitre = trim(explode(",", $pre_extremites[0])[0]);
-						$depart_verset = trim(explode(",", $pre_extremites[0])[1]);
+						if (isset($pre_extremites[1])) {
+							if ( strpos( $pre_extremites[1], ",")) {
+								$fin_chapitre = trim(explode(",", $pre_extremites[1])[0]) ;
+								$fin_verset = trim(explode(",", $pre_extremites[1])[1]);	
+							} else {
+								$fin_chapitre = $depart_chapitre ;
+								$fin_verset = trim($pre_extremites[1]) ;
+							}
+						} else { // Pas de tiret donc mono-verset donc $fin = $depart 
+							$fin_chapitre = $depart_chapitre ;
+							$fin_verset = $depart_verset ;
+						}
+
 					} else {
-						$depart_verset = $pre_extremites[0] ;
-					}
-
-					if (isset($pre_extremites[1])) {
-						if ( strpos( $pre_extremites[1], ",")) {
-							$fin_chapitre = trim(explode(",", $pre_extremites[1])[0]) ;
-							$fin_verset = trim(explode(",", $pre_extremites[1])[1]);	
+						$depart_chapitre = $pre_extremites[0] ;
+						$depart_verset = "1" ;
+						if (isset($pre_extremites[1])) {
+							if ( strpos( $pre_extremites[1], ",")) {
+								$fin_chapitre = trim(explode(",", $pre_extremites[1])[0]) ;
+								$fin_verset = trim(explode(",", $pre_extremites[1])[1]);	
+							} else {
+								$fin_chapitre = trim($pre_extremites[1]) ;
+								$fin_verset = "MAX" ;
+							}							
 						} else {
 							$fin_chapitre = $depart_chapitre ;
-							$fin_verset = trim($pre_extremites[1]) ;
+							$fin_verset = "MAX" ;
 						}
-					} else { // Pas de tiret donc mono-verset donc $fin = $depart 
-						$fin_chapitre = $depart_chapitre ;
-						$fin_verset = $depart_verset ;
+						if ($fin_verset == "MAX") {
+							$query = "SELECT MAX(`verset`) FROM `textes` WHERE `livres_id`='".$this->livre."' AND `chapitre`='" . $fin_chapitre . "'" ;
+							$fin_verset = $connection->queter($query,array("MAX(`verset`)"))[0]["MAX(`verset`)"] ;
+						}
 					}
 
 					$extremites[0] = array("chapitre"=>$depart_chapitre, "verset"=>$depart_verset);
@@ -73,18 +91,15 @@ class Pericope
 						$extremites[$i]["id"] = $connection->queter($query,array("id"))[0]["id"] ;
 
 						// Teste si l'extremité existe dans la DB
-						if ( ! is_numeric($extremites[$i]["id"])) {
-							$this->erreurs[] = "Le verset " . $ref_livre . " " . $extremites[$i]["chapitre"] . ", " . $extremites[$i]["verset"] . " n'existe pas dans la version choisie." ;
-						}
+						if ( ! is_numeric($extremites[$i]["id"])) { $this->erreurs[] = "Le verset " . $ref_livre . " " . $extremites[$i]["chapitre"] . ", " . $extremites[$i]["verset"] . " n'existe pas dans la version choisie." ; }
 					}
-					$query = "SELECT * FROM `textes` WHERE `id` BETWEEN " . $extremites[0]["id"] . " AND " . $extremites[1]["id"] ; 
-					$this->versets = array_merge($this->versets, $connection->queter($query, array("id","chapitre", "verset", "texte")));
+					// Teste si la fin est après le début
+					if( $extremites[0]["id"] <= $extremites[1]["id"] ) {
+						$query = "SELECT * FROM `textes` WHERE `id` BETWEEN " . $extremites[0]["id"] . " AND " . $extremites[1]["id"] ; 
+						$this->versets = array_merge($this->versets, $connection->queter($query, array("id","chapitre", "verset", "texte")));
+					} else { $this->erreurs[] = "Versets de début et de fin inversés sur la péricope..." ; }
 				}
-			} else {
-				// Si le livre n'existe pas dans cette version
-				$this->erreurs[] = "Ce livre (" . $ref_livre . ") n'existe pas dans la version sélectionnée." ;
-				$this->livre = 0 ;
-			}			
+			} else { $this->erreurs[] = "Ce livre (" . $ref_livre . ") n'existe pas dans la version sélectionnée." ; }			
 		} else { $this->erreurs[] = "Erreur :".$connection->erreur ; }
 	}
 }
