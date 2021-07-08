@@ -19,23 +19,32 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 	<?php
 	foreach (explode("|",$references) as $reference) {
 		$pericope = new Pericope(trim($reference)) ;
-		?>
-			<h1 class="titre1"><?php print $pericope->titre ; ?></h1>
-			<h2 class="titre3"><?php print $reference ; ?></h1>
-			<?php
-				$no_chapitre = 0 ;
-				$no_verset = 0 ;
-				foreach ($pericope->versets as $verset) {
-					$old_chap = $no_chapitre ;
-					$no_chapitre = $verset["chapitre"] ;
-					$no_verset =  $verset["verset"] ;
-					if ($no_chapitre > $old_chap) {
-						$verse_number = $no_chapitre . ", " . $no_verset ;
-					} else {
-						$verse_number = $no_verset ;
+		if (! $pericope->erreurs ) {
+			?>
+				<h1 class="titre1"><?php print $pericope->titre ; ?></h1>
+				<h2 class="titre3"><?php print $reference ; ?></h1>
+				<?php
+					$no_chapitre = 0 ;
+					$no_verset = 0 ;
+					foreach ($pericope->versets as $verset) {
+						$old_chap = $no_chapitre ;
+						$no_chapitre = $verset["chapitre"] ;
+						$no_verset =  $verset["verset"] ;
+						if ($no_chapitre > $old_chap) {
+							$verse_number = $no_chapitre . ", " . $no_verset ;
+						} else {
+							$verse_number = $no_verset ;
+						}
+						print '<p><span class = "verse_number" >' . $verse_number . " </span>" . $verset["texte"] . "</p>";
 					}
-					print '<p><span class = "verse_number" >' . $verse_number . " </span>" . $verset["texte"] . "</p>";
-				}
+		} else {
+			?>
+			<h1 class="titre1"> Erreurs </h1>
+			<?php
+			foreach ($pericope->erreurs as $erreur) {
+				print '<p>' . $erreur . '</p>' ;
+			}
+		}
 	}
 	?>
 	</body>
