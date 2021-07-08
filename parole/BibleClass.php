@@ -70,9 +70,12 @@ class Pericope
 
 					for ($i=0; $i < 2 ; $i++) { 
 						$query = "SELECT * FROM `textes` WHERE `livres_id`='".$this->livre."' AND `chapitre`='" . $extremites[$i]["chapitre"] . "' AND `verset`='". $extremites[$i]["verset"] . "' LIMIT 1";
-						// TODO : Tester existence du verset de départ
-						// TODO : Tester existence du verset de fin
 						$extremites[$i]["id"] = $connection->queter($query,array("id"))[0]["id"] ;
+
+						// Teste si l'extremité existe dans la DB
+						if ( ! is_numeric($extremites[$i]["id"])) {
+							$this->erreurs[] = "Le verset " . $ref_livre . " " . $extremites[$i]["chapitre"] . ", " . $extremites[$i]["verset"] . " n'existe pas dans la version choisie." ;
+						}
 					}
 					$query = "SELECT * FROM `textes` WHERE `id` BETWEEN " . $extremites[0]["id"] . " AND " . $extremites[1]["id"] ; 
 					$this->versets = array_merge($this->versets, $connection->queter($query, array("id","chapitre", "verset", "texte")));
