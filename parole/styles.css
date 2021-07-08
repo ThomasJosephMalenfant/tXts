@@ -1,19 +1,25 @@
-p {
-    font-size:20px;
+pre {
+    font-family: Times ;
 }
+
 .titre1 {
     font-weight: 900;
-    font-size: 48px;
+    font-size: 42px;
     margin: 20px 0 5px;
 }.titre2 {
     font-weight: 700;
-    font-size: 38px;
+    font-size: 36px;
     margin: 20px 0 5px;
 }
 .titre3 {
     font-weight: 500;
-    font-size: 22px;
+    font-size: 24px;
     margin: 20px 0 5px;
+}
+.verset_pericope {
+    padding : 0;
+    margin : 0;
+    font-size:22px;
 }
 .verse_number {
     vertical-align: super;
