@@ -1,7 +1,6 @@
 <?php
-// FIXME : Revalider tous les liens externes
 require '../env.php';
-require "BibleClass.php" ;
+require_once "../commun/classes/BibleClass.php";
 
 ob_start();
 
@@ -18,8 +17,8 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 		<link rel="icon" type="image/png" sizes="32x32" href="../commun/icones/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="../commun/icones/favicon-16x16.png">
 		<link rel="stylesheet" href="./parole.css">
-		<script src="./parole.js" defer></script>
- 		<title><?php print $reference ; ?></title>
+		<script src="../commun/commun.js" defer></script>
+		<title><?php print $reference ; ?></title>
 	</head>
 	<body>
 	<?php

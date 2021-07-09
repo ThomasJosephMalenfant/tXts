@@ -1,7 +1,5 @@
 <?php
-// TODO : Déplacer dans /commun/classes/ et relier conséquemment
-
-require '../connecteur.php' ;
+require_once 'ConnecteurDB.php' ;
 
 class Pericope
 {

@@ -1,6 +1,5 @@
 <?php
-// TODO : Déplacer dans /commun/classes/ et relier conséquemment
-require "connect.php";
+require_once "../connect.php";
 
 class ConnecteurDB
 {

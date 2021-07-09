@@ -5,7 +5,8 @@ require "../parole/BibleClass.php" ;
 ob_start();
 
 if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING) ) { 
-	$affichage_versets = isset($_POST['affichage_versets']) ? TRUE : FALSE ;	
+	$affichage_versets = isset($_POST['affichage_versets']) ? TRUE : FALSE ;
+//	FIXME :update links	
 	?>
 	<!DOCTYPE html>
 	<html>
@@ -17,7 +18,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
 		<link rel="stylesheet" href="./styles.css">
-		<script src="./helper.js" defer></script>
+		<script src="./helper.js" defer></script>  
  		<title><?php print $reference ; ?></title>
 	</head>
 	<body>
