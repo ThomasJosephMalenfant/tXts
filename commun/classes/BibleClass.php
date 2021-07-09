@@ -3,26 +3,32 @@ require_once 'ConnecteurDB.php' ;
 
 class Pericope
 {
-	// Titre de la péricope
-	public $titre = "Titre de la pericope" ;
-	public $corpus = 1 ; // 1 = Bible
-	public $version = 1 ; // 1 = aelf
+	public $titre ;
+	public $version ;
 	public $livre ; 
+	public $ref ;
 	public $versets = array(); 
 	public $erreurs = array();
 	
-	// Recoit un string $ref et détermine et popule $this->versets en conséquence
-	public function __construct( string $ref ) {   // FIXME : Transformer en array() $opt argument pour faciliter éventuellement switch de livre / version
-
+	// Recoit un array $opt popule $this->versets en conséquence
+	function __construct( $opt ) { 
+		$this->titre = isset($opt["titre"]) ? $opt["titre"] : "Titre de la péricope" ;
+		$this->version = isset($opt["version"]) ? $opt["version"] : "1" ;
+		if (isset($opt["ref"])) {
+			$this->ref = $opt["ref"];
+		} else { 
+			$this->ref = "Gn 1, 1";
+			$this->erreurs[] = "Pas de référence passée..." ;
+		}
+		
 		// Trouver l'abbréviataion du livre
-		$ref_livre = trim( explode(" ",$ref)[0] ) ;
+		$ref_livre = trim( explode(" ",$this->ref)[0] ) ;
 
 		$connection = new ConnecteurDB(false) ;
 
 		// Test de la connection
 		if ($connection->online) { 
-
-			$query = "SELECT `id`, `name`, `titre` FROM `livres` WHERE `abbr`='".$ref_livre."' AND `versions_id`=1 LIMIT 1" ;
+			$query = "SELECT `id`, `name`, `titre` FROM `livres` WHERE `abbr`='".$ref_livre."' AND `versions_id`='" . $this->version . "' LIMIT 1" ;
 			$result_livre = $connection->queter($query, array("id","titre")) ; 
 
 			// Tester si le livre a été trouvé dans cette version
@@ -31,7 +37,7 @@ class Pericope
 				$this->livre = $result_livre[0]["id"] ;
 				$this->titre = $result_livre[0]["titre"];
 
-				$ref_sans_livre = substr(strstr($ref," "),1);
+				$ref_sans_livre = substr(strstr($this->ref," "),1);
 				$array_sans_livre = explode(".",$ref_sans_livre);
 				$depart_chapitre = "" ;
 				$depart_verset = "" ;

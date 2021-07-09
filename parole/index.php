@@ -24,7 +24,12 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 	<?php
 	print '<div id="pericopes">' ;
 	foreach (explode("|",$references) as $reference) {
-		$pericope = new Pericope(trim($reference)) ;
+		$opt_pericope = array(
+			"corpus" => 1,
+			"version" => 1,
+			"ref" => trim($reference)
+		) ;
+		$pericope = new Pericope($opt_pericope) ;
 		if (! $pericope->erreurs ) {
 			?>
 				<h1 class="titre1"><?php print $pericope->titre ; ?></h1>
@@ -58,6 +63,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 	}
 	print '</div>';
 	?>
+	<a href="">Nouvelle requête</a>
 	</body>
 	</html>
 	<?php
@@ -80,7 +86,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 			<div>
 				<form method="post" autocomplete="off">
 					<label for="reference">Référence :</label><br>
-					<textarea id="reference" name="reference" placeholder="Par exemple : Gn 2, 2-4.7 | Mt 2-4 ..." row="2" cols="50"></textarea><br>
+					<textarea id="reference" name="reference" placeholder="Par exemple : Gn 2, 2-4.7 | Mt 2-4 ..." row="1" cols="50"></textarea><br>
 					<label for="affichage_versets">Versets affichés :</label>
 					<input id="affichage_versets" type="checkbox" name="affichage_versets">
 					<input type="submit" value="Envoyer">
