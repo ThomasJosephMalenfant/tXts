@@ -1,5 +1,4 @@
 <?php
-// TODO : Déplacer dans dossier ./parole/outils/
 ob_start();
 
 print("
