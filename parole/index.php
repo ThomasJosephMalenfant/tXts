@@ -14,10 +14,10 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
         <meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
-		<link rel="stylesheet" href="./styles.css">
+		<link rel="apple-touch-icon" sizes="180x180" href="../commun/icones/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../commun/icones/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../commun/icones/favicon-16x16.png">
+		<link rel="stylesheet" href="./parole.css">
 		<script src="./parole.js" defer></script>
  		<title><?php print $reference ; ?></title>
 	</head>
@@ -67,13 +67,13 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 	<!DOCTYPE html>
 	<html>
 	<head>
-        <meta charset="UTF-8" />
+	<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
-		<link rel="stylesheet" href="./styles.css">
+		<link rel="apple-touch-icon" sizes="180x180" href="../commun/icones/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../commun/icones/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../commun/icones/favicon-16x16.png">
+		<link rel="stylesheet" href="./parole.css">
  		<title>Choisir le texte</title>
 	</head>
 	<body>

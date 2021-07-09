@@ -69,8 +69,6 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
 
         // Génération de la page synthèse
         if ($i == 0 ) { // Entête pour le premier jour
-            // FIXME : Migrer <style> sur fichier externe
-            // FIXME : Ajouter favicon.ico
             ?>
             <!DOCTYPE html>
             <html>
@@ -78,35 +76,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     <meta charset="UTF-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
                     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-                    <style> 
-                        p {
-                            font-size:20px;
-                        }
-                        .titre1 {
-                            font-weight: 900;
-                            font-size: 48px;
-                            margin: 20px 0 5px;
-                        }.titre2 {
-                            text-transform: uppercase;
-                            font-weight: 700;
-                            font-size: 38px;
-                            margin: 20px 0 5px;
-                        }
-                        .titre3 {
-                            text-transform: uppercase;
-                            font-weight: 500;
-                            font-size: 25px;
-                            margin: 20px 0 5px;
-                        }
-                        .verse_number {
-                            vertical-align: super;
-                            font-size: 8px;
-                        }
-                        .fin {
-                            width:100% ;
-                            page-break-after:always;
-                        }
-                    </style>
+                    <link rel="apple-touch-icon" sizes="180x180" href="../commun/icones/apple-touch-icon.png">
+                    <link rel="icon" type="image/png" sizes="32x32" href="../commun/icones/favicon-32x32.png">
+                    <link rel="icon" type="image/png" sizes="16x16" href="../commun/icones/favicon-16x16.png">
+                    <link rel="stylesheet" href="./heures.css">
                     <title><?php print_r($textes["informations"]["informations"]["semaine"]); ?></title>
                 </head>
                 <body>
