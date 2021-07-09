@@ -1,4 +1,6 @@
 <?php
+// TODO : Déplacer dans /commun/classes/ et relier conséquemment
+
 require '../connecteur.php' ;
 
 class Pericope

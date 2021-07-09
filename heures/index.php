@@ -69,6 +69,8 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
 
         // Génération de la page synthèse
         if ($i == 0 ) { // Entête pour le premier jour
+            // FIXME : Migrer <style> sur fichier externe
+            // FIXME : Ajouter favicon.ico
             ?>
             <!DOCTYPE html>
             <html>
@@ -76,7 +78,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     <meta charset="UTF-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
                     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-                    <style>
+                    <style> 
                         p {
                             font-size:20px;
                         }
