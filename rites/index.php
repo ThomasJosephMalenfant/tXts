@@ -4,14 +4,17 @@ require_once "../commun/classes/BibleClass.php" ;
 
 $rituels_disponibles = array(
 	"Parole" => array(
+		"Nom" => "Parole",
 		"Description" => "Célébration de la parole du Chemin néo-catéchuménal." ,
 		"Path" => "chemin_parole.php"
 	),
 	"Funérailles" => array(
+		"Nom" => "Funérailles",
 		"Description" => "Célébration des funérailles chrétiennes (rituel ANNÉE) ",
 		"Path" => "funerailles.php"
 	),
 	"Baptême" => array(
+		"Nom" => "Baptême",
 		"Description" => "Célébration du baptême (rituel ANNÉE) ",
 		"Path" => "bapteme.php"
 	)
@@ -20,9 +23,51 @@ $rituels_disponibles = array(
 ob_start();
 
 if ( filter_input(INPUT_POST, 'schema', FILTER_SANITIZE_STRING) ) { 
-	// TODO : Output du rituel
-} elseif (filter_input(INPUT_POST, 'rituel', FILTER_SANITIZE_STRING)){
-	// TODO : Output questionnaire schema
+	$choix = $rituels_disponibles[filter_input(INPUT_POST, 'rituel', FILTER_SANITIZE_STRING)] ;
+	require_once $choix["Path"] ;
+	$rituel = new Rituel ;
+
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+        <meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
+		<link rel="stylesheet" href="./rites.css">
+		<title><?php print $choix["Nom"] ; ?></title>
+	</head>
+	<body>
+		<?php print $rituel->generer() ; ?>
+	</body>
+	</html>
+	<?php
+} elseif ($choix = $rituels_disponibles[filter_input(INPUT_POST, 'rituel', FILTER_SANITIZE_STRING)]){
+
+	require_once $choix["Path"] ;
+	$rituel = new Rituel ;
+
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+        <meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
+		<link rel="stylesheet" href="./rites.css">
+		<title><?php print $choix["Nom"] ; ?></title>
+	</head>
+	<body>
+		<?php print $rituel->questionnaire() ; ?>
+	</body>
+	</html>
+	<?php
 } else {
 	// Output choix du rituel
 	?>
