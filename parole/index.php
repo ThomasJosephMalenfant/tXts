@@ -1,5 +1,5 @@
 <?php
-require '../env.php';
+require_once '../env.php';
 require_once "../commun/classes/BibleClass.php";
 
 ob_start();

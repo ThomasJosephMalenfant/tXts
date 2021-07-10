@@ -1,5 +1,5 @@
 <?php
-require '../env.php';
+require_once '../env.php';
 
 ob_start();
 if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {

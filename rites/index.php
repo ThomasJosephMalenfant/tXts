@@ -1,17 +1,28 @@
 <?php
-require '../env.php';
-require "../parole/BibleClass.php" ;
+require_once '../env.php';
+require_once "../commun/classes/BibleClass.php" ;
+
+$rituels_disponibles = array(
+	"Parole" => array(
+		"Description" => "Célébration de la parole du Chemin néo-catéchuménal." ,
+		"Path" => "chemin_parole.php"
+	),
+	"Funérailles" => array(
+		"Description" => "Célébration des funérailles chrétiennes (rituel ANNÉE) ",
+		"Path" => "funerailles.php"
+	),
+	"Baptême" => array(
+		"Description" => "Célébration du baptême (rituel ANNÉE) ",
+		"Path" => "bapteme.php"
+	)
+) ;
 
 ob_start();
-// NEXT : Structure triple :
-//			if (isset(schema)) { 
-//			} elseif (isset(rituel)) {
-//			} else { choix de rituel }
 
 if ( filter_input(INPUT_POST, 'schema', FILTER_SANITIZE_STRING) ) { 
-	// Output du rituel
+	// TODO : Output du rituel
 } elseif (filter_input(INPUT_POST, 'rituel', FILTER_SANITIZE_STRING)){
-	// Output questionnaire schema
+	// TODO : Output questionnaire schema
 } else {
 	// Output choix du rituel
 	?>
@@ -24,17 +35,22 @@ if ( filter_input(INPUT_POST, 'schema', FILTER_SANITIZE_STRING) ) {
 		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
-		<link rel="stylesheet" href="./styles.css">
- 		<title>Choisir le texte</title>
+		<link rel="stylesheet" href="./rites.css">
+ 		<title>Rituels</title>
 	</head>
 	<body>
 		<div class="centrement">
 			<div>
 				<form method="post" autocomplete="off">
-					<label for="reference">Référence :</label><br>
-					<textarea id="reference" name="reference" placeholder="Par exemple : Gn 2, 2-4.7 | Mt 2-4 ..." row="2" cols="50"></textarea><br>
-					<label for="affichage_versets">Versets affichés :</label>
-					<input id="affichage_versets" type="checkbox" name="affichage_versets">
+					<label for="rituel">Rituel :</label><br>
+					<select id="rituel" name="rituel">
+						<?php
+						foreach ($rituels_disponibles as $rituel => $details) {
+							print '<option value="' . $rituel . '">' . $rituel . '</option>' ;
+						}
+						?>
+					</select>
+					<br>
 					<input type="submit" value="Envoyer">
 				</form>
 			</div>
