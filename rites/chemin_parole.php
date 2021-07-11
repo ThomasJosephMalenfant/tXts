@@ -12,10 +12,10 @@ class Rituel
 
     function questionnaire() {
         //FIXME : Alignement affreux des <label> et <input>
-        $output .= '<h2>Construction Célébration de la Parole</h2><div class="questions"><form method="POST"><fieldset>
+        $output = '<h2>Construction Célébration de la Parole</h2><div class="questions"><form method="POST"><fieldset>
             <legend>Général</legend>
             <div><label for="communaute">Communauté : </label>
-            <input list="comm_list" type="text" name="communaute" id="communaute">
+            <input name="communaute" id="communaute" list="comm_list" type="text">
             <datalist id="comm_list"><option value="STU1"><option value="NDF4"></datalist></div>
             <div><label for="president">Président : </label>
             <input name="president" id="president" type="text" list="pretres_list">
@@ -45,7 +45,14 @@ class Rituel
     }
 
     function generer(){
-        //NEXT : Fonction Rituel->generer() cahier de célébration en fonction du $_POST
+        $local = setlocale(LC_ALL,"fr_CA.utf8") ;
+        $reponses = array() ;
+        foreach ($_POST as $key => $value) {
+            $reponses[$key] = filter_input(INPUT_POST,$key,FILTER_SANITIZE_STRING) ;
+        }
+        $output = strftime("%A fr_fr %d %B, %Y");
+        // $output = '<h1>' . . '</h1>';
+        return $output ;
     }
 }
 
