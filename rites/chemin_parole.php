@@ -74,38 +74,59 @@ class Rituel
                             <p>Chant d’entrée : ' . $reponses['chant_entree'] . '</p></div>
                     </section>' ;
         for ($i=1; strlen($reponses['ref_' . $i]) ; $i++) { 
- //           if (strlen($reponses['ref_' . $i])) {
-                $ordinal = $nf->format($i) ;
-                $monition = $reponses['mon_' . $i] ;
-                $lecteur = $reponses['lect_' . $i] ;
-                $ref = $reponses['ref_' . $i] ;
-                $chant = $reponses['chant_' . $i] ;
-                $output .= '<section class="parties" id="lecture_' . $i . '" name="lecture_' . $i . '">
-                                <h2 class="titre2">' . ucfirst($ordinal) . ' lecture (' . $ref . ') </h2>
-                                <p>Monition ' . $ordinal . ' lecture : ' . $monition . '</p>
-                                <p>Lecteur ' . $ordinal . ' lecture : ' . $lecteur . '</p>';
-                $opt_pericope = array(
-                    "corpus" => 1,
-                    "version" => 1,
-                    "ref" => trim( explode("|", $ref)[0] )
-                ) ;
-                $pericope = new Pericope($opt_pericope) ;
-                if (! $pericope->erreurs ) {
-                    $output .= '<h3 class="titre3">' . $pericope->titre . '</h3></br>
-                                <div class="editeur" contentEditable="true"><pre>' ;
-                    foreach ($pericope->versets as $verset) {
-                        $output .= '<p class="verset_pericope" >' . $verset["texte"] . "</p>" ;
-                    }
-                    $output .= '</pre></div>' ;
-                } else {
-                    $output .= '<h3 class="titre3"> Erreurs </h3>' ;
-                    foreach ($pericope->erreurs as $erreur) {
-                        $output .= '<p>' . $erreur . '</p>' ;
-                    }
+            $ordinal = $nf->format($i) ;
+            $monition = $reponses['mon_' . $i] ;
+            $lecteur = $reponses['lect_' . $i] ;
+            $ref = $reponses['ref_' . $i] ;
+            $chant = $reponses['chant_' . $i] ;
+            $output .= '<section class="parties" id="lecture_' . $i . '" name="lecture_' . $i . '">
+                            <h2 class="titre2">' . ucfirst($ordinal) . ' lecture (' . $ref . ') </h2>
+                            <p>Monition ' . $ordinal . ' lecture : ' . $monition . '</p>
+                            <p>Lecteur ' . $ordinal . ' lecture : ' . $lecteur . '</p>';
+            $opt_pericope = array(
+                "corpus" => 1,
+                "version" => 1,
+                "ref" => trim( explode("|", $ref)[0] )
+            ) ;
+            $pericope = new Pericope($opt_pericope) ;
+            if (! $pericope->erreurs ) {
+                $output .= '<h3 class="titre3">' . $pericope->titre . '</h3></br>
+                            <div class="editeur" contentEditable="true"><pre>' ;
+                foreach ($pericope->versets as $verset) {
+                    $output .= '<p class="verset_pericope" >' . $verset["texte"] . "</p>" ;
                 }
-                $output .= '<p class="repons">Parole de Dieu.</p><p>Chant après la ' . $ordinal . ' lecture : ' . $chant . '</p></section>' ;
-  //          }
+                $output .= '</pre></div>' ;
+            } else {
+                $output .= '<h3 class="titre3"> Erreurs </h3>' ;
+                foreach ($pericope->erreurs as $erreur) {
+                    $output .= '<p>' . $erreur . '</p>' ;
+                }
+            }
+            $output .= '<p class="repons">Parole de Dieu</p><p>Chant après la ' . $ordinal . ' lecture : ' . $chant . '</p></section>' ;
         }
+        $output .= '<section class="parties" id="lecture_ev" name="lecture_ev">
+                        <h2 class="titre2">Évangile (' . $reponses['ref_ev'] . ') </h2>
+                        <p>Monition Évangile : ' . $reponses['mon_ev'] . '</p>';
+        $opt_pericope = array(
+            "corpus" => 1,
+            "version" => 1,
+            "ref" => trim( explode("|", $reponses['ref_ev'])[0] )
+        ) ;
+        $pericope = new Pericope($opt_pericope) ;
+        if (! $pericope->erreurs ) {
+            $output .= '<h3 class="titre3">' . $pericope->titre . '</h3></br>
+                        <div class="editeur" contentEditable="true"><pre>' ;
+            foreach ($pericope->versets as $verset) {
+                $output .= '<p class="verset_pericope" >' . $verset["texte"] . "</p>" ;
+            }
+            $output .= '</pre></div>' ;
+        } else {
+            $output .= '<h3 class="titre3"> Erreurs </h3>' ;
+            foreach ($pericope->erreurs as $erreur) {
+                $output .= '<p>' . $erreur . '</p>' ;
+            }
+        }
+        $output .= '<p class="repons">Acclamons la parole de Dieu</p></section>' ;
         return $output ;
     }
 }
