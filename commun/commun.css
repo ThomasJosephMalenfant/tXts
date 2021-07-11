@@ -36,3 +36,16 @@ pre {
     align-items: center;
     height: 100vh;
 }
+.repons {
+    font-weight:700;
+    font-size:22px;
+    text-indent: 10%;
+}
+section {
+    margin: 50px 0 0 0;
+}
+@media print {
+    section {
+        break-inside: avoid;
+    }
+}
