@@ -28,24 +28,15 @@ class Rituel
             <input name="mon_entree" id="mon_entree" type="text"></div>
             <div><label for="chant_entree">Chant d’entrée :</label>
             <input name="chant_entree" id="chant_entree" type="text"></div></fieldset>' ;
-        for ($i=1; $i < 4; $i++) { 
-            $output .= '<fieldset><legend>Lecture no ' . $i . '</legend>
-                <div><label for="mon_' . $i . '">Monition lecture no ' . $i . ' :</label>
-                <input name="mon_' . $i . '" id="mon_' . $i . '" type="text"></div>
-                <div><label for="lect_' . $i . '">Proclamation lecture no ' . $i . ' :</label>
-                <input name="lect_' . $i . '" id="lect_' . $i . '" type="text"></div>
-                <div><label for="ref_' . $i . '">Référence lecture no ' . $i . ' :</label>
-                <input name="ref_' . $i . '" id="ref_' . $i . '" type="text"></div>
-                <div><label for="chant_' . $i . '">Chant après lecture no ' . $i . ' :</label>
-                <input name="chant_' . $i . '" id="chant_' . $i . '" type="text"></div>
-                </fieldset>' ;
-        }
-        $output .= '<fieldset><legend>Évangile</legend>
+
+
+        $output .= '<fieldset id="field_ev" name="field_ev"><legend>Évangile</legend>
                     <div><label for="mon_ev">Monition Évangile :</label>
                     <input name="mon_ev" id="mon_ev" type="text"></div>
                     <div><label for="ref_ev">Référence Évangile :</label>
                     <input name="ref_ev" id="ref_ev" type="text"></div>
                     </fieldset>' ;
+        // FIXME : Ajout question chant final dans questionnaire...
         $output .= '<input id="schema" name="schema" type="hidden" value="1"><input id="rituel" name="rituel" type="hidden" value="Parole"><input type="submit" value="Envoyer"></form></div>' ;
 
         return $output ;
@@ -127,6 +118,7 @@ class Rituel
             }
         }
         $output .= '<p class="repons">Acclamons la parole de Dieu</p></section>' ;
+        // FIXME : Ajout chant de sortie dans generer()
         return $output ;
     }
 }

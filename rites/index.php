@@ -39,6 +39,7 @@ if ( filter_input(INPUT_POST, 'schema', FILTER_SANITIZE_STRING) ) {
 		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
 		<link rel="stylesheet" href="./rites.css">
 		<script src="../commun/commun.js" defer></script>
+		<script src="./rites.js" defer></script>
 		<title><?php print $choix["Nom"] ; ?></title>
 	</head>
 	<body>
@@ -62,9 +63,10 @@ if ( filter_input(INPUT_POST, 'schema', FILTER_SANITIZE_STRING) ) {
 		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
 		<link rel="stylesheet" href="./rites.css">
+		<script src="./rites.js" defer></script>
 		<title><?php print $choix["Nom"] ; ?></title>
 	</head>
-	<body>
+	<body onload="ajouterSection()">
 		<?php print $rituel->questionnaire() ; ?>
 	</body>
 	</html>
