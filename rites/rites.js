@@ -172,6 +172,8 @@ function ajouterSection() {
             const input_chant = document.createElement("input");
                 input_chant.id = input_chant.name = "chant_" + cntr ;
                 input_chant.type = "text" ;
+                input_chant.setAttribute("list", "chants_list");
+                input_chant.setAttribute("size", "40");
             div_chant.appendChild(input_chant) ;
         field.appendChild(div_chant) ;
         if( lelien = document.getElementById("lien_ajouter")) {
