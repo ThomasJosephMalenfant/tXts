@@ -404,8 +404,8 @@ var DateTime = luxon.DateTime;
 
     function setSchedules() {
         cal.clear();
-        // generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
-        // cal.createSchedules(ScheduleList);
+        generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
+        cal.createSchedules(ScheduleList);
 
         refreshScheduleVisibility();
     }

@@ -1,4 +1,3 @@
-// TODO : Ajouter fonction autocomplete chant du chemin pour les inputs "chant_"
 const ordinauxFr = [
     '----',
     'deuxième',

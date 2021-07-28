@@ -1,7 +1,7 @@
 'use strict';
 
 /*eslint-disable*/
-
+var DateTime = luxon.DateTime;
 var ScheduleList = [];
 
 var SCHEDULE_CATEGORY = [
@@ -52,45 +52,21 @@ function ScheduleInfo() {
     };
 }
 
-function generateTime(schedule, renderStart, renderEnd) {
-    var startDate = moment(renderStart.getTime())
-    var endDate = moment(renderEnd.getTime());
+function generateTime(schedule, ceJour, nbHeureDuration) {
+    var startDate = moment(ceJour.toMillis())
+    var endDate = moment(ceJour.plus({hours: nbHeureDuration}).toMillis());
     var diffDate = endDate.diff(startDate, 'days');
 
-    schedule.isAllday = chance.bool({likelihood: 30});
-    if (schedule.isAllday) {
-        schedule.category = 'allday';
-    } else if (chance.bool({likelihood: 30})) {
-        schedule.category = SCHEDULE_CATEGORY[chance.integer({min: 0, max: 1})];
-        if (schedule.category === SCHEDULE_CATEGORY[1]) {
-            schedule.dueDateClass = 'morning';
-        }
-    } else {
-        schedule.category = 'time';
-    }
+    schedule.category = 'time';
 
-    startDate.add(chance.integer({min: 0, max: diffDate}), 'days');
-    startDate.hours(chance.integer({min: 0, max: 23}))
-    startDate.minutes(chance.bool() ? 0 : 30);
+    startDate.hours(19);
+    startDate.minutes(45);
     schedule.start = startDate.toDate();
 
     endDate = moment(startDate);
-    if (schedule.isAllday) {
-        endDate.add(chance.integer({min: 0, max: 3}), 'days');
-    }
 
-    schedule.end = endDate
-        .add(chance.integer({min: 1, max: 4}), 'hour')
-        .toDate();
+    schedule.end = endDate.add(2, 'hour').toDate();
 
-    if (!schedule.isAllday && chance.bool({likelihood: 20})) {
-        schedule.goingDuration = chance.integer({min: 30, max: 120});
-        schedule.comingDuration = chance.integer({min: 30, max: 120});;
-
-        if (chance.bool({likelihood: 50})) {
-            schedule.end = schedule.start;
-        }
-    }
 }
 
 function generateNames() {
@@ -105,61 +81,67 @@ function generateNames() {
     return names;
 }
 
-function generateRandomSchedule(calendar, renderStart, renderEnd) {
+function generateNouvelleCeleb(calendar, ceJour, titre, renderStart, renderEnd) {
     var schedule = new ScheduleInfo();
 
     schedule.id = chance.guid();
-    schedule.calendarId = calendar.id;
+    schedule.calendarId = calendar.id ;
 
-    schedule.title = chance.sentence({words: 3});
-    schedule.body = chance.bool({likelihood: 20}) ? chance.sentence({words: 10}) : '';
-    schedule.isReadOnly = chance.bool({likelihood: 20});
-    generateTime(schedule, renderStart, renderEnd);
-
-    schedule.isPrivate = chance.bool({likelihood: 10});
-    schedule.location = chance.address();
+    schedule.title = titre ;
+    schedule.body = titre ;
+    // schedule.isReadOnly = chance.bool({likelihood: 20});
+    // schedule.start = ceJour.toString();
+    // schedule.end = ceJour.plus({hours: 2}).toString();
+    generateTime(schedule, ceJour, 2);
+    // schedule.isPrivate = chance.bool({likelihood: 10});
+    // schedule.location = chance.address();
     schedule.attendees = chance.bool({likelihood: 70}) ? generateNames() : [];
-    schedule.recurrenceRule = chance.bool({likelihood: 20}) ? 'repeated events' : '';
-    schedule.state = chance.bool({likelihood: 20}) ? 'Free' : 'Busy';
+    // schedule.recurrenceRule = chance.bool({likelihood: 20}) ? 'repeated events' : '';
+    // schedule.state = chance.bool({likelihood: 20}) ? 'Free' : 'Busy';
     schedule.color = calendar.color;
     schedule.bgColor = calendar.bgColor;
     schedule.dragBgColor = calendar.dragBgColor;
     schedule.borderColor = calendar.borderColor;
 
-    if (schedule.category === 'milestone') {
-        schedule.color = schedule.bgColor;
-        schedule.bgColor = 'transparent';
-        schedule.dragBgColor = 'transparent';
-        schedule.borderColor = 'transparent';
-    }
+    // schedule.raw.memo = chance.sentence();
+    // schedule.raw.creator.name = chance.name();
+    // schedule.raw.creator.avatar = chance.avatar();
+    // schedule.raw.creator.company = chance.company();
+    // schedule.raw.creator.email = chance.email();
+    // schedule.raw.creator.phone = chance.phone();
 
-    schedule.raw.memo = chance.sentence();
-    schedule.raw.creator.name = chance.name();
-    schedule.raw.creator.avatar = chance.avatar();
-    schedule.raw.creator.company = chance.company();
-    schedule.raw.creator.email = chance.email();
-    schedule.raw.creator.phone = chance.phone();
-
-    if (chance.bool({ likelihood: 20 })) {
-        var travelTime = chance.minute();
-        schedule.goingDuration = travelTime;
-        schedule.comingDuration = travelTime;
-    }
+    // if (chance.bool({ likelihood: 20 })) {
+    //     var travelTime = chance.minute();
+    //     schedule.goingDuration = travelTime;
+    //     schedule.comingDuration = travelTime;
+    // }
 
     ScheduleList.push(schedule);
 }
 
 function generateSchedule(viewName, renderStart, renderEnd) {
+    var jourParole = "mardi" ; 
+    var jourMesse = "samedi" ;    
     ScheduleList = [];
-    CalendarList.forEach(function(calendar) {
-        var i = 0, length = 10;
-        if (viewName === 'month') {
-            length = 3;
-        } else if (viewName === 'day') {
-            length = 4;
+
+    if (viewName === "month") {
+        const jourStart = DateTime.fromMillis(renderStart.getTime());
+        var nbJours = DateTime.fromMillis(renderEnd.getTime()).diff(jourStart, 'days').days;
+        for (let index = 0; index < nbJours ; index++) {
+            const ceJour = jourStart.plus({days: index});
+            switch (ceJour.setLocale('fr').toFormat('EEEE')) {
+                case jourParole:
+                    generateNouvelleCeleb(CalendarList[0], ceJour,"Parole");
+                    break;
+            
+                case jourMesse:
+                    generateNouvelleCeleb(CalendarList[1], ceJour,"Eucharistie");                
+                    break;
+    
+                default:
+                    break;
+            }
         }
-        for (; i < length; i += 1) {
-            generateRandomSchedule(calendar, renderStart, renderEnd);
-        }
-    });
+        console.log(ScheduleList);
+    }
 }
