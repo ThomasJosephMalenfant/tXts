@@ -66,6 +66,9 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
                 <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
                     <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
                 </button>
+                <button type="button" class="btn btn-default btn-sm move-day" data-action="populate">
+                    <i class="calendar-icon ic-down" data-action="populate"></i>
+                </button>
             </span>
             <span id="renderRange" class="render-range"></span>
         </div>

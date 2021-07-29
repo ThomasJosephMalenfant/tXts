@@ -202,12 +202,14 @@ var DateTime = luxon.DateTime;
             case 'move-today':
                 cal.today();
                 break;
+            case 'populate':
+                setSchedules();
+                break;
             default:
                 return;
         }
 
         setRenderRangeText();
-        // setSchedules();
     }
 
     function onNewSchedule() {
@@ -274,6 +276,7 @@ var DateTime = luxon.DateTime;
             });
         }
     }
+
     function saveNewSchedule(scheduleData) {
         var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
         var schedule = {
@@ -436,7 +439,6 @@ var DateTime = luxon.DateTime;
 
     setDropdownCalendarType();
     setRenderRangeText();
-    setSchedules();
     setEventListener();
 })(window, tui.Calendar);
 
