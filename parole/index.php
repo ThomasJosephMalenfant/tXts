@@ -1,6 +1,6 @@
 <?php
-require '../env.php';
-require "BibleClass.php" ;
+require_once '../env.php';
+require_once "../commun/classes/BibleClass.php";
 
 ob_start();
 
@@ -13,18 +13,23 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
         <meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
-		<link rel="stylesheet" href="./styles.css">
-		<script src="./helper.js" defer></script>
- 		<title><?php print $reference ; ?></title>
+		<link rel="apple-touch-icon" sizes="180x180" href="../commun/icones/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../commun/icones/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../commun/icones/favicon-16x16.png">
+		<link rel="stylesheet" href="./parole.css">
+		<script src="../commun/commun.js" defer></script>
+		<title><?php print $reference ; ?></title>
 	</head>
 	<body>
 	<?php
 	print '<div id="pericopes">' ;
 	foreach (explode("|",$references) as $reference) {
-		$pericope = new Pericope(trim($reference)) ;
+		$opt_pericope = array(
+			"corpus" => 1,
+			"version" => 1,
+			"ref" => trim($reference)
+		) ;
+		$pericope = new Pericope($opt_pericope) ;
 		if (! $pericope->erreurs ) {
 			?>
 				<h1 class="titre1"><?php print $pericope->titre ; ?></h1>
@@ -58,6 +63,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 	}
 	print '</div>';
 	?>
+	<a href="">Nouvelle requête</a>
 	</body>
 	</html>
 	<?php
@@ -66,13 +72,13 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 	<!DOCTYPE html>
 	<html>
 	<head>
-        <meta charset="UTF-8" />
+	<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-		<link rel="apple-touch-icon" sizes="180x180" href="../icones/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="../icones/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="../icones/favicon-16x16.png">
-		<link rel="stylesheet" href="./styles.css">
+		<link rel="apple-touch-icon" sizes="180x180" href="../commun/icones/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../commun/icones/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../commun/icones/favicon-16x16.png">
+		<link rel="stylesheet" href="./parole.css">
  		<title>Choisir le texte</title>
 	</head>
 	<body>
@@ -80,7 +86,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 			<div>
 				<form method="post" autocomplete="off">
 					<label for="reference">Référence :</label><br>
-					<textarea id="reference" name="reference" placeholder="Par exemple : Gn 2, 2-4.7 | Mt 2-4 ..." row="2" cols="50"></textarea><br>
+					<textarea id="reference" name="reference" placeholder="Par exemple : Gn 2, 2-4.7 | Mt 2-4 ..." row="1" cols="50"></textarea><br>
 					<label for="affichage_versets">Versets affichés :</label>
 					<input id="affichage_versets" type="checkbox" name="affichage_versets">
 					<input type="submit" value="Envoyer">

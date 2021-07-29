@@ -1,3 +1,5 @@
+// Ajoute un intercepteur charcode = "+" => "      " sur éléments de classe "editeur"
+
 editeurs = document.getElementsByClassName("editeur") ;
 l = editeurs.length;
 for (i = 0; i < l; i++) {

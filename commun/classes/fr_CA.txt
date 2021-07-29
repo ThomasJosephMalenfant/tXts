@@ -1,0 +1,213 @@
+%spellout-numbering-year:
+    0: =%spellout-numbering=;
+    1100/100: <%spellout-cardinal-masculine<-cent>%%cents-m>;
+    10000: =%spellout-numbering=;
+    -x: moins >%spellout-numbering-year>;
+    x.x: =#,###0.#=;
+%spellout-numbering:
+    0: =%spellout-cardinal-masculine=;
+%%et-un:
+    1: et-un;
+    2: =%spellout-cardinal-masculine=;
+    11: et-onze;
+    12: =%spellout-cardinal-masculine=;
+%%cents-m:
+    0: s;
+    1: ' =%spellout-cardinal-masculine=;
+%%subcents-m:
+    0: s;
+    1: -=%spellout-cardinal-masculine=;
+%%spellout-leading:
+    0: =%spellout-cardinal-masculine=;
+    80/20: quatre-vingt;
+    81/20: quatre-vingt->%%spellout-leading>;
+    100: cent;
+    101: cent >%%spellout-leading>;
+    200: <%%spellout-leading< cent;
+    201: <%%spellout-leading< cent >%%spellout-leading>;
+    1000: =%spellout-cardinal-masculine=;
+%spellout-cardinal-masculine:
+    0: zéro;
+    1: un;
+    2: deux;
+    3: trois;
+    4: quatre;
+    5: cinq;
+    6: six;
+    7: sept;
+    8: huit;
+    9: neuf;
+    10: dix;
+    11: onze;
+    12: douze;
+    13: treize;
+    14: quatorze;
+    15: quinze;
+    16: seize;
+    17: dix->%spellout-cardinal-masculine>;
+    20: vingt;
+    21: vingt->%%et-un>;
+    30: trente;
+    31: trente->%%et-un>;
+    40: quarante;
+    41: quarante->%%et-un>;
+    50: cinquante;
+    51: cinquante->%%et-un>;
+    60/20: soixante;
+    61/20: soixante->%%et-un>;
+    80/20: quatre-vingt>%%subcents-m>;
+    100: cent;
+    101: cent >%spellout-cardinal-masculine>;
+    200: <%spellout-cardinal-masculine< cent>%%cents-m>;
+    1000: mille;
+    1001: mille >%spellout-cardinal-masculine>;
+    2000: <%%spellout-leading< mille;
+    2001: <%%spellout-leading< mille >%spellout-cardinal-masculine>;
+    1000000: un million;
+    1000001: un million >%spellout-cardinal-masculine>;
+    2000000: <%%spellout-leading< millions;
+    2000001: <%%spellout-leading< millions >%spellout-cardinal-masculine>;
+    1000000000: un milliard;
+    1000000001: un milliard >%spellout-cardinal-masculine>;
+    2000000000: <%%spellout-leading< milliards;
+    2000000001: <%%spellout-leading< milliards >%spellout-cardinal-masculine>;
+    1000000000000: un billion;
+    1000000000001: un billion >%spellout-cardinal-masculine>;
+    2000000000000: <%%spellout-leading< billions;
+    2000000000001: <%%spellout-leading< billions >%spellout-cardinal-masculine>;
+    1000000000000000: un billiard;
+    1000000000000001: un billiard >%spellout-cardinal-masculine>;
+    2000000000000000: <%%spellout-leading< billiards;
+    2000000000000001: <%%spellout-leading< billiards >%spellout-cardinal-masculine>;
+    1000000000000000000: =#,##0=;
+    -x: moins >%spellout-cardinal-masculine>;
+    x.x: <%spellout-cardinal-masculine< virgule >%spellout-cardinal-masculine>;
+%%et-une:
+    1: et-une;
+    2: =%spellout-cardinal-feminine=;
+    11: et-onze;
+    12: =%spellout-cardinal-feminine=;
+%%cents-f:
+    0: s;
+    1: ' =%spellout-cardinal-feminine=;
+%%subcents-f:
+    0: s;
+    1: -=%spellout-cardinal-feminine=;
+%spellout-cardinal-feminine:
+    0: zéro;
+    1: une;
+    2: =%spellout-cardinal-masculine=;
+    20: vingt;
+    21: vingt->%%et-une>;
+    30: trente;
+    31: trente->%%et-une>;
+    40: quarante;
+    41: quarante->%%et-une>;
+    50: cinquante;
+    51: cinquante->%%et-une>;
+    60/20: soixante;
+    61/20: soixante->%%et-une>;
+    80/20: quatre-vingt>%%subcents-f>;
+    100: cent;
+    101: cent >%spellout-cardinal-feminine>;
+    200: <%spellout-cardinal-masculine< cent>%%cents-f>;
+    1000: mille;
+    1001: mille >%spellout-cardinal-feminine>;
+    2000: <%%spellout-leading< mille;
+    2001: <%%spellout-leading< mille >%spellout-cardinal-feminine>;
+    1000000: un million;
+    1000001: un million >%spellout-cardinal-feminine>;
+    2000000: <%%spellout-leading< millions;
+    2000001: <%%spellout-leading< millions >%spellout-cardinal-feminine>;
+    1000000000: un milliard;
+    1000000001: un milliard >%spellout-cardinal-feminine>;
+    2000000000: <%%spellout-leading< milliards;
+    2000000001: <%%spellout-leading< milliards >%spellout-cardinal-feminine>;
+    1000000000000: un billion;
+    1000000000001: un billion >%spellout-cardinal-feminine>;
+    2000000000000: <%%spellout-leading< billions;
+    2000000000001: <%%spellout-leading< billions >%spellout-cardinal-feminine>;
+    1000000000000000: un billiard;
+    1000000000000001: un billiard >%spellout-cardinal-feminine>;
+    2000000000000000: <%%spellout-leading< billiards;
+    2000000000000001: <%%spellout-leading< billiards >%spellout-cardinal-feminine>;
+    1000000000000000000: =#,##0=;
+    -x: moins >%spellout-cardinal-feminine>;
+    x.x: <%spellout-cardinal-feminine< virgule >%spellout-cardinal-feminine>;
+%%et-unieme:
+    1: et-unième;
+    2: =%%spellout-ordinal=;
+    11: et-onzième;
+    12: =%%spellout-ordinal=;
+%%cents-o:
+    0: ième;
+    1: -=%%et-unieme=;
+    2: ' =%%spellout-ordinal=;
+    11: -et-onzième;
+    12: ' =%%spellout-ordinal=;
+%%subcents-o:
+    0: ième;
+    1: -=%%et-unieme=;
+    2: -=%%spellout-ordinal=;
+    11: -et-onzième;
+    12: -=%%spellout-ordinal=;
+%%mille-o:
+    0: ième;
+    1: e-=%%et-unieme=;
+    2: e =%%spellout-ordinal=;
+    11: e-et-onzième;
+    12: e =%%spellout-ordinal=;
+%%spellout-ordinal:
+    1: unième;
+    2: deuxième;
+    3: troisième;
+    4: quatrième;
+    5: cinquième;
+    6: sixième;
+    7: septième;
+    8: huitième;
+    9: neuvième;
+    10: dixième;
+    11: onzième;
+    12: douzième;
+    13: treizième;
+    14: quatorzième;
+    15: quinzième;
+    16: seizième;
+    17: dix->%%spellout-ordinal>;
+    20: vingtième;
+    21: vingt->%%et-unieme>;
+    30: trentième;
+    31: trente->%%et-unieme>;
+    40: quarantième;
+    41: quarante->%%et-unieme>;
+    50: cinquantième;
+    51: cinquante->%%et-unieme>;
+    60: soixantième;
+    61/20: soixante->%%et-unieme>;
+    80/20: quatre-vingt>%%subcents-o>;
+    100: cent>%%cents-o>;
+    200: <%spellout-cardinal-masculine< cent>%%cents-o>;
+    1000: mill>%%mille-o>;
+    2000: <%%spellout-leading< mill>%%mille-o>;
+    1000000: <%%spellout-leading< million>%%cents-o>;
+    1000000000: <%%spellout-leading< milliard>%%cents-o>;
+    1000000000000: <%%spellout-leading< billion>%%cents-o>;
+    1000000000000000: <%%spellout-leading< billiard>%%cents-o>;
+    1000000000000000000: =#,##0=;
+%spellout-ordinal-masculine-plural:
+    0: =%spellout-ordinal-masculine=s;
+%spellout-ordinal-masculine:
+    0: zéroième;
+    1: premier;
+    2: =%%spellout-ordinal=;
+    -x: moins >%spellout-ordinal-masculine>;
+    x.x: =#,##0.#=;
+%spellout-ordinal-feminine-plural:
+    0: =%spellout-ordinal-feminine=s;
+%spellout-ordinal-feminine:
+    0: zéroième;
+    1: première;
+    2: =%%spellout-ordinal=;
+    -x: moins >%spellout-ordinal-feminine>;
+    x.x: =#,##0.#=;

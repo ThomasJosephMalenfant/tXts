@@ -6,7 +6,8 @@ pre {
     font-weight: 900;
     font-size: 42px;
     margin: 20px 0 5px;
-}.titre2 {
+}
+.titre2 {
     font-weight: 700;
     font-size: 36px;
     margin: 20px 0 5px;
@@ -34,4 +35,17 @@ pre {
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+.repons {
+    font-weight:700;
+    font-size:22px;
+    text-indent: 10%;
+}
+section {
+    margin: 50px 0 0 0;
+}
+@media print {
+    section {
+        break-inside: avoid;
+    }
 }
