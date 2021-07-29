@@ -53,6 +53,9 @@ function ScheduleInfo() {
 }
 
 function generateTime(schedule, ceJour, nbHeureDuration) {
+    //FIXME : utilisation merdique de moment.js pour raison de difficulté de formatage d'output de luxon.DateTime
+    //              - Trouver définition de objet schedule
+    //              - Formater luxon.toFormat() en fonction de input demandé pour propriétés .start et .end 
     var startDate = moment(ceJour.toMillis())
     var endDate = moment(ceJour.plus({hours: nbHeureDuration}).toMillis());
     var diffDate = endDate.diff(startDate, 'days');
@@ -135,7 +138,7 @@ function generateSchedule(viewName, renderStart, renderEnd) {
                     break;
             
                 case jourMesse:
-                    generateNouvelleCeleb(CalendarList[1], ceJour,"Eucharistie");                
+                    generateNouvelleCeleb(CalendarList[0], ceJour,"Eucharistie");                
                     break;
     
                 default:
