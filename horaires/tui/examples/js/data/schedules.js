@@ -52,26 +52,6 @@ function ScheduleInfo() {
     };
 }
 
-function generateTime(schedule, ceJour, nbHeureDuration) {
-    //FIXME : utilisation merdique de moment.js pour raison de difficulté de formatage d'output de luxon.DateTime
-    //              - Trouver définition de objet schedule
-    //              - Formater luxon.toFormat() en fonction de input demandé pour propriétés .start et .end 
-    var startDate = moment(ceJour.toMillis())
-    var endDate = moment(ceJour.plus({hours: nbHeureDuration}).toMillis());
-    var diffDate = endDate.diff(startDate, 'days');
-
-    schedule.category = 'time';
-
-    startDate.hours(19);
-    startDate.minutes(45);
-    schedule.start = startDate.toDate();
-
-    endDate = moment(startDate);
-
-    schedule.end = endDate.add(2, 'hour').toDate();
-
-}
-
 function generateNames() {
     var names = [];
     var i = 0;
@@ -84,7 +64,7 @@ function generateNames() {
     return names;
 }
 
-function generateNouvelleCeleb(calendar, ceJour, titre, renderStart, renderEnd) {
+function generateNouvelleCeleb(calendar, ceMoment, titre, duration) {
     var schedule = new ScheduleInfo();
 
     schedule.id = chance.guid();
@@ -92,15 +72,12 @@ function generateNouvelleCeleb(calendar, ceJour, titre, renderStart, renderEnd) 
 
     schedule.title = titre ;
     schedule.body = titre ;
-    // schedule.isReadOnly = chance.bool({likelihood: 20});
-    // schedule.start = ceJour.toString();
-    // schedule.end = ceJour.plus({hours: 2}).toString();
-    generateTime(schedule, ceJour, 2);
-    // schedule.isPrivate = chance.bool({likelihood: 10});
+    schedule.category = 'time' ;
+    schedule.start = ceMoment.toFormat("yyyy-MM-dd'T'HH:mm':00'");
+    schedule.end = ceMoment.plus({hours: duration}).toFormat("yyyy-MM-dd'T'HH:mm':00'");
     // schedule.location = chance.address();
     schedule.attendees = chance.bool({likelihood: 70}) ? generateNames() : [];
     // schedule.recurrenceRule = chance.bool({likelihood: 20}) ? 'repeated events' : '';
-    // schedule.state = chance.bool({likelihood: 20}) ? 'Free' : 'Busy';
     schedule.color = calendar.color;
     schedule.bgColor = calendar.bgColor;
     schedule.dragBgColor = calendar.dragBgColor;
@@ -113,18 +90,12 @@ function generateNouvelleCeleb(calendar, ceJour, titre, renderStart, renderEnd) 
     // schedule.raw.creator.email = chance.email();
     // schedule.raw.creator.phone = chance.phone();
 
-    // if (chance.bool({ likelihood: 20 })) {
-    //     var travelTime = chance.minute();
-    //     schedule.goingDuration = travelTime;
-    //     schedule.comingDuration = travelTime;
-    // }
-
     ScheduleList.push(schedule);
 }
 
 function generateSchedule(viewName, renderStart, renderEnd) {
-    var jourParole = "mardi" ; 
-    var jourMesse = "samedi" ;    
+    var jourParole = my_post['jourParole'] ; 
+    var jourMesse = my_post['jourMesse'] ?? "samedi" ;    
     ScheduleList = [];
 
     if (viewName === "month") {
@@ -132,19 +103,20 @@ function generateSchedule(viewName, renderStart, renderEnd) {
         var nbJours = DateTime.fromMillis(renderEnd.getTime()).diff(jourStart, 'days').days;
         for (let index = 0; index < nbJours ; index++) {
             const ceJour = jourStart.plus({days: index});
-            switch (ceJour.setLocale('fr').toFormat('EEEE')) {
+            const ceMomentParole = DateTime.local(ceJour.year, ceJour.month, ceJour.day, parseInt(my_post['heureParole'].split(":")[0]), parseInt(my_post['heureParole'].split(":")[1])) ;
+            const ceMomentMesse = DateTime.local(ceJour.year, ceJour.month, ceJour.day, 19, 45) ;
+            switch (ceJour.setLocale('fr').toFormat('EEEE')) {    
                 case jourParole:
-                    generateNouvelleCeleb(CalendarList[0], ceJour,"Parole");
+                    generateNouvelleCeleb(CalendarList[0], ceMomentParole, "Parole", 2);
                     break;
             
                 case jourMesse:
-                    generateNouvelleCeleb(CalendarList[0], ceJour,"Eucharistie");                
+                    generateNouvelleCeleb(CalendarList[0], ceMomentMesse, "Eucharistie");                
                     break;
     
                 default:
                     break;
             }
         }
-        console.log(ScheduleList);
     }
 }
