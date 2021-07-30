@@ -126,12 +126,12 @@
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-date {
   display: inline-block;
   width: 27px;
-  height: 27px;
-  line-height: 27px;
+  height: 10px;
+  line-height: 10px;
   text-align: center;
 }
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-date-title {
-  line-height: 27px;
+  line-height: 10px;
   margin-right: 5px;
 }
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-more-schedules {
@@ -200,12 +200,20 @@
 }
 .tui-full-calendar-weekday-schedule-title {
   display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 3px;
+  word-wrap: break-word ; 
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  padding-left: 1px;
   font-weight: bold;
 }
+.micro-attendee {
+  font-weight: normal;
+  font-size:xx-small;
+  display:inline-block;
+  line-height: 10px;
+}
+
 .tui-full-calendar-weekday-schedule-title-focused {
   padding-left: 16px;
 }

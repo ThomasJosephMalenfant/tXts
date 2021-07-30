@@ -71,7 +71,7 @@ function generateNouvelleCeleb(calendar, ceMoment, titre, duration) {
     schedule.calendarId = calendar.id ;
 
     schedule.title = titre ;
-    schedule.body = titre ;
+    // schedule.body = titre ;
     schedule.category = 'time' ;
     schedule.start = ceMoment.toFormat("yyyy-MM-dd'T'HH:mm':00'");
     schedule.end = ceMoment.plus({hours: duration}).toFormat("yyyy-MM-dd'T'HH:mm':00'");

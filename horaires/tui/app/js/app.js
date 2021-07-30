@@ -8,8 +8,6 @@ var DateTime = luxon.DateTime;
 
 (function(window, Calendar) {
     var cal, resizeThrottled;
-    var useCreationPopup = true;
-    var useDetailPopup = true;
     var datePicker, selectedCalendar;
 
     cal = new Calendar('#calendar', {
@@ -20,10 +18,15 @@ var DateTime = luxon.DateTime;
             daynames: ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
         },
         month: {
-            daynames: ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
+            daynames: ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
+            grid: {
+                header:{
+                    height:14
+                }
+            }
         },
-        useCreationPopup: useCreationPopup,
-        useDetailPopup: useDetailPopup,
+        useCreationPopup: true,
+        useDetailPopup: true,
         calendars: CalendarList,
         template: {
             milestone: function(model) {
