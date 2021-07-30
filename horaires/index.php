@@ -1,6 +1,6 @@
 <?php
 ob_start();
-// TODO : Ajout support de la communauté en php ? 
+
 if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) { 
     ?>
     <!doctype html>
@@ -12,8 +12,8 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
         <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
         <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
         <link rel="stylesheet" type="text/css" href="./tui/dist/tui-calendar.css">
-        <link rel="stylesheet" type="text/css" href="./tui/examples/css/default.css">
-        <link rel="stylesheet" type="text/css" href="./tui/examples/css/icons.css">
+        <link rel="stylesheet" type="text/css" href="./tui/app/css/default.css">
+        <link rel="stylesheet" type="text/css" href="./tui/app/css/icons.css">
         <script>
             <?php
             print 'var my_post = [];
@@ -84,14 +84,15 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
         <script src="./tui/dist/tui-calendar.js"></script>
-        <script src="./tui/examples/js/data/calendars.js"></script>
-        <script src="./tui/examples/js/data/schedules.js"></script>
+        <script src="./tui/app/js/data/calendars.js"></script>
+        <script src="./tui/app/js/data/schedules.js"></script>
         <!-- <script src="./js/theme/dooray.js"></script> -->
-        <script src="./tui/examples/js/app.js"></script>
+        <script src="./tui/app/js/app.js"></script>
     </body>
     </html>
 <?php
 } else {
+    // TODO : Ajout des champs heure de l'eucharistie et, surtout, communauté avec exemple du format dans le champ en background
     ?>
     <!DOCTYPE html>
 	<html>

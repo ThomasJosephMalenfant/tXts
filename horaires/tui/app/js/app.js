@@ -102,6 +102,7 @@ var DateTime = luxon.DateTime;
      */
     function getTimeTemplate(schedule, isAllDay) {
         var html = [];
+        // Migrer affichage de l'heure de début de moment.js --> luxon.DateTime
         var start = moment(schedule.start.toUTCString());
         if (!isAllDay) {
             html.push('<strong>' + start.format('HH:mm') + '</strong> ');
@@ -120,6 +121,7 @@ var DateTime = luxon.DateTime;
                 html.push('<span class="calendar-font-icon ic-location-b"></span>');
             }
             html.push(' ' + schedule.title);
+            html.push('<br><span class="micro-attendee">' + schedule.attendees.join(', ') + '</span>')
         }
 
         return html.join('');
