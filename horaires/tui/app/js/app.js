@@ -124,7 +124,7 @@ var DateTime = luxon.DateTime;
                 html.push('<span class="calendar-font-icon ic-location-b"></span>');
             }
             html.push(' ' + schedule.title);
-            html.push('<br><span class="micro-attendee">' + schedule.attendees.join(', ') + '</span>')
+            html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>')
         }
 
         return html.join('');
@@ -243,9 +243,9 @@ var DateTime = luxon.DateTime;
             dragBgColor: calendar.bgColor,
             borderColor: calendar.borderColor,
             raw: {
-                location: location
+                location: location,
+                attendees: attendees
             },
-            state: 'Busy'
         }]);
 
         $('#modal-new-schedule').modal('hide');
@@ -297,10 +297,10 @@ var DateTime = luxon.DateTime;
             dragBgColor: calendar.bgColor,
             borderColor: calendar.borderColor,
             location: scheduleData.location,
-            raw: {
-                class: scheduleData.raw['class']
-            },
-            state: scheduleData.state
+            attendees: scheduleData.attendees
+            // raw: {
+            //     class: scheduleData.raw['class']
+            // }
         };
         if (calendar) {
             schedule.calendarId = calendar.id;

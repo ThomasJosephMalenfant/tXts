@@ -76,7 +76,8 @@ function generateNouvelleCeleb(calendar, ceMoment, titre, duration) {
     schedule.start = ceMoment.toFormat("yyyy-MM-dd'T'HH:mm':00'");
     schedule.end = ceMoment.plus({hours: duration}).toFormat("yyyy-MM-dd'T'HH:mm':00'");
     // schedule.location = chance.address();
-    schedule.attendees = chance.bool({likelihood: 70}) ? generateNames() : [];
+    var arrayNames = chance.bool({likelihood: 70}) ? generateNames() : [];
+    schedule.attendees = arrayNames.join(", ") ;
     // schedule.recurrenceRule = chance.bool({likelihood: 20}) ? 'repeated events' : '';
     schedule.color = calendar.color;
     schedule.bgColor = calendar.bgColor;
