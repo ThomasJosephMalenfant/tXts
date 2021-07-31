@@ -1,4 +1,5 @@
 'use strict';
+// TODO Ajout sélecteur d'étape de la communauté pour différent pattern de célébration
 
 /*eslint-disable*/
 var DateTime = luxon.DateTime;

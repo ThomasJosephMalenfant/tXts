@@ -4,8 +4,12 @@
  * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
+
 /* NEXT : Explorer effet de l'option "week-end grid plus étroit" pour inspiration de grid plus étroit pour les jours vides... */
- .tui-full-calendar-layout {
+ 
+/* TODO : bouton d'entête @media:print -> hidden */
+
+.tui-full-calendar-layout {
   height: 100%;
   position: relative;
   box-sizing: border-box;
@@ -136,7 +140,7 @@
   margin-right: 5px;
 }
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-more-schedules {
-  float: right;
+  /* float: right; */
   display: inline-block;
   height: 27px;
   line-height: 27px;
@@ -542,8 +546,11 @@
   bottom: 3px;
 }
 .tui-full-calendar-month {
-  height: 100%;
-  min-height: 600px;
+  height: max-content;
+  min-height: 75%;
+  border-style: ridge;
+  border-width: thin;
+  border-color: black;
 }
 .tui-full-calendar-month-dayname {
   width: 100%;

@@ -5,7 +5,6 @@
 /* global moment, tui, chance */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
-// TODO : Retrouver l'option pour limiter à 5 semaines affichées MAX
 var DateTime = luxon.DateTime;
 
 (function(window, Calendar) {
@@ -25,7 +24,8 @@ var DateTime = luxon.DateTime;
                 header:{
                     height:14
                 }
-            }
+            },
+            visibleWeeksCount: 5
         },
         useCreationPopup: true,
         useDetailPopup: true,

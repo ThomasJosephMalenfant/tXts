@@ -3631,26 +3631,52 @@ datetime = {
      * @param {boolean} workweek - only show work week
      * @returns {Array} day, left, width
      */
-    getGridLeftAndWidth: function(days, narrowWeekend, startDayOfWeek, workweek) {
-        var limitDaysToApplyNarrowWeekend = 5;
-        var uniformWidth = 100 / days;
-        var wideWidth = days > limitDaysToApplyNarrowWeekend ? 100 / (days - 1) : uniformWidth;
+    // getGridLeftAndWidth: function(days, narrowWeekend, startDayOfWeek, workweek) {
+    //     var limitDaysToApplyNarrowWeekend = 5;
+    //     var uniformWidth = 100 / days;
+    //     var wideWidth = days > limitDaysToApplyNarrowWeekend ? 100 / (days - 1) : uniformWidth;
+    //     var accumulatedWidth = 0;
+    //     var dates = util.range(startDayOfWeek, 7).concat(util.range(days)).slice(0, 7);
+
+        // if (workweek) {
+        //     dates = util.filter(dates, function(day) {
+        //         return !datetime.isWeekend(day);
+        //     });
+        // }
+
+
+    //     narrowWeekend = workweek ? false : narrowWeekend;
+
+    //     return util.map(dates, function(day) {
+    //         var model;
+    //         var width = narrowWeekend ? wideWidth : uniformWidth;
+    //         if (days > limitDaysToApplyNarrowWeekend && narrowWeekend && datetime.isWeekend(day)) {
+    //             width = wideWidth / 2;
+    //         }
+
+    //         model = {
+    //             day: day,
+    //             width: width,
+    //             left: accumulatedWidth
+    //         };
+
+    //         accumulatedWidth += width;
+
+    //         return model;
+    //     });
+    // },
+
+    getGridLeftAndWidth: function(days, startDayOfWeek) {
+        const libres = [0,1,3,4,5] ; // Jour de la semaine à couper en largeur
+        var halfWidth = 100 / ((days * 3) - (libres.length * 2)) ;
         var accumulatedWidth = 0;
         var dates = util.range(startDayOfWeek, 7).concat(util.range(days)).slice(0, 7);
 
-        if (workweek) {
-            dates = util.filter(dates, function(day) {
-                return !datetime.isWeekend(day);
-            });
-        }
-
-        narrowWeekend = workweek ? false : narrowWeekend;
-
         return util.map(dates, function(day) {
             var model;
-            var width = narrowWeekend ? wideWidth : uniformWidth;
-            if (days > limitDaysToApplyNarrowWeekend && narrowWeekend && datetime.isWeekend(day)) {
-                width = wideWidth / 2;
+            var width = halfWidth ;
+            if (!datetime.isVide(day, libres)) {
+                width = width * 3;
             }
 
             model = {
@@ -3672,6 +3698,16 @@ datetime = {
      */
     isWeekend: function(day) {
         return day === 0 || day === 6;
+    },
+
+    /**
+     * Test si ce jour de semaine est sans activité pour tout le mois
+     * @param {number} day number
+     * @param {array} libres array
+     * @returns {boolean} true if weekend or false
+     */
+     isVide: function(day,libres) {
+        return libres.includes(day);
     },
 
     /**
@@ -5154,6 +5190,18 @@ DW.prototype.addMonth = function(m) {
     }
 
     this.d.setMonth(targetMonth, Math.min(currentDay, targetDaysOfMonth));
+
+    return this;
+};
+
+/**
+ * Add month.
+ * @param {number} m - month to add
+ * @returns {DW} wrapper object
+ */
+
+DW.prototype.addWeek = function(w) {
+    this.d.setDate(this.d.getDate() + (w*7));
 
     return this;
 };
@@ -9911,7 +9959,8 @@ Calendar.prototype.move = function(offset) {
                 workweek: workweek
             };
 
-            renderDate.addDate(offset * 7 * datetimeOptions.visibleWeeksCount);
+            // renderDate.addDate(offset * 7 * datetimeOptions.visibleWeeksCount);
+            renderDate.addWeek(offset);
             tempDate = datetime.arr2dCalendar(renderDate.d, datetimeOptions);
 
             recursiveSet(view, function(childView, opt) {
@@ -9924,7 +9973,8 @@ Calendar.prototype.move = function(offset) {
                 workweek: workweek
             };
 
-            renderDate.addMonth(offset);
+            // renderDate.addMonth(offset);
+            renderDate.addWeek(offset);
             tempDate = datetime.arr2dCalendar(renderDate.d, datetimeOptions);
 
             recursiveSet(view, function(childView, opt) {
@@ -19468,7 +19518,6 @@ function Month(options, container, controller) {
      */
     this.grids = datetime.getGridLeftAndWidth(
         this.options.daynames.length,
-        this.options.narrowWeekend,
         this.options.startDayOfWeek);
 }
 
@@ -19583,7 +19632,6 @@ Month.prototype.render = function() {
 
     grids = this.grids = datetime.getGridLeftAndWidth(
         opt.daynames.length,
-        opt.narrowWeekend,
         opt.startDayOfWeek
     );
 
@@ -19601,18 +19649,18 @@ Month.prototype.render = function() {
         this
     );
 
-    if (workweek) {
-        grids = this.grids = datetime.getGridLeftAndWidth(5, opt.narrowWeekend, opt.startDayOfWeek, workweek);
+    // if (workweek) {
+    //     grids = this.grids = datetime.getGridLeftAndWidth(5, opt.narrowWeekend, opt.startDayOfWeek, workweek);
 
-        daynameViewModel = util.filter(daynameViewModel, function(daynameModel) {
-            return !datetime.isWeekend(daynameModel.day);
-        });
+    //     daynameViewModel = util.filter(daynameViewModel, function(daynameModel) {
+    //         return !datetime.isWeekend(daynameModel.day);
+    //     });
 
-        util.forEach(daynameViewModel, function(daynameModel, index) {
-            daynameModel.width = grids[index] ? grids[index].width : 0;
-            daynameModel.left = grids[index] ? grids[index].left : 0;
-        });
-    }
+    //     util.forEach(daynameViewModel, function(daynameModel, index) {
+    //         daynameModel.width = grids[index] ? grids[index].width : 0;
+    //         daynameModel.left = grids[index] ? grids[index].left : 0;
+    //     });
+    // }
 
     baseViewModel = {
         daynames: daynameViewModel,
@@ -26705,9 +26753,7 @@ Week.prototype.render = function() {
 
     grids = datetime.getGridLeftAndWidth(
         range.length,
-        narrowWeekend,
-        startDayOfWeek,
-        workweek
+        startDayOfWeek
     );
 
     viewModel = {

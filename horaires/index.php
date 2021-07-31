@@ -7,7 +7,7 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
     <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>Calendrier test DEMO</title>
+        <title>Célébrations</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
         <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
