@@ -4,7 +4,8 @@
  * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
-.tui-full-calendar-layout {
+/* NEXT : Explorer effet de l'option "week-end grid plus étroit" pour inspiration de grid plus étroit pour les jours vides... */
+ .tui-full-calendar-layout {
   height: 100%;
   position: relative;
   box-sizing: border-box;
@@ -207,13 +208,25 @@
   padding-left: 1px;
   font-weight: bold;
 }
+.micro-location {
+  font-weight: normal;
+  font-size:xx-small;
+  text-decoration: underline;
+  display:inline-block;
+  line-height: 10px;
+}
+.micro-location::before {
+  content : url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAOZJREFUKBWVUT0KwjAUbkzGTuJWPYNDpV0cXD2ETuIRBK+gs4ubp3BwcXBp6eINBKWDgydoid9X8oKCggYeee/7S9IGwZ9LverTNO3Wdb2y1o6IK6WOWutFlmU30XmDE58hbgvpTA+Y+mJqCemS20jdG2N6LPYMICc6b5BrIG3ONBZ7CoVj7w0cfllGRDj+gKQpjt/iPU0ye/LkROcNANaoCUzjqqquIsBuHddAWoiyLO9RFHUwJ4JxR/qmKIqdYG9vCMNwCeIiJHuHecj/B0GSJBng7ifO+ErDPM8L4b7ucRzPWJ8ET1E7YC7tmi9qAAAAAElFTkSuQmCC) ;
+}
 .micro-attendee {
   font-weight: normal;
   font-size:xx-small;
   display:inline-block;
   line-height: 10px;
 }
-
+.micro-attendee::before {
+  content : url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAJpJREFUKBVjYKA1YES3wMTExBMoNgsqnnbmzJntyGqYkDlQ9qz////LgDCQD9MIV4ZNA1wSGwObhjRGRsYnIAzUkIZNE0licE+bm5tr/fnzJx1osjPQBFmoKY+BftnLwsIy8+TJk9dAYmANxsbGoUD2YiBmBwliAT+BYrFnz55dDfNDO1AAl2KQfpAcSA0DTIMyiEMAEKMG0wgAolIjcM7Tjm8AAAAASUVORK5CYII=);
+}
 .tui-full-calendar-weekday-schedule-title-focused {
   padding-left: 16px;
 }

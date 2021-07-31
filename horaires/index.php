@@ -73,7 +73,8 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
             <span id="renderRange" class="render-range"></span>
         </div>
         <div id="calendar"></div>
-
+            <!-- TODO : Ajouter façon de laisser des notes dans le bas -->
+        <!-- <form><label for="notes">Notes :</label><textarea id="notes" name="notes" placeholder="Notes pour le mois..."></textarea></form> -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -92,7 +93,6 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
     </html>
 <?php
 } else {
-    // TODO : Ajout des champs heure de l'eucharistie et, surtout, communauté avec exemple du format dans le champ en background
     ?>
     <!DOCTYPE html>
 	<html>
@@ -114,11 +114,15 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
                         <legend>Communautée</legend>
                         <div>
                             <label for="comm">Nom :</label>
-                            <input type="text" id="comm" name="comm" placeholder="STU1, NDF4...">
+                            <input type="text" id="comm" name="comm" placeholder="Exemple : STU1, NDF4...">
+                        </div>
+                        <div>
+                            <label for="nbmembre">Nombre par équipe :</label>
+                            <input type="number" id="nbmembre" name="nbmembre" min="3" max="6" value="4"> 
                         </div>
                         <div>
                             <label for="pool">Frères et soeurs :</label>
-                            <textarea id="pool" name="pool" placeholder="Gimli, Aragorn & Arwen, Legolas, ..." ></textarea>
+                            <textarea id="pool" name="pool" placeholder="Exemple : Gimli, Aragorn & Arwen..." ></textarea>
                         </div>
                     </fieldset>
                     <fieldset>
@@ -126,29 +130,36 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
                         <div>
                             <label for="jourParole">Jour célébration parole :</label>
                             <select id="jourParole" name="jourParole">
-                                <option value="mardi">Mardi</option>'
-                                <option value="mercredi">Mercredi</option>'
-                                <option value="jeudi">Jeudi</option>'
+                                <option value="mardi">Mardi</option>
+                                <option value="mercredi">Mercredi</option>
+                                <option value="jeudi">Jeudi</option>
                             </select>
                         </div>
                         <div>
-                            <label for="heureParole">Heure de la Parole:</label>
+                            <label for="heureParole">Heure de la Parole :</label>
                             <input type="time" id="heureParole" name="heureParole" value="19:45">
+                        </div>
+                        <div>
+                            <label for="lieuParole">Lieu de la Parole :</label>
+                            <input type="text" id="lieuParole" name="lieuParole" placeholder="Exemple : Srmq, St-Ignace...">
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Eucharistie</legend>
                         <div>
-                            <label for="jourParole">Jour célébration parole :</label>
-                            <select id="jourParole" name="jourParole">
-                                <option value="mardi">Mardi</option>'
-                                <option value="mercredi">Mercredi</option>'
-                                <option value="jeudi">Jeudi</option>'
+                            <label for="jourMesse">Jour de l'Eucharistie :</label>
+                            <select id="jourMesse" name="jourMesse">
+                                <option value="samedi">Samedi</option>
+                                <option value="Dimanche">Dimanche</option>
                             </select>
                         </div>
                         <div>
-                            <label for="heureParole">Heure de la Parole:</label>
-                            <input type="time" id="heureParole" name="heureParole" value="19:45">
+                            <label for="heureMesse">Heure de l'Eucharistie :</label>
+                            <input type="time" id="heureMesse" name="heureMesse" value="19:45">
+                        </div>
+                        <div>
+                            <label for="lieuMesse">Lieu de l'Eucharistie :</label>
+                            <input type="text" id="lieuMesse" name="lieuMesse" placeholder="Exemple : Srmq, St-Ignace...">
                         </div>
                     </fieldset>
                     <br>

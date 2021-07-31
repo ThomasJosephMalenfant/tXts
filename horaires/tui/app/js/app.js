@@ -4,6 +4,8 @@
 /* eslint-env jquery */
 /* global moment, tui, chance */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
+
+// TODO : Retrouver l'option pour limiter à 5 semaines affichées MAX
 var DateTime = luxon.DateTime;
 
 (function(window, Calendar) {
@@ -44,23 +46,23 @@ var DateTime = luxon.DateTime;
     // event handlers
     cal.on({
         'clickMore': function(e) {
-            console.log('clickMore', e);
+            // console.log('clickMore', e);
         },
         'clickSchedule': function(e) {
-            console.log('clickSchedule', e);
+            // console.log('clickSchedule', e);
         },
         'clickDayname': function(date) {
-            console.log('clickDayname', date);
+            // console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            console.log('beforeCreateSchedule', e);
+            // console.log('beforeCreateSchedule', e);
             saveNewSchedule(e);
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
             var changes = e.changes;
 
-            console.log('beforeUpdateSchedule', e);
+            // console.log('beforeUpdateSchedule', e);
 
             if (changes && !changes.isAllDay && schedule.category === 'allday') {
                 changes.category = 'time';
@@ -70,16 +72,16 @@ var DateTime = luxon.DateTime;
             refreshScheduleVisibility();
         },
         'beforeDeleteSchedule': function(e) {
-            console.log('beforeDeleteSchedule', e);
+            // console.log('beforeDeleteSchedule', e);
             cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
         },
         'afterRenderSchedule': function(e) {
             var schedule = e.schedule;
-            // var element = cal.getElement(schedule.id, schedule.calendarId);
+            var element = cal.getElement(schedule.id, schedule.calendarId);
             // console.log('afterRenderSchedule', element);
         },
         'clickTimezonesCollapseBtn': function(timezonesCollapsed) {
-            console.log('timezonesCollapsed', timezonesCollapsed);
+            // console.log('timezonesCollapsed', timezonesCollapsed);
 
             if (timezonesCollapsed) {
                 cal.setTheme({
@@ -105,27 +107,16 @@ var DateTime = luxon.DateTime;
      */
     function getTimeTemplate(schedule, isAllDay) {
         var html = [];
-        // Migrer affichage de l'heure de début de moment.js --> luxon.DateTime
         var start = DateTime.fromMillis(schedule.start.getTime()); 
+
         if (!isAllDay) {
             html.push('<strong>' + start.toFormat("HH:mm") + '</strong> ');
         }
-        if (schedule.isPrivate) {
-            html.push('<span class="calendar-font-icon ic-lock-b"></span>');
-            html.push(' Private');
-        } else {
-            if (schedule.isReadOnly) {
-                html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
-            } else if (schedule.recurrenceRule) {
-                html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
-            } else if (schedule.attendees.length) {
-                html.push('<span class="calendar-font-icon ic-user-b"></span>');
-            } else if (schedule.location) {
-                html.push('<span class="calendar-font-icon ic-location-b"></span>');
-            }
-            html.push(' ' + schedule.title);
-            html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>')
+        html.push(' ' + schedule.title );
+        if (schedule.location) {
+            html.push('<span class="micro-location">' + schedule.location + '</span>') ;
         }
+        html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>') ;
 
         return html.join('');
     }
