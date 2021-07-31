@@ -152,13 +152,25 @@ var DateTime = luxon.DateTime;
                 options.month.visibleWeeksCount = 3;
                 viewName = 'month';
                 break;
-            case 'toggle-narrow-weekend':
-                options.month.narrowWeekend = !options.month.narrowWeekend;
-                options.week.narrowWeekend = !options.week.narrowWeekend;
-                viewName = cal.getViewName();
-
-                target.querySelector('input').checked = options.month.narrowWeekend;
+            case 'toggle-weeks4':
+                options.month.visibleWeeksCount = 4;
+                viewName = 'month';
                 break;
+            case 'toggle-weeks5':
+                options.month.visibleWeeksCount = 5;
+                viewName = 'month';
+                break;
+            case 'toggle-weeks6':
+                options.month.visibleWeeksCount = 6;
+                viewName = 'month';
+                break;
+            case 'toggle-narrow-weekend':
+            options.month.narrowWeekend = !options.month.narrowWeekend;
+            options.week.narrowWeekend = !options.week.narrowWeekend;
+            viewName = cal.getViewName();
+
+            target.querySelector('input').checked = options.month.narrowWeekend;
+            break;
             case 'toggle-start-day-1':
                 options.month.startDayOfWeek = options.month.startDayOfWeek ? 0 : 1;
                 options.week.startDayOfWeek = options.week.startDayOfWeek ? 0 : 1;

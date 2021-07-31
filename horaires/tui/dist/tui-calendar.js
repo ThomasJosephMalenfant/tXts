@@ -3666,8 +3666,12 @@ datetime = {
     //     });
     // },
 
-    getGridLeftAndWidth: function(days, startDayOfWeek) {
+    getGridLeftAndWidth: function(days, startDayOfWeek, schedulesInDateRange) {
         const libres = [0,1,3,4,5] ; // Jour de la semaine à couper en largeur
+        console.log(schedulesInDateRange)
+        if (libres.length > 6) {
+            libres.splice(0, libres.length)
+        }
         var halfWidth = 100 / ((days * 3) - (libres.length * 2)) ;
         var accumulatedWidth = 0;
         var dates = util.range(startDayOfWeek, 7).concat(util.range(days)).slice(0, 7);
@@ -19518,7 +19522,8 @@ function Month(options, container, controller) {
      */
     this.grids = datetime.getGridLeftAndWidth(
         this.options.daynames.length,
-        this.options.startDayOfWeek);
+        this.options.startDayOfWeek,
+        "Dans function Month");
 }
 
 util.inherit(Month, View);
@@ -19617,26 +19622,38 @@ Month.prototype._renderChildren = function(container, calendar, theme) {
  */
 Month.prototype.render = function() {
     var self = this,
-        opt = this.options,
+        options = this.options,
+        scheduleFilter = options.scheduleFilter,
         vLayout = this.vLayout,
         controller = this.controller,
-        daynames = opt.daynames,
-        workweek = opt.workweek,
-        calendar = this._getMonthCalendar(opt.renderMonth),
-        scheduleFilter = opt.scheduleFilter,
+        daynames = options.daynames,
+        workweek = options.workweek,
+        calendar = this._getMonthCalendar(options.renderMonth),
         theme = controller ? controller.theme : null,
-        styles = this._getStyles(theme),
-        grids,
-        daynameViewModel,
-        baseViewModel;
+        styles = this._getStyles(theme) ;
+    var daynameViewModel, baseViewModel;
+    var renderStartDate, renderEndDate, schedulesInDateRange, viewModel, grids, range;
+
+    // NEXT : Pas vraiment start et end du RENDER comme souhaité... plutôt centré sur today()...
+    renderStartDate = new TZDate(options.renderStartDate);
+    renderEndDate = new TZDate(options.renderEndDate);
+
+    schedulesInDateRange = controller.findByDateRange(
+        datetime.startDateOfMonth(renderStartDate),
+        datetime.endDateOfMonth(renderStartDate),
+        this.panels,
+        scheduleFilter,
+        this.options
+    );
 
     grids = this.grids = datetime.getGridLeftAndWidth(
-        opt.daynames.length,
-        opt.startDayOfWeek
+        options.daynames.length,
+        options.startDayOfWeek,
+        schedulesInDateRange
     );
 
     daynameViewModel = util.map(
-        util.range(opt.startDayOfWeek, 7).concat(util.range(7)).slice(0, 7),
+        util.range(options.startDayOfWeek, 7).concat(util.range(7)).slice(0, 7),
         function(day, index) {
             return {
                 day: day,
@@ -26753,7 +26770,8 @@ Week.prototype.render = function() {
 
     grids = datetime.getGridLeftAndWidth(
         range.length,
-        startDayOfWeek
+        startDayOfWeek,
+        schedulesInDateRange
     );
 
     viewModel = {

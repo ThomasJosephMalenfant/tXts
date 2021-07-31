@@ -42,11 +42,6 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
                         </a>
                     </li>
                     <li role="presentation">
-                        <a class="dropdown-menu-title" role="menuitem" data-action="toggle-weekly">
-                            <i class="calendar-icon ic_view_week"></i>Semaine
-                        </a>
-                    </li>
-                    <li role="presentation">
                         <a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks2">
                             <i class="calendar-icon ic_view_week"></i>2 semaines
                         </a>
@@ -54,6 +49,21 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
                     <li role="presentation">
                         <a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks3">
                             <i class="calendar-icon ic_view_week"></i>3 semaines
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks4">
+                            <i class="calendar-icon ic_view_week"></i>4 semaines
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks5">
+                            <i class="calendar-icon ic_view_week"></i>5 semaines
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a class="dropdown-menu-title" role="menuitem" data-action="toggle-weeks6">
+                            <i class="calendar-icon ic_view_week"></i>6 semaines
                         </a>
                     </li>
                 </ul>

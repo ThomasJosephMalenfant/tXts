@@ -4,11 +4,12 @@
  * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
-
-/* NEXT : Explorer effet de l'option "week-end grid plus étroit" pour inspiration de grid plus étroit pour les jours vides... */
  
-/* TODO : bouton d'entête @media:print -> hidden */
-
+@media print{
+  button {
+    display: none !important;
+  }
+}
 .tui-full-calendar-layout {
   height: 100%;
   position: relative;
