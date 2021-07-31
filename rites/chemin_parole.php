@@ -11,7 +11,6 @@ class Rituel
     }
 
     function questionnaire() {
-        //FIXME : Alignement affreux des <label> et <input>
         $output = '<h2>Construction Célébration de la Parole</h2><div class="questions"><form method="POST"><fieldset>
             <legend>Général</legend>
             <div><label for="communaute">Communauté : </label>

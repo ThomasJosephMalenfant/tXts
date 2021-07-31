@@ -110,18 +110,22 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
 		<div class="centrement">
 			<div>
 				<form method="post" autocomplete="off">
-					<label for="comm">Communautée :</label> <input type="text" id="comm" name="comm">
-					<br>
-                    <label for="jourParole">Jour célébration parole :</label>
-					<select id="jourParole" name="jourParole">
-                        <option value="mardi">Mardi</option>'
-                        <option value="mercredi">Mercredi</option>'
-                        <option value="jeudi">Jeudi</option>'
-					</select>
-                    <br>
-                    <label for="heureParole">Heure de la Parole:</label>
-                    <input type="time" id="heureParole" name="heureParole">
-                    <br>
+                    <div>
+    					<label for="comm">Communautée :</label>
+                        <input type="text" id="comm" name="comm">
+                    </div>
+                    <div>
+                        <label for="jourParole">Jour célébration parole :</label>
+                        <select id="jourParole" name="jourParole">
+                            <option value="mardi">Mardi</option>'
+                            <option value="mercredi">Mercredi</option>'
+                            <option value="jeudi">Jeudi</option>'
+                        </select>
+                    </div>
+                    <div>
+                        <label for="heureParole">Heure de la Parole:</label>
+                        <input type="time" id="heureParole" name="heureParole">
+                    </div>
                     <input id="data" name="data" type="hidden" value="1">
 					<input type="submit" value="Envoyer">
 				</form>

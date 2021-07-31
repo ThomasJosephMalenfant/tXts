@@ -1,1 +1,10 @@
 @import "../commun/commun.css" ;
+
+div {
+    margin-bottom: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 160px;
+}
