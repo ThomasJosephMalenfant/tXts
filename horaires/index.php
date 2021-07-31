@@ -110,22 +110,48 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
 		<div class="centrement">
 			<div>
 				<form method="post" autocomplete="off">
-                    <div>
-    					<label for="comm">Communautée :</label>
-                        <input type="text" id="comm" name="comm">
-                    </div>
-                    <div>
-                        <label for="jourParole">Jour célébration parole :</label>
-                        <select id="jourParole" name="jourParole">
-                            <option value="mardi">Mardi</option>'
-                            <option value="mercredi">Mercredi</option>'
-                            <option value="jeudi">Jeudi</option>'
-                        </select>
-                    </div>
-                    <div>
-                        <label for="heureParole">Heure de la Parole:</label>
-                        <input type="time" id="heureParole" name="heureParole">
-                    </div>
+                    <fieldset>
+                        <legend>Communautée</legend>
+                        <div>
+                            <label for="comm">Nom :</label>
+                            <input type="text" id="comm" name="comm" placeholder="STU1, NDF4...">
+                        </div>
+                        <div>
+                            <label for="pool">Frères et soeurs :</label>
+                            <textarea id="pool" name="pool" placeholder="Gimli, Aragorn & Arwen, Legolas, ..." ></textarea>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Parole</legend>
+                        <div>
+                            <label for="jourParole">Jour célébration parole :</label>
+                            <select id="jourParole" name="jourParole">
+                                <option value="mardi">Mardi</option>'
+                                <option value="mercredi">Mercredi</option>'
+                                <option value="jeudi">Jeudi</option>'
+                            </select>
+                        </div>
+                        <div>
+                            <label for="heureParole">Heure de la Parole:</label>
+                            <input type="time" id="heureParole" name="heureParole" value="19:45">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Eucharistie</legend>
+                        <div>
+                            <label for="jourParole">Jour célébration parole :</label>
+                            <select id="jourParole" name="jourParole">
+                                <option value="mardi">Mardi</option>'
+                                <option value="mercredi">Mercredi</option>'
+                                <option value="jeudi">Jeudi</option>'
+                            </select>
+                        </div>
+                        <div>
+                            <label for="heureParole">Heure de la Parole:</label>
+                            <input type="time" id="heureParole" name="heureParole" value="19:45">
+                        </div>
+                    </fieldset>
+                    <br>
                     <input id="data" name="data" type="hidden" value="1">
 					<input type="submit" value="Envoyer">
 				</form>

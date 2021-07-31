@@ -124,7 +124,6 @@ function setRenderRangeText() {
   var viewName = cal.getViewName();
   var html = [];
   if (viewName === 'day') {
-    // TODO : éventuellement compléter la migration de moment.js --> luxon.DateTime
     html.push(moment(cal.getDate().getTime()).format('YYYY.MM.DD'));
   } else if (viewName === 'month' &&
     (!options.month.visibleWeeksCount || options.month.visibleWeeksCount > 4)) {

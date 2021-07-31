@@ -106,9 +106,9 @@ var DateTime = luxon.DateTime;
     function getTimeTemplate(schedule, isAllDay) {
         var html = [];
         // Migrer affichage de l'heure de début de moment.js --> luxon.DateTime
-        var start = moment(schedule.start.toUTCString());
+        var start = DateTime.fromMillis(schedule.start.getTime()); 
         if (!isAllDay) {
-            html.push('<strong>' + start.format('HH:mm') + '</strong> ');
+            html.push('<strong>' + start.toFormat("HH:mm") + '</strong> ');
         }
         if (schedule.isPrivate) {
             html.push('<span class="calendar-font-icon ic-lock-b"></span>');
@@ -272,7 +272,7 @@ var DateTime = luxon.DateTime;
 
     function createNewSchedule(event) {
         var start = event.start ? new Date(event.start.getTime()) : new Date();
-        var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
+        var end = event.end ? new Date(event.end.getTime()) : DateTime.now().plus({hours: 1}).toJSDate() ;
 
         if (useCreationPopup) {
             cal.openCreationPopup({
