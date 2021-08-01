@@ -6380,6 +6380,24 @@ TZDate.prototype.addDate = function(day) {
     return this;
 };
 
+TZDate.prototype.substractDate = function(day) {
+    this.setDate(this.getDate() - day);
+
+    return this;
+};
+
+TZDate.prototype.addYear = function(year) {
+    this.setFullYear(this.getFullYear() + year, this.getMonth(), this.getDate());
+
+    return this;
+};
+
+TZDate.prototype.substractYear = function(year) {
+    this.setFullYear(this.getFullYear() - year, this.getMonth(), this.getDate());
+
+    return this;
+};
+
 TZDate.prototype.addMinutes = function(minutes) {
     this.setMinutes(this.getMinutes() + minutes);
 
@@ -19632,15 +19650,17 @@ Month.prototype.render = function() {
         theme = controller ? controller.theme : null,
         styles = this._getStyles(theme) ;
     var daynameViewModel, baseViewModel;
-    var renderStartDate, renderEndDate, schedulesInDateRange, viewModel, grids, range;
+    var maintenant, renderStartDate, renderEndDate, schedulesInDateRange, viewModel, grids, range;
 
-    // NEXT : Pas vraiment start et end du RENDER comme souhaité... plutôt centré sur today()...
-    renderStartDate = new TZDate(options.renderStartDate);
-    renderEndDate = new TZDate(options.renderEndDate);
+    // Hack un peu sketch... comme le renderStart restait toujours centré sur now(), 
+    //  j'élargie le range de (now - 2 ans) -> (now + 2 ans) ... ça devrait le faire.
+    maintenant = new TZDate();
+    renderStartDate = maintenant.substractYear(2);
+    renderEndDate = maintenant.addYear(2);
 
     schedulesInDateRange = controller.findByDateRange(
         datetime.startDateOfMonth(renderStartDate),
-        datetime.endDateOfMonth(renderStartDate),
+        datetime.endDateOfMonth(renderEndDate),
         this.panels,
         scheduleFilter,
         this.options
