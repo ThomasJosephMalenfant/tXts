@@ -114,7 +114,7 @@
         if (schedule.location) {
             html.push('<span class="micro-location">' + schedule.location + '</span>') ;
         }
-        if (schedule.attendees) {
+        if (schedule.attendees.length > 0) {
             html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>') ;
         }
         return html.join('');
