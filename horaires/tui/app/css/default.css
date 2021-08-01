@@ -1,4 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+/* Custom ajout pour marge text Editeur */
+#textEditeur {
+  margin-top: 5px;
+}
 
 body {
   font-family: 'Noto Sans', sans-serif;

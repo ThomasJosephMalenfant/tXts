@@ -444,7 +444,7 @@
         textEditeur.id = textEditeur.name = "textEditeur";
         var textArea = document.createElement("p");
         textArea.id = textArea.name = "textEditeurArea";
-        textArea.innerText = "Test pour voir.";
+        textArea.innerText = "Notes de fin de calendrier...";
         textEditeur.appendChild(textArea);
         calendrier.parentNode.insertBefore(textEditeur, calendrier.nextSibling);
         var tinySimpleConfig = {
@@ -456,7 +456,6 @@
                 'lists',
                 'powerpaste',
                 'autolink',
-                'tinymcespellchecker'
             ],
             toolbar: [
                 'undo redo | bold italic underline | fontselect fontsizeselect',
