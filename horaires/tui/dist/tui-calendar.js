@@ -7698,6 +7698,9 @@ Base.prototype.updateSchedule = function(schedule, options) {
     if (options.attendees) {
         schedule.set('attendees', options.attendees);
     }
+    if (options.body) {
+        schedule.set('body', options.body);
+    }
 
     this._removeFromMatrix(schedule);
     this._addToMatrix(schedule);
@@ -18350,7 +18353,7 @@ function Schedule() {
      * attendees
      * @type {Array.<string>}
      */
-    this.attendees = [];
+    this.attendees = '';
 
     /**
      * recurrence rule
@@ -18436,7 +18439,8 @@ Schedule.prototype.init = function(options) {
     this.dueDateClass = options.dueDateClass || '';
     this.customStyle = options.customStyle || '';
     this.location = options.location || '';
-    this.attendees = options.attendees || [];
+    this.body = options.body || '';
+    this.attendees = options.attendees || '';
     this.recurrenceRule = options.recurrenceRule || '';
     this.isPrivate = options.isPrivate || false;
     this.isPending = options.isPending || false;
@@ -20599,6 +20603,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         calendarId: this._selectedCal ? this._selectedCal.id : null,
         title: title,
         location: domutil.get(cssPrefix + 'schedule-location'),
+        body: domutil.get(cssPrefix + 'schedule-body'),
         attendees: domutil.get(cssPrefix + 'schedule-attendees'),
         start: rangeDate.start,
         end: rangeDate.end,
@@ -20661,13 +20666,14 @@ ScheduleCreationPopup.prototype.render = function(viewModel) {
  */
 ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     var schedule = viewModel.schedule;
-    var title, isPrivate, location, attendees, startDate, endDate, isAllDay, state;
+    var title, isPrivate, location, body, attendees, startDate, endDate, isAllDay, state;
     var raw = schedule.raw || {};
     var calendars = this.calendars;
 
     var id = schedule.id;
     title = schedule.title;
     location = schedule.location;
+    body = schedule.body ;
     attendees = schedule.attendees;
     startDate = schedule.start;
     endDate = schedule.end;
@@ -20685,6 +20691,7 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
         calendars: calendars,
         title: title,
         location: location,
+        body: body,
         attendees: attendees,
         isAllDay: isAllDay,
         start: startDate,
@@ -21026,11 +21033,12 @@ ScheduleCreationPopup.prototype._getRangeDate = function(startDate, endDate, isA
 ScheduleCreationPopup.prototype._onClickUpdateSchedule = function(form) {
     var changes = common.getScheduleChanges(
         this._schedule,
-        ['calendarId', 'title', 'location', 'attendees', 'start', 'end', 'isAllDay'],
+        ['calendarId', 'title', 'location', 'body', 'attendees', 'start', 'end', 'isAllDay'],
         {
             calendarId: form.calendarId,
             title: form.title.value,
             location: form.location.value,
+            body: form.body.value,
             attendees: form.attendees.value,
             start: form.start,
             end: form.end,
@@ -21081,6 +21089,7 @@ ScheduleCreationPopup.prototype._onClickCreateSchedule = function(form) {
         calendarId: form.calendarId,
         title: form.title.value,
         location: form.location.value,
+        body: form.body.value,
         attendees:form.attendees.value,
         start: form.start,
         end: form.end,
@@ -21935,6 +21944,9 @@ var helpers = {
     'locationPlaceholder-tmpl': function() {
         return 'Lieux';
     },
+    'bodyPlaceholder-tmpl': function() {
+        return 'Prêtre qui préside';
+    },
     'attendeesPlaceholder-tmpl': function() {
         return 'Équipe de préparation';
     },
@@ -21964,6 +21976,9 @@ var helpers = {
     'popupDetailLocation-tmpl': function(schedule) {
         return schedule.location;
     },
+    'popupDetailBody-tmpl': function(schedule) {
+        return schedule.body;
+    },
     'popupDetailUser-tmpl': function(schedule) {
         return schedule.attendees || "" ;
     },
@@ -21972,9 +21987,6 @@ var helpers = {
     },
     'popupDetailRepeat-tmpl': function(schedule) {
         return schedule.recurrenceRule;
-    },
-    'popupDetailBody-tmpl': function(schedule) {
-        return schedule.body;
     },
     'popupEdit-tmpl': function() {
         return 'Modifier';
@@ -23140,7 +23152,28 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + "\" value=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"location") || (depth0 != null ? lookupProperty(depth0,"location") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"location","hash":{},"data":data,"loc":{"start":{"line":30,"column":140},"end":{"line":30,"column":152}}}) : helper)))
     + "\">\n            </div>\n        </div>\n"
-// début attendees ?
+    // début president 
+    + "<div class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":27,"column":20},"end":{"line":27,"column":34}}}) : helper)))
+    + "popup-section\">\n            <div class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":28,"column":24},"end":{"line":28,"column":38}}}) : helper)))
+    + "popup-section-item "
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":28,"column":57},"end":{"line":28,"column":71}}}) : helper)))
+    + "section-body\">\n            <span class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":29,"column":25},"end":{"line":29,"column":39}}}) : helper)))
+    + "icon "
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":29,"column":44},"end":{"line":29,"column":58}}}) : helper)))
+    + "ic-president\"></span>\n                <input id=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":30,"column":27},"end":{"line":30,"column":41}}}) : helper)))
+    + "schedule-body\" class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":30,"column":67},"end":{"line":30,"column":81}}}) : helper)))
+    + "content\" placeholder=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"bodyPlaceholder-tmpl") || (depth0 != null ? lookupProperty(depth0,"bodyPlaceholder-tmpl") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"bodyPlaceholder-tmpl","hash":{},"data":data,"loc":{"start":{"line":30,"column":103},"end":{"line":30,"column":131}}}) : helper)))
+    + "\" value=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"body") || (depth0 != null ? lookupProperty(depth0,"body") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data,"loc":{"start":{"line":30,"column":140},"end":{"line":30,"column":152}}}) : helper)))
+    + "\">\n            </div>\n        </div>\n"
+    // fin section president
+    // début attendees ?
     + "<div class=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":27,"column":20},"end":{"line":27,"column":34}}}) : helper)))
     + "popup-section\">\n            <div class=\""
@@ -23160,7 +23193,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + "\" value=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"attendees") || (depth0 != null ? lookupProperty(depth0,"attendees") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"attendees","hash":{},"data":data,"loc":{"start":{"line":30,"column":140},"end":{"line":30,"column":152}}}) : helper)))
     + "\">\n            </div>\n        </div>\n"
-// fin section attendees
+    // fin section attendees
     + "<div class=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":33,"column":20},"end":{"line":33,"column":34}}}) : helper)))
     + "popup-section\">\n            <div class=\""
@@ -23426,7 +23459,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":18,"column":73},"end":{"line":18,"column":87}}}) : helper)))
     + "popup-detail-item-separate\"><span class=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":18,"column":128},"end":{"line":18,"column":142}}}) : helper)))
-    + "content\">"
+    + "content\">Célébration présidée par "
     + ((stack1 = (lookupProperty(helpers,"popupDetailBody-tmpl")||(depth0 && lookupProperty(depth0,"popupDetailBody-tmpl"))||alias2).call(alias1,(depth0 != null ? lookupProperty(depth0,"schedule") : depth0),{"name":"popupDetailBody-tmpl","hash":{},"data":data,"loc":{"start":{"line":18,"column":151},"end":{"line":18,"column":186}}})) != null ? stack1 : "")
     + "</span></div>";
 },"13":function(container,depth0,helpers,partials,data) {

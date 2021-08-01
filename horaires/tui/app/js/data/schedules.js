@@ -73,7 +73,7 @@ function generateNouvelleCeleb(calendar, ceMoment, titre, duration, lieu, pool, 
     schedule.calendarId = calendar.id ;
 
     schedule.title = titre ;
-    // schedule.body = titre ;
+    schedule.body = '' // President !
     schedule.category = 'time' ;
     schedule.start = ceMoment.toFormat("yyyy-MM-dd'T'HH:mm':00'");
     schedule.end = ceMoment.plus({hours: duration}).toFormat("yyyy-MM-dd'T'HH:mm':00'");
@@ -86,7 +86,7 @@ function generateNouvelleCeleb(calendar, ceMoment, titre, duration, lieu, pool, 
     schedule.borderColor = calendar.borderColor;
 
     // schedule.raw.memo = chance.sentence();
-    // schedule.raw.creator.name = chance.name();
+    // schedule.raw.creator.name = 
     // schedule.raw.creator.avatar = chance.avatar();
     // schedule.raw.creator.company = chance.company();
     // schedule.raw.creator.email = chance.email();
