@@ -5,8 +5,6 @@
 /* global moment, tui, chance */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
-var DateTime = luxon.DateTime;
-
 (function(window, Calendar) {
     var cal, resizeThrottled;
     var datePicker, selectedCalendar;

@@ -4,6 +4,8 @@
  * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
+var DateTime = luxon.DateTime;
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("tui-code-snippet"), require("tui-date-picker"));
@@ -3667,20 +3669,33 @@ datetime = {
     // },
 
     getGridLeftAndWidth: function(days, startDayOfWeek, schedulesInDateRange) {
-        const libres = [0,1,3,4,5] ; // Jour de la semaine à couper en largeur
-        console.log(schedulesInDateRange)
+        var libres = [0,1,2,3,4,5,6] ;
+        var debut,weekday ; 
+        if (schedulesInDateRange){
+            for (let index = 0; index < schedulesInDateRange.length; index++) {
+                debut = DateTime.fromMillis(schedulesInDateRange[index][0][0].model.start.getTime());
+                weekday = debut.weekday;
+                if (weekday === 7) {
+                    weekday = 0;
+                }
+                libres = libres.filter(item => item !== weekday) ;
+            }
+        }
         if (libres.length > 6) {
             libres.splice(0, libres.length)
         }
-        var halfWidth = 100 / ((days * 3) - (libres.length * 2)) ;
+
+        var ratio =  3; // Jour occupé X fois plus large que jour vide
+        var halfWidth = 100 / ((days * ratio) - (libres.length * (ratio-1))) ;
         var accumulatedWidth = 0;
         var dates = util.range(startDayOfWeek, 7).concat(util.range(days)).slice(0, 7);
+        
 
         return util.map(dates, function(day) {
             var model;
             var width = halfWidth ;
             if (!datetime.isVide(day, libres)) {
-                width = width * 3;
+                width = width * ratio;
             }
 
             model = {
@@ -19541,7 +19556,7 @@ function Month(options, container, controller) {
     this.grids = datetime.getGridLeftAndWidth(
         this.options.daynames.length,
         this.options.startDayOfWeek,
-        "Dans function Month");
+        false);
 }
 
 util.inherit(Month, View);
