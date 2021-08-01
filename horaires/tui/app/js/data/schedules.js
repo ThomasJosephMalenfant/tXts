@@ -107,8 +107,8 @@ function generateSchedule(viewName, renderStart, renderEnd) {
 
     if (viewName === "month") {
         const jourStart = DateTime.fromMillis(renderStart.getTime());
-        var nbJours = DateTime.fromMillis(renderEnd.getTime()).diff(jourStart, 'days').days;
-        for (let index = 0; index < nbJours ; index++) {
+        var nbJours = DateTime.fromMillis(renderEnd.getTime()).diff(jourStart, 'days').days + 7;
+        for (let index = 0; index <= nbJours ; index++) {
             const ceJour = jourStart.plus({days: index});
             const ceMomentParole = DateTime.local(ceJour.year, ceJour.month, ceJour.day, parseInt(my_post['heureParole'].split(":")[0]), parseInt(my_post['heureParole'].split(":")[1])) ;
             const ceMomentMesse = DateTime.local(ceJour.year, ceJour.month, ceJour.day, parseInt(my_post['heureMesse'].split(":")[0]), parseInt(my_post['heureMesse'].split(":")[1])) ;
