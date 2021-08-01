@@ -14,7 +14,7 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
         <link rel="stylesheet" type="text/css" href="./tui/dist/tui-calendar.css">
         <link rel="stylesheet" type="text/css" href="./tui/app/css/default.css">
         <link rel="stylesheet" type="text/css" href="./tui/app/css/icons.css">
-        <script>
+        <script src="https://cdn.tiny.cloud/1/jc999j606rhpa52cp5xem0uymhqn82g3uaikwqw05ntz7hm8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>        <script>
             <?php
             print 'var my_post = [];
                 ' ;
@@ -83,8 +83,6 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
             <span id="renderRange" class="render-range"></span>
         </div>
         <div id="calendar"></div>
-            <!-- TODO : Ajouter façon de laisser des notes dans le bas -->
-        <!-- <form><label for="notes">Notes :</label><textarea id="notes" name="notes" placeholder="Notes pour le mois..."></textarea></form> -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -92,6 +90,7 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
         <script src="https://uicdn.toast.com/tui.time-picker/v2.0.3/tui-time-picker.min.js"></script>
         <script src="https://uicdn.toast.com/tui.date-picker/v4.0.3/tui-date-picker.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/2.0.1/luxon.min.js" integrity="sha512-bI2nHaBnCCpELzO7o0RB58ULEQuWW9HRXP/qyxg/u6WakLJb6wz0nVR9dy0bdKKGo0qOBa3s8v9FGv54Mbp3aA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- TODO Se débarrasser complètement de moment.js ...  -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
         <script src="./tui/dist/tui-calendar.js"></script>

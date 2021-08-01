@@ -2,7 +2,7 @@
 
 /* eslint-disable */
 /* eslint-env jquery */
-/* global moment, tui, chance */
+/* global moment, tui, chance, TinyMCE */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
 (function(window, Calendar) {
@@ -114,8 +114,9 @@
         if (schedule.location) {
             html.push('<span class="micro-location">' + schedule.location + '</span>') ;
         }
-        html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>') ;
-
+        if (schedule.attendees) {
+            html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>') ;
+        }
         return html.join('');
     }
 
@@ -437,6 +438,40 @@
         return target.dataset ? target.dataset.action : target.getAttribute('data-action');
     }
 
+    function setTextArea() {
+        var calendrier = document.getElementsByClassName("tui-full-calendar-vlayout-container")[0];
+        var textEditeur = document.createElement("div");
+        textEditeur.id = textEditeur.name = "textEditeur";
+        var textArea = document.createElement("p");
+        textArea.id = textArea.name = "textEditeurArea";
+        textArea.innerText = "Test pour voir.";
+        textEditeur.appendChild(textArea);
+        calendrier.parentNode.insertBefore(textEditeur, calendrier.nextSibling);
+        var tinySimpleConfig = {
+            selector: '#textEditeur',
+            menubar: false,
+            inline: true,
+            plugins: [
+                'link',
+                'lists',
+                'powerpaste',
+                'autolink',
+                'tinymcespellchecker'
+            ],
+            toolbar: [
+                'undo redo | bold italic underline | fontselect fontsizeselect',
+                'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent'
+            ],
+            valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
+            valid_styles: {
+                '*': 'font-size,font-family,color,text-decoration,text-align'
+            },
+            powerpaste_word_import: 'clean',
+            powerpaste_html_import: 'clean',
+          };          
+        tinymce.init(tinySimpleConfig);  
+    }
+
     resizeThrottled = tui.util.throttle(function() {
         cal.render();
     }, 50);
@@ -446,5 +481,6 @@
     setDropdownCalendarType();
     setRenderRangeText();
     setEventListener();
+    setTextArea();
 })(window, tui.Calendar);
 
