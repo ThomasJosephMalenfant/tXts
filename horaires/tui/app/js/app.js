@@ -2,7 +2,7 @@
 
 /* eslint-disable */
 /* eslint-env jquery */
-/* global moment, tui, chance, TinyMCE */
+/* global tui, chance, TinyMCE */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
 (function(window, Calendar) {

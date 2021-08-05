@@ -1,3 +1,5 @@
+// BUG : view month : plusieurs événements le même jour --> collision dans le layout
+
 /*!
  * TOAST UI Calendar
  * @version 1.13.1 | Tue Jul 06 2021

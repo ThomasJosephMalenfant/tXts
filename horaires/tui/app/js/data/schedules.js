@@ -1,6 +1,10 @@
 'use strict';
 // TODO Ajout sélecteur d'étape de la communauté pour différent pattern de célébration
 
+// TODO Modifier la génération automatisée pour un découpage en 2 étapes
+//      1) Bouton 1 Population des événements selon options idem actuel SANS attendees
+//      2) Bouton 2 shuffle brasse attendees là où il trouve ? comme attendees
+
 /*eslint-disable*/
 var DateTime = luxon.DateTime;
 var ScheduleList = [];
@@ -73,12 +77,14 @@ function generateNouvelleCeleb(calendar, ceMoment, titre, duration, lieu, pool, 
     schedule.calendarId = calendar.id ;
 
     schedule.title = titre ;
-    schedule.body = '' // President !
+    schedule.body = '' // President de la célébration
     schedule.category = 'time' ;
     schedule.start = ceMoment.toFormat("yyyy-MM-dd'T'HH:mm':00'");
     schedule.end = ceMoment.plus({hours: duration}).toFormat("yyyy-MM-dd'T'HH:mm':00'");
     schedule.location = lieu ;
-    schedule.attendees = pool.length >= nbEquipe ? pool.splice(0, nbEquipe).join(", ") : pool.brasser(membresList).splice(0,nbEquipe).join(", ") ;
+    schedule.attendees = pool.length >= nbEquipe 
+        ? pool.splice(0, nbEquipe).join(", ") 
+        : pool.brasser(membresList).splice(0,nbEquipe).join(", ") ;
     // schedule.recurrenceRule = chance.bool({likelihood: 20}) ? 'repeated events' : '';
     schedule.color = calendar.color;
     schedule.bgColor = calendar.bgColor;
