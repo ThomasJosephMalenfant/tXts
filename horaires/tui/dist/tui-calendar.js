@@ -1,5 +1,3 @@
-// BUG Lorsque View > today + 1 month --> l'ajustement des largeurs de colonne ne fonctionne pas
-//      - Le calcul des schedule ne test toujours pas un Range assez large !@!!!!Q@W@# 
 /*!
  * TOAST UI Calendar
  * @version 1.13.1 | Tue Jul 06 2021

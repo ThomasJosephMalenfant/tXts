@@ -158,7 +158,7 @@ if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) {
                             <label for="jourMesse">Jour de l'Eucharistie :</label>
                             <select id="jourMesse" name="jourMesse">
                                 <option value="samedi">Samedi</option>
-                                <option value="Dimanche">Dimanche</option>
+                                <option value="dimanche">Dimanche</option>
                             </select>
                         </div>
                         <div>
