@@ -1,5 +1,5 @@
-// BUG : view month : plusieurs événements le même jour --> collision dans le layout
-
+// BUG Lorsque View > today + 1 month --> l'ajustement des largeurs de colonne ne fonctionne pas
+//      - Le calcul des schedule ne test toujours pas un Range assez large !@!!!!Q@W@# 
 /*!
  * TOAST UI Calendar
  * @version 1.13.1 | Tue Jul 06 2021
@@ -7829,6 +7829,38 @@ Base.prototype.splitScheduleByDateRange = function(start, end, scheduleCollectio
  * @returns {object.<string, Collection>} schedule collection grouped by dates.
  */
 Base.prototype.findByDateRange = function(start, end) {
+    var range = datetime.range(
+            datetime.start(start),
+            datetime.end(end),
+            datetime.MILLISECONDS_PER_DAY
+        ),
+        ownSchedules = this.schedules.items,
+        ownMatrix = this.dateMatrix,
+        dformat = datetime.format,
+        result = {},
+        matrix,
+        ymd,
+        viewModels;
+
+    util.forEachArray(range, function(date) {
+        ymd = dformat(date, 'YYYYMMDD');
+        matrix = ownMatrix[ymd];
+        viewModels = result[ymd] = common.createScheduleCollection();
+
+        if (matrix && matrix.length) {
+            viewModels.add.apply(
+                viewModels,
+                util.map(matrix, function(id) {
+                    return ScheduleViewModel.create(ownSchedules[id]);
+                })
+            );
+        }
+    });
+
+    return result;
+};
+
+Base.prototype.findAll = function(start, end) {
     var range = datetime.range(
             datetime.start(start),
             datetime.end(end),
@@ -19674,10 +19706,11 @@ Month.prototype.render = function() {
     var maintenant, renderStartDate, renderEndDate, schedulesInDateRange, viewModel, grids, range;
 
     // Hack un peu sketch... comme le renderStart restait toujours centré sur now(), 
-    //  j'élargie le range de (now - 2 ans) -> (now + 2 ans) ... ça devrait le faire.
-    maintenant = new TZDate();
-    renderStartDate = maintenant.substractYear(2);
-    renderEndDate = maintenant.addYear(2);
+    //  j'élargis le range de (now - 2 ans) -> (now + 2 ans) ... ça devrait le faire.
+    renderStartDate =  new TZDate();
+    renderStartDate.substractYear(1);
+    renderEndDate = new TZDate();
+    renderEndDate.addYear(2);
 
     schedulesInDateRange = controller.findByDateRange(
         datetime.startDateOfMonth(renderStartDate),

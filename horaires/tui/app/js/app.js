@@ -5,6 +5,8 @@
 /* global tui, chance, TinyMCE */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
+//BUG : Quand jour eucharistie est changé pour dimanche, pas d'affichage...
+
 (function(window, Calendar) {
     var cal, resizeThrottled;
     var datePicker, selectedCalendar;
