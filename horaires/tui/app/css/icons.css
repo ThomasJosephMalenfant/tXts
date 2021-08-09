@@ -46,8 +46,12 @@
   background: url('../images/ic-arrow-line-right.png') no-repeat;
 }
 
-.ic-down {
-  background: url('../images/down-arrow.png') no-repeat;
+.ic-cal {
+  background: url('../images/calendar.png') no-repeat;
+}
+
+.ic-shuffle {
+  background: url('../images/dices.png') no-repeat;
 }
 
 .ic-travel-time {

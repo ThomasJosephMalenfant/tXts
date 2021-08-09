@@ -133,8 +133,6 @@
         var options = cal.getOptions();
         var viewName = '';
 
-        console.log(target);
-        console.log(action);
         switch (action) {
             case 'toggle-daily':
                 viewName = 'day';
@@ -214,6 +212,9 @@
                 break;
             case 'populate':
                 setSchedules();
+                break;
+            case 'shuffle':
+                setAttendees();
                 break;
             default:
                 return;
@@ -424,6 +425,25 @@
         refreshScheduleVisibility();
     }
 
+    function setAttendees() {
+        var allSchedules = cal.getAllSchedules().items ;
+        var nbEquipe = parseInt(my_post['nbmembre']) ?? 4 ;
+        var membresTxt = my_post['pool'] ?? '' ;
+        var membresList = membresTxt.split(',').map(s => s.trim());    
+        var pool = new MembresPool ;
+        pool.brasser(membresList);
+        var attendeesBrasses ;
+    
+        tui.util.map(allSchedules, function(thisSchedule){
+            if (thisSchedule.attendees == "?"){;
+                attendeesBrasses = pool.length >= nbEquipe 
+                    ? pool.splice(0, nbEquipe).join(", ") 
+                    : pool.brasser(membresList).splice(0,nbEquipe).join(", ") ;
+                cal.updateSchedule(thisSchedule.id, thisSchedule.calendarId, {attendees: attendeesBrasses})
+            }
+        });
+    }
+
     function setEventListener() {
         $('#menu-navi').on('click', onClickNavi);
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
@@ -442,7 +462,7 @@
     }
 
     function setTextArea() {
-        var calendrier = document.getElementsByClassName("tui-full-calendar-vlayout-container")[0];
+        var calendrier = document.querySelector("#calendar");
         var textEditeur = document.createElement("div");
         textEditeur.id = textEditeur.name = "textEditeur";
         var textArea = document.createElement("p");

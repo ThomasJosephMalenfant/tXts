@@ -7643,10 +7643,6 @@ Base.prototype.updateSchedule = function(schedule, options) {
         schedule.set('title', options.title);
     }
 
-    if (options.body) {
-        schedule.set('body', options.body);
-    }
-
     if (options.start || options.end) {
         if (schedule.isAllDay) {
             schedule.setAllDayPeriod(start, end);
@@ -7683,7 +7679,7 @@ Base.prototype.updateSchedule = function(schedule, options) {
         schedule.set('isReadOnly', options.isReadOnly);
     }
 
-    if (options.location) {
+    if (!util.isUndefined(options.location)) {
         schedule.set('location', options.location);
     }
 
@@ -7695,10 +7691,11 @@ Base.prototype.updateSchedule = function(schedule, options) {
         schedule.set('raw', options.raw);
     }
 
-    if (options.attendees) {
+    if (!util.isUndefined(options.attendees)) {
         schedule.set('attendees', options.attendees);
     }
-    if (options.body) {
+
+    if (!util.isUndefined(options.body)) {
         schedule.set('body', options.body);
     }
 
@@ -7827,38 +7824,6 @@ Base.prototype.splitScheduleByDateRange = function(start, end, scheduleCollectio
  * @returns {object.<string, Collection>} schedule collection grouped by dates.
  */
 Base.prototype.findByDateRange = function(start, end) {
-    var range = datetime.range(
-            datetime.start(start),
-            datetime.end(end),
-            datetime.MILLISECONDS_PER_DAY
-        ),
-        ownSchedules = this.schedules.items,
-        ownMatrix = this.dateMatrix,
-        dformat = datetime.format,
-        result = {},
-        matrix,
-        ymd,
-        viewModels;
-
-    util.forEachArray(range, function(date) {
-        ymd = dformat(date, 'YYYYMMDD');
-        matrix = ownMatrix[ymd];
-        viewModels = result[ymd] = common.createScheduleCollection();
-
-        if (matrix && matrix.length) {
-            viewModels.add.apply(
-                viewModels,
-                util.map(matrix, function(id) {
-                    return ScheduleViewModel.create(ownSchedules[id]);
-                })
-            );
-        }
-    });
-
-    return result;
-};
-
-Base.prototype.findAll = function(start, end) {
     var range = datetime.range(
             datetime.start(start),
             datetime.end(end),
@@ -8435,7 +8400,6 @@ var Month = {
         alldayFirstMode = alldayFirstMode || false;
         andFilters = andFilters || [];
         filter = Collection.and.apply(null, [filter].concat(andFilters));
-
         coll = this.schedules.find(filter);
         vColl = ctrlCore.convertToViewModel(coll);
         ctrlMonth._addMultiDatesInfo(vColl);
@@ -8450,6 +8414,31 @@ var Month = {
         } else {
             ctrlMonth._stackTimeFromTop(vColl);
         }
+
+        return matrices;
+    },
+
+    findAll: function() {
+        var ctrlCore = this.Core,
+            ctrlMonth = this.Month,
+            coll, vColl, vList,
+            collisionGroup,
+            matrices;
+
+        coll = this.schedules ;
+        vColl = ctrlCore.convertToViewModel(coll);
+        ctrlMonth._addMultiDatesInfo(vColl);
+        // ctrlMonth._adjustRenderRange(start, end, vColl);
+        vList = vColl.sort(array.compare.schedule.asc);
+
+        collisionGroup = ctrlCore.getCollisionGroup(vList);
+        matrices = ctrlCore.getMatrices(vColl, collisionGroup);
+        // ctrlCore.positionViewModels(start, end, matrices, ctrlMonth._weightTopValue);
+        // if (alldayFirstMode) {
+        //     ctrlMonth._adjustTimeTopIndex(vColl);
+        // } else {
+            ctrlMonth._stackTimeFromTop(vColl);
+        // }
 
         return matrices;
     }
@@ -9741,6 +9730,10 @@ Calendar.prototype.getSchedule = function(scheduleId, calendarId) {
     return this._controller.schedules.single(function(model) {
         return model.id === scheduleId && model.calendarId === calendarId;
     });
+};
+
+Calendar.prototype.getAllSchedules = function() {
+    return this._controller.schedules ;
 };
 
 /**
@@ -19701,22 +19694,9 @@ Month.prototype.render = function() {
         theme = controller ? controller.theme : null,
         styles = this._getStyles(theme) ;
     var daynameViewModel, baseViewModel;
-    var maintenant, renderStartDate, renderEndDate, schedulesInDateRange, viewModel, grids, range;
+    var schedulesInDateRange, grids;
 
-    // Hack un peu sketch... comme le renderStart restait toujours centré sur now(), 
-    //  j'élargis le range de (now - 2 ans) -> (now + 2 ans) ... ça devrait le faire.
-    renderStartDate =  new TZDate();
-    renderStartDate.substractYear(1);
-    renderEndDate = new TZDate();
-    renderEndDate.addYear(2);
-
-    schedulesInDateRange = controller.findByDateRange(
-        datetime.startDateOfMonth(renderStartDate),
-        datetime.endDateOfMonth(renderEndDate),
-        this.panels,
-        scheduleFilter,
-        this.options
-    );
+    schedulesInDateRange = controller.findAll();
 
     grids = this.grids = datetime.getGridLeftAndWidth(
         options.daynames.length,
@@ -20642,7 +20622,6 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         end: rangeDate.end,
         isAllDay: isAllDay,
     };
-
     if (this._isEditMode) {
         this._onClickUpdateSchedule(form);
     } else {
@@ -21079,7 +21058,7 @@ ScheduleCreationPopup.prototype._onClickUpdateSchedule = function(form) {
             state: form.state
         }
     );
-
+ 
     /**
      * @event ScheduleCreationPopup#beforeUpdateSchedule
      * @type {object}

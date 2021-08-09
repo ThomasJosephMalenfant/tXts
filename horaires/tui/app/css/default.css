@@ -1,12 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 /* Custom ajout pour marge text Editeur */
 #textEditeur {
-  margin-top: 5px;
+  position:relative;
+  margin-top: 1rem;
 }
 /* Effacer bouttons lors de l'impression */
 @media print{
   button {
     display: none !important;
+  }
+  #textEditeur {
+    break-inside: avoid;
   }
 }
 /* Affichages micro dans la view month */
@@ -253,11 +257,11 @@ body {
 }
 
 #calendar {
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
     bottom: 5px;
-    top: 64px;
+    height: 75vh;
 }
 
 /** custom fontawesome */
