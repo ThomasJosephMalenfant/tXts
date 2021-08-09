@@ -1,5 +1,47 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
-
+/* Custom ajout pour marge text Editeur */
+#textEditeur {
+  position:relative;
+  margin-top: 1rem;
+}
+/* Effacer bouttons lors de l'impression */
+@media print{
+  button {
+    display: none !important;
+  }
+  #textEditeur {
+    break-inside: avoid;
+  }
+}
+/* Affichages micro dans la view month */
+.micro-location {
+  font-weight: normal;
+  font-size:xx-small;
+  text-decoration: underline;
+  display:inline-block;
+  line-height: 10px;
+}
+.micro-location::before {
+  content : url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAOZJREFUKBWVUT0KwjAUbkzGTuJWPYNDpV0cXD2ETuIRBK+gs4ubp3BwcXBp6eINBKWDgydoid9X8oKCggYeee/7S9IGwZ9LverTNO3Wdb2y1o6IK6WOWutFlmU30XmDE58hbgvpTA+Y+mJqCemS20jdG2N6LPYMICc6b5BrIG3ONBZ7CoVj7w0cfllGRDj+gKQpjt/iPU0ye/LkROcNANaoCUzjqqquIsBuHddAWoiyLO9RFHUwJ4JxR/qmKIqdYG9vCMNwCeIiJHuHecj/B0GSJBng7ifO+ErDPM8L4b7ucRzPWJ8ET1E7YC7tmi9qAAAAAElFTkSuQmCC) ;
+}
+.micro-president {
+  font-weight: normal;
+  font-size:xx-small;
+  display:inline-block;
+  line-height: 10px;
+}
+.micro-president::before {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAADDAAAAlgFaAlciAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAJRJREFUKJGV0TFqQlEQheHvgCSg8CQI7iAhhdtxry7CKqR2A4+YIJKozU2h5R3BaaY4/HPmzNCpJJskm542KYADWmutJ3eBMclYObzhB+94wdOtwxoXfOMDy9wm7fGK3DHeYQhm+MWABZ6TfLqGWOGMLxwwrTKckvxVGXp1rvaqgBO6N62A40NAkq3icV2gtTYvnP0DtrEmlkjuZi0AAAAASUVORK5CYII=);
+}
+.micro-attendee {
+  font-weight: normal;
+  font-size:xx-small;
+  display:inline-block;
+  line-height: 10px;
+}
+.micro-attendee::before {
+  content : url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAJpJREFUKBVjYKA1YES3wMTExBMoNgsqnnbmzJntyGqYkDlQ9qz////LgDCQD9MIV4ZNA1wSGwObhjRGRsYnIAzUkIZNE0licE+bm5tr/fnzJx1osjPQBFmoKY+BftnLwsIy8+TJk9dAYmANxsbGoUD2YiBmBwliAT+BYrFnz55dDfNDO1AAl2KQfpAcSA0DTIMyiEMAEKMG0wgAolIjcM7Tjm8AAAAASUVORK5CYII=);
+}
 body {
   font-family: 'Noto Sans', sans-serif;
   font-size: 12px;
@@ -215,11 +257,11 @@ body {
 }
 
 #calendar {
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
     bottom: 5px;
-    top: 64px;
+    height: 75vh;
 }
 
 /** custom fontawesome */

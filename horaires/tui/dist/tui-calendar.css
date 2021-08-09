@@ -4,6 +4,8 @@
  * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
+
+
 .tui-full-calendar-layout {
   height: 100%;
   position: relative;
@@ -126,16 +128,16 @@
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-date {
   display: inline-block;
   width: 27px;
-  height: 27px;
-  line-height: 27px;
+  height: 10px;
+  line-height: 10px;
   text-align: center;
 }
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-date-title {
-  line-height: 27px;
+  line-height: 10px;
   margin-right: 5px;
 }
 .tui-full-calendar-weekday-grid-line .tui-full-calendar-weekday-grid-more-schedules {
-  float: right;
+  /* float: right; */
   display: inline-block;
   height: 27px;
   line-height: 27px;
@@ -200,10 +202,11 @@
 }
 .tui-full-calendar-weekday-schedule-title {
   display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 3px;
+  word-wrap: break-word ; 
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  padding-left: 1px;
   font-weight: bold;
 }
 .tui-full-calendar-weekday-schedule-title-focused {
@@ -522,7 +525,16 @@
 }
 .tui-full-calendar-month {
   height: 100%;
-  min-height: 600px;
+  border-style: ridge;
+  border-width: thin;
+  border-color: black;
+}
+.tui-view-6 {
+  background-color:cornsilk;
+  height: 10% !important;
+}
+.tui-view-7 {
+  height: 90% !important;
 }
 .tui-full-calendar-month-dayname {
   width: 100%;
@@ -674,11 +686,11 @@
   visibility: hidden;
 }
 .tui-full-calendar-section-title {
-  width: calc(100% - 36px);
+  width: 100% ;
   padding-right: 4px;
 }
 .tui-full-calendar-section-title input {
-  width: 365px;
+  width: 400px;
 }
 .tui-full-calendar-button.tui-full-calendar-section-private {
   height: 32px;
@@ -726,6 +738,9 @@
   display: block;
 }
 .tui-full-calendar-popup-section-item.tui-full-calendar-section-location input {
+  width: 400px;
+}
+.tui-full-calendar-popup-section-item.tui-full-calendar-section-attendees input {
   width: 400px;
 }
 .tui-full-calendar-section-allday .tui-full-calendar-icon.tui-full-calendar-ic-checkbox {
@@ -1117,6 +1132,12 @@ input[type='checkbox'].tui-full-calendar-checkbox-round + span {
 .tui-full-calendar-icon.tui-full-calendar-ic-location {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAR1JREFUKBWdUTtPg1AUBiT8CydHJtv/0MTJRWAgcTK1bq0/pO3k4E4IYLo2Me46tS4wumjSpV07kAb6HXLPzaGPRZLL+c73uE/D+OdnHuaCIOhVVTUEf620pWVZ0yRJ3qW3FfR9f1zX9UgaGJumOUnT9Fn3DDzPuwPOuD9TvSzL3kizhOFJ4LnjOJc0wM0FP2Asgx0mEehHUfRHgzDzqF3GOogzbJg8V6XHFqYv4Cvqy7J8DcOwWYmw8Hwy1kHMRjcaKuEGgV82caWbZay3indagJyxcKLOlKeRdJA627YfUVaN0v6tlKbZVjCO4zW2cw91px3AxJEmOONCNoTzPP9xXZfOd6u0Bzz60RGOgmQuiuIb4S3gB0IvaoJW2QMDs1bBoH1CAQAAAABJRU5ErkJggg==) no-repeat;
 }
+.tui-full-calendar-icon.tui-full-calendar-ic-president{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAACXBIWXMAAADDAAAAlgFaAlciAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAJRJREFUKJGV0TFqQlEQheHvgCSg8CQI7iAhhdtxry7CKqR2A4+YIJKozU2h5R3BaaY4/HPmzNCpJJskm542KYADWmutJ3eBMclYObzhB+94wdOtwxoXfOMDy9wm7fGK3DHeYQhm+MWABZ6TfLqGWOGMLxwwrTKckvxVGXp1rvaqgBO6N62A40NAkq3icV2gtTYvnP0DtrEmlkjuZi0AAAAASUVORK5CYII=) no-repeat;
+}
+.tui-full-calendar-icon.tui-full-calendar-ic-user {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAJpJREFUKBVjYKA1YES3wMTExBMoNgsqnnbmzJntyGqYkDlQ9qz////LgDCQD9MIV4ZNA1wSGwObhjRGRsYnIAzUkIZNE0licE+bm5tr/fnzJx1osjPQBFmoKY+BftnLwsIy8+TJk9dAYmANxsbGoUD2YiBmBwliAT+BYrFnz55dDfNDO1AAl2KQfpAcSA0DTIMyiEMAEKMG0wgAolIjcM7Tjm8AAAAASUVORK5CYII=) no-repeat;
+}
 .tui-full-calendar-icon.tui-full-calendar-ic-date {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAGpJREFUKBVjYKAGCA0N/Q/C6GZhE2cEKQoLC9v6//9/L3QN2PiMjIzbVq1a5c0EkiRWE7JasEZsJhMSI1sjC7LJq1evBvsZWQyZjRxwZNs4hDSiBA6y55EDBRsb7EdQasAmiUNsKw5x4oQBkUAeDPJ53KsAAAAASUVORK5CYII=) no-repeat;
 }
@@ -1159,6 +1180,3 @@ input[type='checkbox'].tui-full-calendar-checkbox-round + span {
 .tui-full-calendar-ic-repeat-b {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAQpJREFUKBVjYCARMCKrNzU1tf/3718lUMwQiP8yMjKeYWJi6j516tRhExOThjNnzjTANQAFqv///98CVHQPSO8A0ixATa5AtjyQPgDETmfPngULMpiZmbn//fu3BSg4B6ggCyjxG8hm8PT0ZH/9+vUJoJgTiA8CTCACqDgXaOJ9Xl7eTJhikDhQcSVQsQGITT8A9rSxsfF/mJVApzWCQgPGd3BwYPny5cstoNOuAZ3rAwoJOAAqviAqKtoOEwAaxPr58+dpQL4iEGeAxJFt2AfkOwA1PQTSu4Em/gGyPYC0EpCuAdraCtIADiWgQCPQOmdmZmYHoNgVoCJfIB0CpG8DI84BphgoRjoAAAzgdELI91E5AAAAAElFTkSuQmCC);
 }
-/*# sourceMappingURL=src/css/main.css.map */
-
-/*# sourceMappingURL=tui-calendar.css.map*/

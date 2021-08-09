@@ -2,14 +2,11 @@
 
 /* eslint-disable */
 /* eslint-env jquery */
-/* global moment, tui, chance */
+/* global tui, chance, TinyMCE */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
-var DateTime = luxon.DateTime;
 
 (function(window, Calendar) {
     var cal, resizeThrottled;
-    var useCreationPopup = true;
-    var useDetailPopup = true;
     var datePicker, selectedCalendar;
 
     cal = new Calendar('#calendar', {
@@ -20,10 +17,16 @@ var DateTime = luxon.DateTime;
             daynames: ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
         },
         month: {
-            daynames: ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
+            daynames: ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
+            grid: {
+                header:{
+                    height:14
+                }
+            },
+            visibleWeeksCount: 5
         },
-        useCreationPopup: useCreationPopup,
-        useDetailPopup: useDetailPopup,
+        useCreationPopup: true,
+        useDetailPopup: true,
         calendars: CalendarList,
         template: {
             milestone: function(model) {
@@ -41,23 +44,23 @@ var DateTime = luxon.DateTime;
     // event handlers
     cal.on({
         'clickMore': function(e) {
-            console.log('clickMore', e);
+            // console.log('clickMore', e);
         },
         'clickSchedule': function(e) {
-            console.log('clickSchedule', e);
+            // console.log('clickSchedule', e);
         },
         'clickDayname': function(date) {
-            console.log('clickDayname', date);
+            // console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            console.log('beforeCreateSchedule', e);
+            // console.log('beforeCreateSchedule', e);
             saveNewSchedule(e);
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
             var changes = e.changes;
 
-            console.log('beforeUpdateSchedule', e);
+            // console.log('beforeUpdateSchedule', e);
 
             if (changes && !changes.isAllDay && schedule.category === 'allday') {
                 changes.category = 'time';
@@ -67,16 +70,16 @@ var DateTime = luxon.DateTime;
             refreshScheduleVisibility();
         },
         'beforeDeleteSchedule': function(e) {
-            console.log('beforeDeleteSchedule', e);
+            // console.log('beforeDeleteSchedule', e);
             cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
         },
         'afterRenderSchedule': function(e) {
             var schedule = e.schedule;
-            // var element = cal.getElement(schedule.id, schedule.calendarId);
+            var element = cal.getElement(schedule.id, schedule.calendarId);
             // console.log('afterRenderSchedule', element);
         },
         'clickTimezonesCollapseBtn': function(timezonesCollapsed) {
-            console.log('timezonesCollapsed', timezonesCollapsed);
+            // console.log('timezonesCollapsed', timezonesCollapsed);
 
             if (timezonesCollapsed) {
                 cal.setTheme({
@@ -102,26 +105,21 @@ var DateTime = luxon.DateTime;
      */
     function getTimeTemplate(schedule, isAllDay) {
         var html = [];
-        var start = moment(schedule.start.toUTCString());
-        if (!isAllDay) {
-            html.push('<strong>' + start.format('HH:mm') + '</strong> ');
-        }
-        if (schedule.isPrivate) {
-            html.push('<span class="calendar-font-icon ic-lock-b"></span>');
-            html.push(' Private');
-        } else {
-            if (schedule.isReadOnly) {
-                html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
-            } else if (schedule.recurrenceRule) {
-                html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
-            } else if (schedule.attendees.length) {
-                html.push('<span class="calendar-font-icon ic-user-b"></span>');
-            } else if (schedule.location) {
-                html.push('<span class="calendar-font-icon ic-location-b"></span>');
-            }
-            html.push(' ' + schedule.title);
-        }
+        var start = DateTime.fromMillis(schedule.start.getTime()); 
 
+        if (!isAllDay) {
+            html.push('<strong>' + start.toFormat("HH:mm") + '</strong> ');
+        }
+        html.push(' ' + schedule.title );
+        if (schedule.location) {
+            html.push('<span class="micro-location">' + schedule.location + '</span>') ;
+        }
+        if (schedule.body) {
+            html.push('<span class="micro-president">' + schedule.body + '</span>') ;
+        }
+        if (schedule.attendees.length > 0) {
+            html.push('<br><span class="micro-attendee">' + schedule.attendees + '</span>') ;
+        }
         return html.join('');
     }
 
@@ -135,8 +133,6 @@ var DateTime = luxon.DateTime;
         var options = cal.getOptions();
         var viewName = '';
 
-        console.log(target);
-        console.log(action);
         switch (action) {
             case 'toggle-daily':
                 viewName = 'day';
@@ -156,13 +152,25 @@ var DateTime = luxon.DateTime;
                 options.month.visibleWeeksCount = 3;
                 viewName = 'month';
                 break;
-            case 'toggle-narrow-weekend':
-                options.month.narrowWeekend = !options.month.narrowWeekend;
-                options.week.narrowWeekend = !options.week.narrowWeekend;
-                viewName = cal.getViewName();
-
-                target.querySelector('input').checked = options.month.narrowWeekend;
+            case 'toggle-weeks4':
+                options.month.visibleWeeksCount = 4;
+                viewName = 'month';
                 break;
+            case 'toggle-weeks5':
+                options.month.visibleWeeksCount = 5;
+                viewName = 'month';
+                break;
+            case 'toggle-weeks6':
+                options.month.visibleWeeksCount = 6;
+                viewName = 'month';
+                break;
+            case 'toggle-narrow-weekend':
+            options.month.narrowWeekend = !options.month.narrowWeekend;
+            options.week.narrowWeekend = !options.week.narrowWeekend;
+            viewName = cal.getViewName();
+
+            target.querySelector('input').checked = options.month.narrowWeekend;
+            break;
             case 'toggle-start-day-1':
                 options.month.startDayOfWeek = options.month.startDayOfWeek ? 0 : 1;
                 options.week.startDayOfWeek = options.week.startDayOfWeek ? 0 : 1;
@@ -186,7 +194,7 @@ var DateTime = luxon.DateTime;
 
         setDropdownCalendarType();
         setRenderRangeText();
-        setSchedules();
+        // setSchedules();
     }
 
     function onClickNavi(e) {
@@ -202,12 +210,17 @@ var DateTime = luxon.DateTime;
             case 'move-today':
                 cal.today();
                 break;
+            case 'populate':
+                setSchedules();
+                break;
+            case 'shuffle':
+                setAttendees();
+                break;
             default:
                 return;
         }
 
         setRenderRangeText();
-        setSchedules();
     }
 
     function onNewSchedule() {
@@ -236,9 +249,9 @@ var DateTime = luxon.DateTime;
             dragBgColor: calendar.bgColor,
             borderColor: calendar.borderColor,
             raw: {
-                location: location
+                location: location,
+                attendees: attendees
             },
-            state: 'Busy'
         }]);
 
         $('#modal-new-schedule').modal('hide');
@@ -265,7 +278,7 @@ var DateTime = luxon.DateTime;
 
     function createNewSchedule(event) {
         var start = event.start ? new Date(event.start.getTime()) : new Date();
-        var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
+        var end = event.end ? new Date(event.end.getTime()) : DateTime.now().plus({hours: 1}).toJSDate() ;
 
         if (useCreationPopup) {
             cal.openCreationPopup({
@@ -274,6 +287,7 @@ var DateTime = luxon.DateTime;
             });
         }
     }
+
     function saveNewSchedule(scheduleData) {
         var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
         var schedule = {
@@ -289,10 +303,10 @@ var DateTime = luxon.DateTime;
             dragBgColor: calendar.bgColor,
             borderColor: calendar.borderColor,
             location: scheduleData.location,
-            raw: {
-                class: scheduleData.raw['class']
-            },
-            state: scheduleData.state
+            attendees: scheduleData.attendees
+            // raw: {
+            //     class: scheduleData.raw['class']
+            // }
         };
         if (calendar) {
             schedule.calendarId = calendar.id;
@@ -399,6 +413,7 @@ var DateTime = luxon.DateTime;
 
         var html = [];
         html.push(currentCalendarDate());
+        html.push(' | ' + my_post['comm']);
         renderRange.innerHTML = html.join('');
     }
 
@@ -408,6 +423,25 @@ var DateTime = luxon.DateTime;
         cal.createSchedules(ScheduleList);
 
         refreshScheduleVisibility();
+    }
+
+    function setAttendees() {
+        var allSchedules = cal.getAllSchedules().items ;
+        var nbEquipe = parseInt(my_post['nbmembre']) ?? 4 ;
+        var membresTxt = my_post['pool'] ?? '' ;
+        var membresList = membresTxt.split(',').map(s => s.trim());    
+        var pool = new MembresPool ;
+        pool.brasser(membresList);
+        var attendeesBrasses ;
+    
+        tui.util.map(allSchedules, function(thisSchedule){
+            if (thisSchedule.attendees == "?"){;
+                attendeesBrasses = pool.length >= nbEquipe 
+                    ? pool.splice(0, nbEquipe).join(", ") 
+                    : pool.brasser(membresList).splice(0,nbEquipe).join(", ") ;
+                cal.updateSchedule(thisSchedule.id, thisSchedule.calendarId, {attendees: attendeesBrasses})
+            }
+        });
     }
 
     function setEventListener() {
@@ -427,6 +461,39 @@ var DateTime = luxon.DateTime;
         return target.dataset ? target.dataset.action : target.getAttribute('data-action');
     }
 
+    function setTextArea() {
+        var calendrier = document.querySelector("#calendar");
+        var textEditeur = document.createElement("div");
+        textEditeur.id = textEditeur.name = "textEditeur";
+        var textArea = document.createElement("p");
+        textArea.id = textArea.name = "textEditeurArea";
+        textArea.innerText = "Notes de fin de calendrier...";
+        textEditeur.appendChild(textArea);
+        calendrier.parentNode.insertBefore(textEditeur, calendrier.nextSibling);
+        var tinySimpleConfig = {
+            selector: '#textEditeur',
+            menubar: false,
+            inline: true,
+            plugins: [
+                'link',
+                'lists',
+                'powerpaste',
+                'autolink',
+            ],
+            toolbar: [
+                'undo redo | bold italic underline | fontselect fontsizeselect',
+                'forecolor backcolor | alignleft aligncenter alignright alignfull | numlist bullist outdent indent'
+            ],
+            valid_elements: 'p[style],strong,em,span[style],a[href],ul,ol,li',
+            valid_styles: {
+                '*': 'font-size,font-family,color,text-decoration,text-align'
+            },
+            powerpaste_word_import: 'clean',
+            powerpaste_html_import: 'clean',
+          };          
+        tinymce.init(tinySimpleConfig);  
+    }
+
     resizeThrottled = tui.util.throttle(function() {
         cal.render();
     }, 50);
@@ -435,21 +502,7 @@ var DateTime = luxon.DateTime;
 
     setDropdownCalendarType();
     setRenderRangeText();
-    setSchedules();
     setEventListener();
+    setTextArea();
 })(window, tui.Calendar);
 
-// set calendars
-(function() {
-    var calendarList = document.getElementById('calendarList');
-    var html = [];
-    CalendarList.forEach(function(calendar) {
-        html.push('<div class="lnb-calendars-item"><label>' +
-            '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
-            '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
-            '<span>' + calendar.name + '</span>' +
-            '</label></div>'
-        );
-    });
-    // calendarList.innerHTML = html.join('\n');
-})();
