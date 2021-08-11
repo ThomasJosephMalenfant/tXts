@@ -10,14 +10,14 @@ $rituels_disponibles = array(
 	),
 	"Funérailles" => array(
 		"Nom" => "Funérailles",
-		"Description" => "Célébration des funérailles chrétiennes (rituel ANNÉE) ",
+		"Description" => "Célébration des funérailles chrétiennes (rituel 1974) ",
 		"Path" => "funerailles.php"
 	),
-	"Baptême" => array(
-		"Nom" => "Baptême",
-		"Description" => "Célébration du baptême (rituel ANNÉE) ",
-		"Path" => "bapteme.php"
-	)
+	// "Baptême" => array(
+	// 	"Nom" => "Baptême",
+	// 	"Description" => "Célébration du baptême (rituel ANNÉE) ",
+	// 	"Path" => "bapteme.php"
+	// )
 ) ;
 
 ob_start();
