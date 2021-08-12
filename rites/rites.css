@@ -1,5 +1,9 @@
 @import "../commun/commun.css" ;
 
+body {
+	margin-left: 2em;
+}
+
 div {
     margin-bottom: 10px;
 }
@@ -7,4 +11,22 @@ div {
 label {
     display: inline-block;
     width: 180px;
+}
+
+.rubrique {
+	color: #FF0000;
+	font-size: small;
+	font-style: italic;
+	width: 40em;
+}
+
+.oraison {
+	margin-left: 4em;
+	text-indent: -2em;
+	width: 25em;
+	font-size: large;
+}
+
+.ref {
+	text-decoration: underline;
 }
