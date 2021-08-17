@@ -254,14 +254,30 @@ function alternifier() {
         }
         // Ajouter bouton resetter alternative()
         var refresher = document.createElement("button");
-        refresher.classList.add("btn-refresh");
+        refresher.classList.add("btn");
         refresher.innerText = "⟲" ;
         refresher.setAttribute("data-action","refresh");
         refresher.addEventListener("click",resetter);
         alternatives[i].insertBefore(refresher,alternatives[i].firstChild);  
     }
 }
+
 function facultatifier() {
     // Ajouter possibilité bouton effacer sur tous les div "facultatif"
-    
+    var facultatifs = document.getElementsByClassName("facultatif");
+
+    for (let i = 0; i < facultatifs.length; i++) {
+        const facultatif = facultatifs[i];
+        var toggler = document.createElement("button");
+        toggler.classList.add("btn");
+        toggler.innerText = "X" ;
+        toggler.setAttribute("data-action","toggle");
+        toggler.addEventListener("click",resetter);
+        facultatif.insertBefore(toggler,facultatif.firstChild);
+    }
+}
+
+function interactivifier() {
+    alternifier();
+    facultatifier();
 }
