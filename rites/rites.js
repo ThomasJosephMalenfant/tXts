@@ -210,3 +210,58 @@ function retirerSection() {
     var cntr = main.datacntr - 1;
     main.datacntr = cntr;
 }
+
+function rendreSelectable(div) {
+    div.addEventListener("click", selecter);
+}
+
+function selecter() {
+    var ceSelecte = this.parentNode;
+    for (let i = 0; i < ceSelecte.childNodes.length; i++) {
+        if (ceSelecte.childNodes[i].id && ceSelecte.childNodes[i].classList.contains("alternative")) {
+            if (ceSelecte.childNodes[i].id == this.id) {
+                ceSelecte.childNodes[i].classList.remove("aChoisir");
+                ceSelecte.childNodes[i].setAttribute('contenteditable',"true");
+            } else {
+                ceSelecte.childNodes[i].classList.add("invisible");
+            }
+        }
+    }
+}
+
+function resetter(){
+    var ceSelecte = this.parentNode ;
+    for (let i = 0; i < ceSelecte.childNodes.length; i++) {
+        if (ceSelecte.childNodes[i].id && ceSelecte.childNodes[i].classList.contains("alternative")) {
+            ceSelecte.childNodes[i].classList.add("aChoisir");
+            ceSelecte.childNodes[i].classList.remove("invisible");
+        }
+    }
+}
+
+function alternifier() {
+    // Ajouter alternative pour tous les div.alternatives
+    var alternatives = document.getElementsByClassName("alternatives");
+
+    for (let i = 0; i < alternatives.length; i++) {
+        const options = alternatives[i].childNodes;
+        for (let j = 0; j < options.length; j++) {
+            const uneOption = options[j];
+            if (uneOption?.classList?.contains("alternative")) {
+                uneOption.classList.add("aChoisir");
+                rendreSelectable(uneOption);
+            }
+        }
+        // Ajouter bouton resetter alternative()
+        var refresher = document.createElement("button");
+        refresher.classList.add("btn-refresh");
+        refresher.innerText = "⟲" ;
+        refresher.setAttribute("data-action","refresh");
+        refresher.addEventListener("click",resetter);
+        alternatives[i].insertBefore(refresher,alternatives[i].firstChild);  
+    }
+}
+function facultatifier() {
+    // Ajouter possibilité bouton effacer sur tous les div "facultatif"
+    
+}
