@@ -14,29 +14,29 @@
 </head>
 <body onload="interactivifier()">
     <h1>Funérailles d'adulte</h1>
-    <h2 class="titre_parties" id="titre_accueil">Accueil</h2>
+    <h2 contextmenu=context-menu-id class="titre_parties" id="titre_accueil">Accueil</h2>
     <div class="parties" id="partie_accueil">
-        <h3 class="titre titre_section" id="titre_accueilCorps">Accueil du corps à l'église</h3>
-        <p class="sousTitre sousTitre_section" id="sousTitre_accueilCorps">lorsque la liturgie des obsèques ne suit pas immédiatement</p>
-        <div class="sections" id="section_accueilCorps">
+        <div class="sections facultatif" id="section_accueilCorps">
+            <h3 class="titre titre_section" id="titre_accueilCorps">Accueil du corps à l'église</h3>
+            <p class="sousTitre sousTitre_section" id="sousTitre_accueilCorps">lorsque la liturgie des obsèques ne suit pas immédiatement</p>
             <div class="numero" id="no_42">
                 <p class="rubrique">Lorsque le corps du défunt est transféré un certain temps avant la célébration des obsèques, le rite de réception à l'église peut être organisé de la manière suivante :<br>On accueille le corps à la porte de l'église comme il est prévu au <span class="ref ref_interne" id="ref_42_to_43">no 43</span> ci-après.<br>Pendant que le corps est introduit dans l'église, on peut chanter un chant adapté à la circonstance.On lit ensuite <span class="ref ref_biblique" id="ref_42_to_Jn14">Jn 14, 1-6</span>, ou une des autres péricopes proposées dans le Lectionnaire. Après la lecture, on peut dire un psaume ou une brève prière litanique.<br>L'ensemble du rite s'achève par le Notre Père.<br>Puis le corps est déposé à l'endroit prévu (soit dans la chapelle destinée à cet effet, soit au lieu où il sera pendant la liturgie des obsèques).</p>
             </div>           
         </div>
-        <h3 class="titre titre_section" id="titre_debutCeleb">Début de la célébration</h3>
         <div class="sections" id="section_debutCeleb">
-            <h4 class="titre titre_sousSection" id="titre_accueilPre">Accueil préalable</h4>
-            <div class="sousSections" id="sousSection_accueilPre">
-                <div class="numero facultatif" id="no_43">
+            <h3 class="titre titre_section" id="titre_debutCeleb">Début de la célébration</h3>
+            <div class="sousSections facultatif" id="sousSection_accueilPre">
+                <h4 class="titre titre_sousSection" id="titre_accueilPre">Accueil préalable</h4>
+                <div class="numero" id="no_43">
                     <p class="rubrique">Pendant le temps qui précède la célébration, on peut prévoir de la musique (orgue ou autre instrument) pour créer un climat de paix et de prière.</p>
                 </div>
-                <div class="numero facultatif" id="no_44">
+                <div class="numero" id="no_44">
                     <p class="rubrique">S'il y a procession de la maison du défunt à l'église et que le prêtre y participe, l'entrée se fait directement et il n'y a pas, à proprement parler, d'accueil.</p>
                 </div>
-                <div class="numero facultatif" id="no_45">
+                <div class="numero" id="no_45">
                     <p class="rubrique">Dans les autres cas, le prêtre se rend à la porte de l'église ou à la chapelle funéraire. Là, il salue les personnes de la famille. Puis il se recueille devant le corps du défunt. Il peut faire le signe de la croix en geste de bénédiction. Il vaut mieux réserver l'aspersion avec l'eau bénite pour le dernier adieu. Il peut aussi à ce moment dire une des prières au choix (ci-dessous).</p>
                 </div>
-                <div class="numero facultatif" id="no_46">
+                <div class="numero" id="no_46">
                     <p class="rubrique">Si le corps est déjà dans l'église à l'endroit où il restera pendant la célébration, le prêtre se rend au lieu de présidence.</p>
                     <h5 class="titre titre_priere" id="titre_priereAccueilPre">Oraisons pour l'accueil préalable à l'église.</h5>
                     <div class="alternatives" id="alternatives_priereAccueilPre">
@@ -52,43 +52,43 @@
 					 		<p class="rubrique">Disposition du corps : On placera le corps du défunt de manière à faciliter le regroupement de l'assemblée et à permettre que tous voient bien les gestes accomplis autour de lui.<br>Auprès du cercueil, on peut disposer des cierges ou simplement le cierge pascal ou encore des cierges regroupés autour du cierge pascal. Si l'on fait le rite de la lumière (<span class="ref ref_interne" id="ref_47_to54">no 54</span>), seul le cierge pascal est allumé. On tiendra compte des coutumes locales comme celles d'offrir des fleurs, de déposer les décorations du défunt, etc. - en veillant cependant à une certaine discrétion - et, s'il y a lieu, on en soulignera la signification au cours de la célébration.</p>
 					</div>
             </div>
-            <h4 class="titre titre_sousSection" id="titre_chantEntree">Chant d'entrée</h4>
             <div class="sousSections" id="sousSection_chantEntree">
-            	<div class="numero obligatoire" id="no_48">
+                <h4 class="titre titre_sousSection" id="titre_chantEntree">Chant d'entrée</h4>
+            	<div class="numero" id="no_48">
             	 		<p class="rubrique">Il y a un seul chant d'entrée pour la procession avec le corps et le commencement de la célébration. On choisira le meilleur moment pour commencer : soit dès l'entrée du corps dans l'église, soit une fois l'assemblée en place.<br>Une fois le corps déposé à l'emplacement prévu, l'assemblée ayant pris place dans l'église, le prêtre poursuit la célébration par les autres rites d'ouverture.</p>
             	 		<p class="chant" id="chant_entree">Chant d'entrée : %[ch_entree]</p>
             	</div>
             </div>
-            <h4 class="titre titre_sousSection" id="titre_infoIntro">Salutation, monition d'ouverture</h4>
-            <div class="sousSections" id="sousSection_infoIntro">
-                <div class="numero facultatif" id="no_49">
+            <div class="sousSections facultatif" id="sousSection_infoIntro">
+                <h4 class="titre titre_sousSection" id="titre_infoIntro">Salutation, monition d'ouverture</h4>
+                <div class="numero" id="no_49">
                     <p class="rubrique">Pour les funérailles avec célébration de l'Eucharistie, on pourra utiliser les différents éléments de la structure habituelle selon les besoins pastoraux.<br>Pour les funérailles avec seulement célébration de la Parole, la monition d'entrée peut remplacer la prière d'ouverture si cette manière de faire est plus adaptée.</p>
                 </div>
             </div>
-            <h4 class="titre titre_sousSection" id="titre_infoChoixRite">Rites au choix</h4>
-            <div class="sousSections" id="sousSection_infoChoixRite">
-                <div class="numero facultatif" id="no_50">
+            <div class="sousSections facultatif" id="sousSection_infoChoixRite">
+                <h4 class="titre titre_sousSection" id="titre_infoChoixRite">Rites au choix</h4>
+                <div class="numero" id="no_50">
                     <p class="rubrique">Après la salutation et la monition peut avoir lieu l'un ou l'autre des rites au choix : mise en valeur des fleurs ; déposition sur le cercueil d'une croix ou d'un autre signe chrétien (Bible, médaille de baptême, etc.) ; déposition du vêtement blanc ou des vêtements liturgiques ; mise en valeur du signe de la lumière.</p>
                 </div>
             </div>
-            <h4 class="titre titre_sousSection" id="titre_infoPenitentielle">Préparation pénitentielle et prière d'ouverture</h4>
-            <div class="sousSections" id="sousSection_infoPenitentielle">
-                <div class="numero facultatif" id="no_51">
+            <div class="sousSections facultatif" id="sousSection_infoPenitentielle">
+                <h4 class="titre titre_sousSection" id="titre_infoPenitentielle">Préparation pénitentielle et prière d'ouverture</h4>
+                <div class="numero" id="no_51">
                     <p class="rubrique">Pour les funérailles avec célébration de l'Eucharistie, le prêtre conclut ce premier temps de la célébration par la préparation pénitentielle et la prière d'ouverture.<br>Pour les funérailles avec seulement célébration de la Parole, la préparation pénitentielle est facultative.<br>On peut utiliser les invocations au Christ (voir <span class="ref ref_interne" id="ref_51_to_61">no 61 à 63</span>), puis le prêtre dit la prière d'ouverture, sauf s'il estime que la monition développée ou la prière qui accompagne les rites au choix en tenait lieu. La liturgie de la Parole suit immédiatement.</p>
                 </div>
             </div>
         </div>
-        <h3 class="titre titre_section" id="titre_salutation">Salutation d'ouverture</h3>
         <div class="sections" id="section_salutation">
-            <div class="numero obligatoire" id="no_52">
+            <h3 class="titre titre_section" id="titre_salutation">Salutation d'ouverture</h3>
+            <div class="numero" id="no_52">
                 <p class="rubrique">Après l'accueil préalable et le chant d'entrée, le prêtre salut l'assemblée soit par l'une des formules habituelles, soit par une monition adaptée. Outre les salutations qui se trouvent dans la Liturgie de la messe, on peut dire :</p>
                 <p class="oraison">Que le Dieu de l'espérance<br>vous donne en plénitude la paix dans la foi<br>et que le Seigneur soit toujours avec vous.</p>
                 <p class="repons">Et avec votre esprit.</p>
             </div>
         </div>
-        <h3 class="titre titre_section" id="titre_monitionEntree">Suggestions pour la monition</h3>
-        <div class="sections" id="section_monitionEntree">
-            <div class="numero facultatif" id="no_53">
+        <div class="sections facultatif" id="section_monitionEntree">
+            <h3 class="titre titre_section" id="titre_monitionEntree">Suggestions pour la monition</h3>
+            <div class="numero" id="no_53">
                 <p class="oraison">Si nous sommes réunis...<br>C'est pour entourer de notre (affection / sympathie / amitié) ceux qui sont dans la peine...</p>
                 <p class="rubrique">On pourra ici, dans certains cas, faire allusion au sens des condoléances, des fleurs, de la correspondance, etc.)</p>
                 <p class="oraison">C'est pour affirmer ensemble que tous ces liens que nous tissons tout au long de notre vie ne s'arrêtent pas avec la mort...</p>
@@ -96,18 +96,62 @@
                 <p class="oraison">C'est pour nous recueillir... pour prier... pour écouter la Parole de Dieu...pour célébrer l'Eucharistie...<br>C'est pour nous rappeler que Dieu se souvient de tout ce qu'il y a eu de vrai, de beau, de grand dans la vie de %N., et lui demander de l'accueillir...</p>
             </div>
         </div>
+        <div class="sections facultatif" id="section_hommage">
+            <h3 class="titre titre_section" id="titre_hommage">Hommage</h3>
+            <p class="hommage" id="hommage">Hommage de la famille par : %[hommage]</p>
+        </div>
+        <div class="sections facultatif" id="section_rite_au_choix">
+            <h3 class="titre titre_section" id="titre_riteChoix">Rites au choix</h3>
+            <div class="sousSections facultatif" id="souSection_riteLumiere">
+                <h4 class="titre titre_sousSection" id="titre_sousSection_riteLumiere">La lumière</h4>
+                <div class="numero" id="no_54">
+                    <p class="rubrique">Le cierge pascal ayant été allumé avant la célébration, le prêtre ou un memebre de la famille ou un proche du défunt prend de sa flamme pour la communiquer aux autres cierges. Ce geste est fait dans le silence et doit être bien visible.</p>
+                </div>
+                <div class="alternatives" id="alternatives_riteLumiere">
+                    <div class="alternative numero" id="no_55">
+                        <p class="rubrique">Le prêtre dit, par exemple :</p>
+                        <p class="oraison">Nous ranimons cette flamme <br> près de %N., notre %[frère/soeur].<br> Cette flamme qui vient de toi, Seigneur,<br> lumière dans notre obscurité, <br>qu'elle éclaire ce pas que nous avons à faire <br> pour repartir dans l'espérance.</p>
+                    </div>                    
+                    <div class="alternative numero" id="no_56">
+                        <p class="rubrique">Le prêtre dit, par exemple :</p>
+                        <p class="oraison">Dieu, notre Père,<br>la mort de %N., nous rappelle notre confition d'homme <br> et la brièveté de notre vie ;<br> mais pour ceux qui croient en ton amour <br> la mort n'est pas la fin de tout : <br> Il y a l'espérance des fils de Dieu <br> et, pour nous, brille la lumière <br> de la résurrection du Christ, vainqueur de la mort.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sousSections facultatif" id="sousSection_riteCroix">
+                <h4 class="titre titre_souSection" id="titre_sousSection_riteCroix">La croix</h4>
+                <div class="numero" id="no_57">
+                    <p class="rubrique">On peut mettre en valeur soit le crucifix offert par la famille, soit la croix de procession, si on l'utilise.</p>
+                </div>
+                <div class="alternatives" id="alternatives_riteCroix">
+                    <div class="alternative numero" id="no_58">
+                        <p class="rubrique">Dans ce cas, le prêtre, ou un membre de la famille, vient déposer le crucifix sur le cercueil, en disant, par exemple :</p>
+                        <p class="oraison">Cette croix que nous avons apportée,<br> nous la déposons maintenant.<br>Seigneur Jésus, rappelle-toi :<br> tu nous as aimés jusqu'à mourir pour nous ;<br>Que cette croix soit donc à nos yeux<br>le signe de ton amour pour %N., <br> et pour chacun de nous.</p>
+                    </div>
+                    <div class="alternative numero" id="no_59">
+                        <p class="rubrique">Dans ce cas, on dispose la croix de procession près du cercueil, seulement après la monition d'ouverture ; le gest est fait en silence. Puis le prêtre dit:</p>
+                        <p class="oraison">Le Seigneur Jésus nous a aimés<br>jusqu'à mourir pour nous,<br>cette croix nous le rappelle ; <br> qu'elle soit donc à nos yeux <br> le signe de son amour pour %N. <br> et pour chacun de nous.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sousSections facultatif" id="sousSection_riteVetement">
+                <h4 class="titre titre_souSection" id="titre_sousSection_riteVetement">Le vêtement liturgique</h4>
+                <div class="alternatives numero" id="alternatives_riteVetement">
+                    
+                </div>
+            </div>
+        </div>
     </div>
-    <h2 class="titre_parties" id="titre_parole">Liturgie de la parole</h2>
     <div class="parties" id="partie_parole">
+        <h2 class="titre_parties" id="titre_parole">Liturgie de la parole</h2>
         
     </div>
-    <h2 class="titre_parties" id="titre_messe">Liturgie de l'eucharistie</h2>
     <div class="parties" id="partie_messe">
+        <h2 class="titre_parties" id="titre_messe">Liturgie de l'eucharistie</h2>
         
     </div>
-    <h2 class="titre_parties" id="titre_adieu">Dernier adieu</h2>
     <div class="parties" id="partie_adieu">
-        
+        <h2 class="titre_parties" id="titre_adieu">Dernier adieu</h2>
     </div>
 </body>
 </html>
