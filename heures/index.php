@@ -277,12 +277,14 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
             <p class="titre3">Répons</p>
             <p><?php print_r( $cet_office["repons"] ); ?></p>
-            <p class="titre3">Antienne du Magnificat</p>
-            <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
-            <p class="titre3">Cantique du Magnificat</p>
-            <p><?php print_r($cet_office["cantique_mariale"]["texte"]); ?></p>
-            <p class="titre3">Antienne du Magnificat</p>
-            <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
+            <section class="cant_ev">
+                <p class="titre3">Antienne du Magnificat</p>
+                <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
+                <p class="titre3">Cantique du Magnificat</p>
+                <p><?php print_r($cet_office["cantique_mariale"]["texte"]); ?></p>
+                <p class="titre3">Antienne du Magnificat</p>
+                <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
+                </section>
             <p class="titre3">Intercession</p>
             <p><?php print_r($cet_office["intercession"]); ?></p>
             <p class="titre3">Notre Père</p>
