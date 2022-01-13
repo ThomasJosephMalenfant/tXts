@@ -192,30 +192,36 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     print_r($antienne); ?></p>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
-                </section>
-            <section class="psaume2">
                 <?php if ( $cet_office["antienne_2"] ) {
                     ?>
                     <p class="titre3">Antienne </p>
                     <p><?php print_r($cet_office["antienne_1"]); ?></p>
                     <p class="titre3">Antienne 2</p>
+                </section>
+            <section class="psaume2">
                     <p><?php
                         $antienne = $cet_office["antienne_2"] ;
                         print_r($antienne); ?> </p>
-                    <?php } ?>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume2">
+                <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
-                </section>
-            <section class="psaume3">
                 <?php if ( $cet_office["antienne_3"] ) {
                     ?>
+                </section>
+            <section class="psaume3">
                     <p class="titre3">Antienne</p>
                     <p><?php print_r($antienne); ?></p>
                     <p class="titre3">Antienne 3</p>
                     <p><?php
                             $antienne = $cet_office["antienne_3"] ;
                             print_r($antienne); ?></p>
-                    <?php } ?>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume3">
+                <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
                 <p class="titre3">Antienne</p>
