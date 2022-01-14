@@ -5,7 +5,7 @@ ob_start();
 if ( filter_input(INPUT_POST, 'data', FILTER_SANITIZE_STRING) ) { 
     ?>
     <!doctype html>
-    <html lang="en">
+    <html lang="fr">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Célébrations</title>

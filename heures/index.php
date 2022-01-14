@@ -99,43 +99,51 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p class="titre2">Laudes & lectures</p>
             <p class="titre3">Introduction</p>
             <p><?php print_r($cet_office["introduction"]); ?></p>
-            <p class="titre3">Antienne invitatoire</p>
-            <?php print_r($cet_office["antienne_invitatoire"]); ?>
-            <p class="titre3">Psaume invitatoire (<?php print_r($cet_office["psaume_invitatoire"]["reference"]); ?>)</p>
-            <?php print_r($cet_office["psaume_invitatoire"]["texte"]); ?>
-            <p class="titre3">Antienne invitatoire</p>
-            <?php print_r($cet_office["antienne_invitatoire"]); ?>
+            <section class="invitatoire">
+                <p class="titre3">Antienne invitatoire</p>
+                <?php print_r($cet_office["antienne_invitatoire"]); ?>
+                <p class="titre3">Psaume invitatoire (<?php print_r($cet_office["psaume_invitatoire"]["reference"]); ?>)</p>
+                <?php print_r($cet_office["psaume_invitatoire"]["texte"]); ?>
+                <p class="titre3">Antienne invitatoire</p>
+                <?php print_r($cet_office["antienne_invitatoire"]); ?>
+            </section>
             <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
             <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
-            <p class="titre3">Antienne 1</p>
-            <p><?php
-                $antienne = $cet_office["antienne_1"] ;
-                print_r($antienne); ?></p>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_2"] ) { 
-            ?>
-            <p class="titre3">Antienne</p>
-            <p><?php print_r($antienne); ?></p>
-            <p class="titre3">Antienne 2</p>
-            <p><?php
-                $antienne = $cet_office["antienne_2"] ;
-                print_r($antienne); ?></p>
-                <?php } ?>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_3"] )  
-            ?>
-            <p class="titre3">Antienne</p>
-            <p><?php print_r($antienne); ?></p>
-            <p class="titre3">Antienne 3</p>
-            <p><?php
-                $antienne = $cet_office["antienne_3"] ;
-                print_r($antienne); ?> </p>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
-            <p class="titre3">Antienne 3</p>
-            <p><?php print_r($antienne); ?></p>
+            <section class="psaume1">
+                <p class="titre3">Antienne 1</p>
+                <p><?php
+                    $antienne = $cet_office["antienne_1"] ;
+                    print_r($antienne); ?></p>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_2"] ) { 
+                ?>
+                <p class="titre3">Antienne</p>
+                <p><?php print_r($antienne); ?></p>
+                </section>
+            <section class="psaume2">
+                <p class="titre3">Antienne 2</p>
+                <p><?php
+                    $antienne = $cet_office["antienne_2"] ;
+                    print_r($antienne); ?></p>
+                    <?php } ?>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_3"] )  
+                ?>
+                <p class="titre3">Antienne</p>
+                <p><?php print_r($antienne); ?></p>
+                </section>
+            <section class="psaume3">
+                <p class="titre3">Antienne 3</p>
+                <p><?php
+                    $antienne = $cet_office["antienne_3"] ;
+                    print_r($antienne); ?> </p>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
+                <p class="titre3">Antienne 3</p>
+                <p><?php print_r($antienne); ?></p>
+                </section>
             <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
             <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
             <p class="titre3">Répons</p>
@@ -154,12 +162,14 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r( $textes["messes"]["messes"][0]["lectures"][$evang]['ref'] ) ; ?></p>
             <p><?php print_r( $textes["messes"]["messes"][0]["lectures"][$evang]['contenu'] ) ; ?></p>
             <p class="titre3">Oraison 15 minutes</p>
-            <p class="titre3">Antienne de Zacharie</p>
-            <p><?php print_r($cet_office["antienne_zacharie"]); ?></p>
-            <p class="titre3">Cantique de Zacharie</p>
-            <p><?php print_r($cet_office["cantique_zacharie"]["texte"]); ?></p>
-            <p class="titre3">Antienne de Zacharie</p>
-            <p><?php print_r($cet_office["antienne_zacharie"]); ?></p>
+            <section class="cant_ev">
+                <p class="titre3">Antienne de Zacharie</p>
+                <p><?php print_r($cet_office["antienne_zacharie"]); ?></p>
+                <p class="titre3">Cantique de Zacharie</p>
+                <p><?php print_r($cet_office["cantique_zacharie"]["texte"]); ?></p>
+                <p class="titre3">Antienne de Zacharie</p>
+                <p><?php print_r($cet_office["antienne_zacharie"]); ?></p>
+                </section>
             <p class="titre3">Intercession</p>
             <p><?php print_r($cet_office["intercession"]); ?></p>
             <p class="titre3">Notre Père</p>
@@ -175,36 +185,48 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r($cet_office["introduction"]); ?></p>
             <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
             <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
-            <p class="titre3">Antienne 1</p>
-            <p><?php
-                $antienne = $cet_office["antienne_1"] ;
-                print_r($antienne); ?></p>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_2"] ) {
-                ?>
-                <p class="titre3">Antienne </p>
-                <p><?php print_r($cet_office["antienne_1"]); ?></p>
-                <p class="titre3">Antienne 2</p>
+            <section class="psaume1">
+                <p class="titre3">Antienne 1</p>
                 <p><?php
-                    $antienne = $cet_office["antienne_2"] ;
-                    print_r($antienne); ?> </p>
-                <?php } ?>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_3"] ) {
-                ?>
+                    $antienne = $cet_office["antienne_1"] ;
+                    print_r($antienne); ?></p>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_2"] ) {
+                    ?>
+                    <p class="titre3">Antienne </p>
+                    <p><?php print_r($cet_office["antienne_1"]); ?></p>
+                    <p class="titre3">Antienne 2</p>
+                </section>
+            <section class="psaume2">
+                    <p><?php
+                        $antienne = $cet_office["antienne_2"] ;
+                        print_r($antienne); ?> </p>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume2">
+                <?php }?>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_3"] ) {
+                    ?>
+                </section>
+            <section class="psaume3">
+                    <p class="titre3">Antienne</p>
+                    <p><?php print_r($antienne); ?></p>
+                    <p class="titre3">Antienne 3</p>
+                    <p><?php
+                            $antienne = $cet_office["antienne_3"] ;
+                            print_r($antienne); ?></p>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume3">
+                <?php }?>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
                 <p class="titre3">Antienne</p>
                 <p><?php print_r($antienne); ?></p>
-                <p class="titre3">Antienne 3</p>
-                <p><?php
-                        $antienne = $cet_office["antienne_3"] ;
-                        print_r($antienne); ?></p>
-                <?php } ?>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
-            <p class="titre3">Antienne</p>
-            <p><?php print_r($antienne); ?></p>
+                </section>
             <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
             <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
             <p class="titre3">Répons</p>
@@ -221,46 +243,54 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r($cet_office["introduction"]); ?></p>
             <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
             <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
-            <p class="titre3">Antienne 1</p>
-            <p><?php
-                $antienne = $cet_office["antienne_1"] ;
-                print_r($antienne); ?></p>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_2"] ) {
-                ?>
-                <p class="titre3">Antienne </p>
-                <p><?php print_r($cet_office["antienne_1"]); ?></p>
-                <p class="titre3">Antienne 2</p>
+            <section class="psaume1">
+                <p class="titre3">Antienne 1</p>
                 <p><?php
-                    $antienne = $cet_office["antienne_2"] ;
-                    print_r($antienne); ?> </p>
-                <?php } ?>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_3"] ) {
-                ?>
+                    $antienne = $cet_office["antienne_1"] ;
+                    print_r($antienne); ?></p>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_2"] ) {
+                    ?>
+                    <p class="titre3">Antienne </p>
+                    <p><?php print_r($cet_office["antienne_1"]); ?></p>
+                </section>
+            <section class="psaume2">
+                    <p class="titre3">Antienne 2</p>
+                    <p><?php
+                        $antienne = $cet_office["antienne_2"] ;
+                        print_r($antienne); ?> </p>
+                    <?php } ?>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_3"] ) {
+                    ?>
+                    <p class="titre3">Antienne</p>
+                    <p><?php print_r($antienne); ?></p>
+                </section>
+            <section class="psaume3">
+                    <p class="titre3">Antienne 3</p>
+                    <p><?php
+                            $antienne = $cet_office["antienne_3"] ;
+                            print_r($antienne); ?></p>
+                    <?php } ?>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
                 <p class="titre3">Antienne</p>
                 <p><?php print_r($antienne); ?></p>
-                <p class="titre3">Antienne 3</p>
-                <p><?php
-                        $antienne = $cet_office["antienne_3"] ;
-                        print_r($antienne); ?></p>
-                <?php } ?>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
-            <p class="titre3">Antienne</p>
-            <p><?php print_r($antienne); ?></p>
+                </section>
             <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
             <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
             <p class="titre3">Répons</p>
             <p><?php print_r( $cet_office["repons"] ); ?></p>
-            <p class="titre3">Antienne du Magnificat</p>
-            <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
-            <p class="titre3">Cantique du Magnificat</p>
-            <p><?php print_r($cet_office["cantique_mariale"]["texte"]); ?></p>
-            <p class="titre3">Antienne du Magnificat</p>
-            <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
+            <section class="cant_ev">
+                <p class="titre3">Antienne du Magnificat</p>
+                <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
+                <p class="titre3">Cantique du Magnificat</p>
+                <p><?php print_r($cet_office["cantique_mariale"]["texte"]); ?></p>
+                <p class="titre3">Antienne du Magnificat</p>
+                <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
+                </section>
             <p class="titre3">Intercession</p>
             <p><?php print_r($cet_office["intercession"]); ?></p>
             <p class="titre3">Notre Père</p>
