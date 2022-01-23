@@ -5,5 +5,10 @@ p {
 }
 
 .double {
-    background-color: blue;
+    background-color: lightgray;
+    column-count: 2;
+    column-gap: 10px ;
+    column-rule-style: solid;
+    column-rule-width: 1px;
+
 }
