@@ -122,7 +122,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             $dom = new DOMDocument;
             $dom->loadHTML($cet_office["psaume_2"]["texte"]);            
             if ($dom->getElementsByTagName('br')->length > 40) {
-                $classe2 = 'class="psaume2 double"';
+                $classe2 = 'class="psaume2 double' . $dom->getElementsByTagName('br')->length . '"';
             } else {
                 $classe2 = 'class="psaume2"';
             }
@@ -132,7 +132,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             if ($dom->getElementsByTagName('br')->length > 40) {
                 $classe3 = 'class="psaume3 double"';
             } else {
-                $classe3 = 'class="psaume3"';
+                $classe2 = 'class="psaume3 ' . $dom->getElementsByTagName('br')->length . '"';
             }
             ?>
             <section <?php print_r($classe1); ?>>
