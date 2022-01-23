@@ -443,20 +443,48 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r($cet_office["introduction"]); ?></p>
             <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
             <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
-            <p class="titre3">Antienne 1</p>
-            <p><?php
-                $antienne = $cet_office["antienne_1"] ;
-                print_r($antienne); ?></p>
-            <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
-            <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
-            <?php if ( $cet_office["antienne_2"] ) {
-                ?>
+            <?php
+            $dom = new DOMDocument;
+            $dom->loadHTML($cet_office["psaume_1"]["texte"]);            
+            if ($dom->getElementsByTagName('br')->length > 34) {
+                if ($dom->getElementsByTagName('br')->length > 70) {
+                    $classe1 = 'class="psaume1 triple"'; 
+                } else {
+                    $classe1 = 'class="psaume1 double"';
+                }
+            } else {
+                $classe1 = 'class="psaume1"';
+            }
+
+            $dom = new DOMDocument;
+            $dom->loadHTML($cet_office["psaume_2"]["texte"]);            
+            if ($dom->getElementsByTagName('br')->length > 34) {
+                if ($dom->getElementsByTagName('br')->length > 70) {
+                    $classe2 = 'class="psaume2 triple"'; 
+                } else {
+                    $classe2 = 'class="psaume2 double"';
+                }
+            } else {
+                $classe2 = 'class="psaume2"';
+            }
+            ?>
+            <section <?php print_r($classe1); ?>>
+                <p class="titre3">Antienne 1</p>
+                <p><?php
+                    $antienne = $cet_office["antienne_1"] ;
+                    print_r($antienne); ?></p>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
+                <?php if ( $cet_office["antienne_2"] ) {
+                    ?>
                 <p class="titre3">Antienne </p>
                 <p><?php print_r($cet_office["antienne_1"]); ?></p>
-                <p class="titre3">Antienne 2</p>
-                <p><?php
-                    $antienne = $cet_office["antienne_2"] ;
-                    print_r($antienne); ?> </p>
+                </section>
+                <section <?php print_r($classe2); ?>>
+                    <p class="titre3">Antienne 2</p>
+                    <p><?php
+                        $antienne = $cet_office["antienne_2"] ;
+                        print_r($antienne); ?> </p>
                 <?php }
             if ( $cet_office["psaume_2"] ) {
                 ?>
@@ -466,6 +494,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <?php } ?>
             <p class="titre3">Antienne </p>
             <p><?php print_r($antienne); ?></p>
+            </section>
             <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
             <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
             <p class="titre3">Répons</p>
