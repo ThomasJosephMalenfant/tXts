@@ -3,7 +3,9 @@ require_once '../env.php';
 
 ob_start();
 if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
-
+    // BUG <Section> psaume invitatoire intègre l'hymne
+    // FIXME dispatch de <section> gère mal antiennes finale sur laudes, vêpres et complies (faire comme sur Sexte)  
+    // TODO Quand un psaume a plus que X ligne, <section class=*_double> css: 2 columns
     //  *Construction des variables en fonction du jour choisi*
 
     //  Semaine actuelle = 0, ...
@@ -15,10 +17,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
     //  Génération de la date-string
     $jour = new DateTime('last sunday');
     $jour->modify($ajoutsemaine);
-    $jour->modify('-1 day');
-    for ($i=0; $i < 7 ; $i++) { 
+    
+//    for ($i=0; $i < 7 ; $i++) {  // Ligne originale fix racourcir pendant dbug
+    for ($i=0; $i < 1 ; $i++) { 
             
-        $jour->modify('+1 day');
         $textes = array();
         
         //  Liste des offices inclus
@@ -26,10 +28,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             "informations",
             "messes",
             "lectures",
-            "laudes",
+            "laudes"/* ,
             "sexte",
             "vepres",
-            "complies"
+            "complies" */
             ) ;   
         // **Extraction des textes
         foreach ($offices as $office) {
@@ -66,7 +68,6 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             //  Ajout du texte de l'office $office
             $textes[$office] = $data ;
         }
-
         // Génération de la page synthèse
         if ($i == 0 ) { // Entête pour le premier jour
             ?>
@@ -106,9 +107,11 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <?php print_r($cet_office["psaume_invitatoire"]["texte"]); ?>
                 <p class="titre3">Antienne invitatoire</p>
                 <?php print_r($cet_office["antienne_invitatoire"]); ?>
-            </section>
-            <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
-            <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
+                </section>
+            <section class="hymne">
+                <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
+                <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
+                </section>
             <section class="psaume1">
                 <p class="titre3">Antienne 1</p>
                 <p><?php
@@ -346,7 +349,8 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p class="titre3"><?php print_r( $cet_office["hymne_mariale"]["titre"]) ; ?> </p>
             <p><?php print_r( $cet_office["hymne_mariale"]["texte"]) ; ?> </p>
             <hr class="fin" >
-    <?php
+        <?php
+        $jour->modify('+1 day');
     }
     ?>
         </body>
