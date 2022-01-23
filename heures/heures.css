@@ -1,7 +1,7 @@
 @import "../commun/commun.css" ;
 
 body {
-    font-size: 20px;
+    font-size: 19px;
 }
 
 .double {
@@ -10,7 +10,7 @@ body {
 }
 
 .triple {
-    font-size: 14px;
+    font-size: 16px;
     column-count: 3;
     column-gap: 4px ;
 }

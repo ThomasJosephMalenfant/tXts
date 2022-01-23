@@ -238,6 +238,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r($cet_office["introduction"]); ?></p>
             <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
             <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
+            <?php
             $dom = new DOMDocument;
             $dom->loadHTML($cet_office["psaume_1"]["texte"]);            
             if ($dom->getElementsByTagName('br')->length > 34) {
@@ -332,6 +333,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             <p><?php print_r($cet_office["introduction"]); ?></p>
             <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
             <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
+            <?php
             $dom = new DOMDocument;
             $dom->loadHTML($cet_office["psaume_1"]["texte"]);            
             if ($dom->getElementsByTagName('br')->length > 34) {
