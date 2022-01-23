@@ -3,7 +3,6 @@ require_once '../env.php';
 
 ob_start();
 if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
-    // TODO Quand un psaume a plus que X ligne, <section class=*_double> css: 2 columns
     //  *Construction des variables en fonction du jour choisi*
 
     //  Semaine actuelle = 0, ...
@@ -16,8 +15,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
     $jour = new DateTime('last sunday');
     $jour->modify($ajoutsemaine);
     
-//    for ($i=0; $i < 7 ; $i++) {  // Ligne originale fix racourcir pendant dbug
-    for ($i=0; $i < 1 ; $i++) { 
+    for ($i=0; $i < 7 ; $i++) {  // Ligne originale fix racourcir pendant dbug
             
         $textes = array();
         
