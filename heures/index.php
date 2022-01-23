@@ -3,7 +3,6 @@ require_once '../env.php';
 
 ob_start();
 if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
-    // FIXME dispatch de <section> gère mal antiennes finale sur laudes, vêpres et complies (faire comme sur Sexte)  
     // TODO Quand un psaume a plus que X ligne, <section class=*_double> css: 2 columns
     //  *Construction des variables en fonction du jour choisi*
 
@@ -27,10 +26,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             "informations",
             "messes",
             "lectures",
-            "laudes"/* ,
+            "laudes",
             "sexte",
             "vepres",
-            "complies" */
+            "complies"
             ) ;   
         // **Extraction des textes
         foreach ($offices as $office) {
@@ -111,7 +110,26 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
                 <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
                 </section>
-                <section class="psaume1">
+            <?php
+            if (substr_count($cet_office["psaume_1"]["texte"],"<br>") > 40) {
+                $classe1 = 'class="psaume1 double"';
+            } else {
+                $classe1 = 'class="psaume1"';
+            }
+
+            if (substr_count($cet_office["psaume_2"]["texte"],"<br>") > 40) {
+                $classe2 = 'class="psaume2 double"';
+            } else {
+                $classe2 = 'class="psaume2"';
+            }
+            
+            if (substr_count($cet_office["psaume_3"]["texte"],"<br>") > 40) {
+                $classe3 = 'class="psaume3 double"';
+            } else {
+                $classe3 = 'class="psaume3"';
+            }
+            ?>
+            <section <?php print_r($classe1); ?>>
                 <p class="titre3">Antienne 1</p>
                 <p><?php
                     $antienne = $cet_office["antienne_1"] ;
@@ -123,14 +141,14 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     <p class="titre3">Antienne </p>
                     <p><?php print_r($cet_office["antienne_1"]); ?></p>
                 </section>
-            <section class="psaume2">
+            <section <?php print_r($classe2); ?>>
                 <p class="titre3">Antienne 2</p>
                     <p><?php
                         $antienne = $cet_office["antienne_2"] ;
                         print_r($antienne); ?> </p>
                     <?php } else { ?> 
                 </section>
-            <section class="psaume2">
+            <section <?php print_r($classe2); ?>>
                 <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
@@ -139,14 +157,14 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     <p class="titre3">Antienne</p>
                     <p><?php print_r($antienne); ?></p>
                 </section>
-            <section class="psaume3">
+            <section <?php print_r($classe3); ?>>
                     <p class="titre3">Antienne 3</p>
                     <p><?php
                             $antienne = $cet_office["antienne_3"] ;
                             print_r($antienne); ?></p>
                     <?php } else { ?> 
                 </section>
-            <section class="psaume3">
+            <section <?php print_r($classe3); ?>>
                 <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
