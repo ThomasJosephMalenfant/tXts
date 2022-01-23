@@ -117,7 +117,7 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 $classe1 = 'class="psaume1"';
             }
  */
-            $classe1 = 'class="psaum_' .   substr_count($cet_office["psaume_1"]["texte"],"terre") . '"' ;
+            $classe1 = 'class="psaum_' .   substr_count($cet_office["psaume_1"]["texte"],"<br>") . '"' ;
              if (substr_count($cet_office["psaume_2"]["texte"],"<br>") > 40) {
                 $classe2 = 'class="psaume2 double"';
             } else {
