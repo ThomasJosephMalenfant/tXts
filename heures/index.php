@@ -111,13 +111,14 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
                 </section>
             <?php
-            if (substr_count($cet_office["psaume_1"]["texte"],"<br>") > 40) {
+/*             if (substr_count($cet_office["psaume_1"]["texte"],"<br>") > 40) {
                 $classe1 = 'class="psaume1 double"';
             } else {
                 $classe1 = 'class="psaume1"';
             }
-
-            if (substr_count($cet_office["psaume_2"]["texte"],"<br>") > 40) {
+ */
+            $classe1 = 'class="psaum_' . substr_count($cet_office["psaume_1"]["texte"],"<br>") . '"' ;
+             if (substr_count($cet_office["psaume_2"]["texte"],"<br>") > 40) {
                 $classe2 = 'class="psaume2 double"';
             } else {
                 $classe2 = 'class="psaume2"';
