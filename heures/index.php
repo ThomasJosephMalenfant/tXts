@@ -111,22 +111,25 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
                 </section>
             <?php
-/*             if (substr_count($cet_office["psaume_1"]["texte"],"<br>") > 40) {
+            $dom = new DOMDocument;
+            $dom->loadHTML($cet_office["psaume_1"]["texte"]);            
+            if ($dom->getElementsByTagName('br')->length > 40) {
                 $classe1 = 'class="psaume1 double"';
             } else {
                 $classe1 = 'class="psaume1"';
             }
- */
+
             $dom = new DOMDocument;
-            $dom->loadHTML($cet_office["psaume_1"]["texte"]);            
-            $classe1 = 'class="psaum_' .   $dom->getElementsByTagName('br')->length . '"' ;
-             if (substr_count($cet_office["psaume_2"]["texte"],"<br>") > 40) {
+            $dom->loadHTML($cet_office["psaume_2"]["texte"]);            
+            if ($dom->getElementsByTagName('br')->length > 40) {
                 $classe2 = 'class="psaume2 double"';
             } else {
                 $classe2 = 'class="psaume2"';
             }
             
-            if (substr_count($cet_office["psaume_3"]["texte"],"<br>") > 40) {
+            $dom = new DOMDocument;
+            $dom->loadHTML($cet_office["psaume_3"]["texte"]);            
+            if ($dom->getElementsByTagName('br')->length > 40) {
                 $classe3 = 'class="psaume3 double"';
             } else {
                 $classe3 = 'class="psaume3"';
