@@ -196,9 +196,9 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     ?>
                     <p class="titre3">Antienne </p>
                     <p><?php print_r($cet_office["antienne_1"]); ?></p>
-                    <p class="titre3">Antienne 2</p>
                 </section>
             <section class="psaume2">
+                <p class="titre3">Antienne 2</p>
                     <p><?php
                         $antienne = $cet_office["antienne_2"] ;
                         print_r($antienne); ?> </p>
@@ -210,10 +210,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
                 <?php if ( $cet_office["antienne_3"] ) {
                     ?>
-                </section>
-            <section class="psaume3">
                     <p class="titre3">Antienne</p>
                     <p><?php print_r($antienne); ?></p>
+                </section>
+            <section class="psaume3">
                     <p class="titre3">Antienne 3</p>
                     <p><?php
                             $antienne = $cet_office["antienne_3"] ;
