@@ -1,10 +1,16 @@
 @import "../commun/commun.css" ;
 
 p {
-    font-size: larger;
+    font-size: 20px;
 }
 
 .double {
     column-count: 2;
     column-gap: 10px ;
+}
+
+.triple {
+    font-size: 14px;
+    column-count: 3;
+    column-gap: 4px ;
 }

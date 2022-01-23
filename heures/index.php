@@ -114,25 +114,37 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             $dom = new DOMDocument;
             $dom->loadHTML($cet_office["psaume_1"]["texte"]);            
             if ($dom->getElementsByTagName('br')->length > 34) {
-                $classe1 = 'class="psaume1 double"';
+                if ($dom->getElementsByTagName('br')->length > 70) {
+                    $classe1 = 'class="psaume1 triple"'; 
+                } else {
+                    $classe1 = 'class="psaume1 double"';
+                }
             } else {
                 $classe1 = 'class="psaume1"';
             }
 
             $dom = new DOMDocument;
             $dom->loadHTML($cet_office["psaume_2"]["texte"]);            
-            if ($dom->getElementsByTagName('br')->length > 40) {
-                $classe2 = 'class="psaume2 double' . $dom->getElementsByTagName('br')->length . '"';
+            if ($dom->getElementsByTagName('br')->length > 34) {
+                if ($dom->getElementsByTagName('br')->length > 70) {
+                    $classe2 = 'class="psaume2 triple"'; 
+                } else {
+                    $classe2 = 'class="psaume2 double"';
+                }
             } else {
                 $classe2 = 'class="psaume2"';
             }
             
             $dom = new DOMDocument;
             $dom->loadHTML($cet_office["psaume_3"]["texte"]);            
-            if ($dom->getElementsByTagName('br')->length > 40) {
-                $classe3 = 'class="psaume3 double"';
+            if ($dom->getElementsByTagName('br')->length > 34) {
+                if ($dom->getElementsByTagName('br')->length > 70) {
+                    $classe3 = 'class="psaume3 triple"'; 
+                } else {
+                    $classe3 = 'class="psaume3 double"';
+                }
             } else {
-                $classe3 = 'class="psaume3 ' . $dom->getElementsByTagName('br')->length . '"';
+                $classe3 = 'class="psaume3"';
             }
             ?>
             <section <?php print_r($classe1); ?>>
