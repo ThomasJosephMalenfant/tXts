@@ -3,7 +3,6 @@ require_once '../env.php';
 
 ob_start();
 if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
-    // BUG <Section> psaume invitatoire intègre l'hymne
     // FIXME dispatch de <section> gère mal antiennes finale sur laudes, vêpres et complies (faire comme sur Sexte)  
     // TODO Quand un psaume a plus que X ligne, <section class=*_double> css: 2 columns
     //  *Construction des variables en fonction du jour choisi*
@@ -112,53 +111,66 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p class="titre3">Hymne : <?php print_r($cet_office["hymne"]["titre"]); ?></p>
                 <p><?php print_r($cet_office["hymne"]["texte"]); ?> </p>
                 </section>
-            <section class="psaume1">
+                <section class="psaume1">
                 <p class="titre3">Antienne 1</p>
                 <p><?php
                     $antienne = $cet_office["antienne_1"] ;
                     print_r($antienne); ?></p>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_1"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_1"]["texte"]); ?></p>
-                <?php if ( $cet_office["antienne_2"] ) { 
-                ?>
-                <p class="titre3">Antienne</p>
-                <p><?php print_r($antienne); ?></p>
+                <?php if ( $cet_office["antienne_2"] ) {
+                    ?>
+                    <p class="titre3">Antienne </p>
+                    <p><?php print_r($cet_office["antienne_1"]); ?></p>
                 </section>
             <section class="psaume2">
                 <p class="titre3">Antienne 2</p>
-                <p><?php
-                    $antienne = $cet_office["antienne_2"] ;
-                    print_r($antienne); ?></p>
-                    <?php } ?>
+                    <p><?php
+                        $antienne = $cet_office["antienne_2"] ;
+                        print_r($antienne); ?> </p>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume2">
+                <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
-                <?php if ( $cet_office["antienne_3"] )  
-                ?>
+                <?php if ( $cet_office["antienne_3"] ) {
+                    ?>
+                    <p class="titre3">Antienne</p>
+                    <p><?php print_r($antienne); ?></p>
+                </section>
+            <section class="psaume3">
+                    <p class="titre3">Antienne 3</p>
+                    <p><?php
+                            $antienne = $cet_office["antienne_3"] ;
+                            print_r($antienne); ?></p>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume3">
+                <?php }?>
+                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
+                <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
                 <p class="titre3">Antienne</p>
                 <p><?php print_r($antienne); ?></p>
                 </section>
-            <section class="psaume3">
-                <p class="titre3">Antienne 3</p>
-                <p><?php
-                    $antienne = $cet_office["antienne_3"] ;
-                    print_r($antienne); ?> </p>
-                <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
-                <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
-                <p class="titre3">Antienne 3</p>
-                <p><?php print_r($antienne); ?></p>
+            <section class="parole_Dieu">
+                <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
+                <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
+                <p class="titre3">Répons</p>
+                <p><?php print_r($cet_office["repons"]  ); ?></p>
                 </section>
-            <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
-            <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
-            <p class="titre3">Répons</p>
-            <p><?php print_r($cet_office["repons"]  ); ?></p>
-            <p class="titre3">Lecture : <?php print_r("(" . $textes["lectures"]["lectures"]["lecture"]["reference"] . ")"); ?></p>
-            <p><?php print_r($textes["lectures"]["lectures"]["lecture"]["texte"]); ?></p>
-            <p class="titre3">Répons</p>
-            <p><?php print_r($textes["lectures"]["lectures"]["repons_lecture"]); ?></p>
-            <p class="titre3"><?php print_r($textes["lectures"]["lectures"]["titre_patristique"]); ?></p>
-            <p><?php print_r($textes["lectures"]["lectures"]["texte_patristique"]); ?></p>
-            <p class="titre3">Répons</p>
-            <p><?php print_r( $textes["lectures"]["lectures"]["repons_patristique"] ) ; ?></p>
+            <section class="lecture_longue">
+                <p class="titre3">Lecture : <?php print_r("(" . $textes["lectures"]["lectures"]["lecture"]["reference"] . ")"); ?></p>
+                <p><?php print_r($textes["lectures"]["lectures"]["lecture"]["texte"]); ?></p>
+                <p class="titre3">Répons</p>
+                <p><?php print_r($textes["lectures"]["lectures"]["repons_lecture"]); ?></p>
+                </section>
+            <section class="patristique">
+                <p class="titre3"><?php print_r($textes["lectures"]["lectures"]["titre_patristique"]); ?></p>
+                <p><?php print_r($textes["lectures"]["lectures"]["texte_patristique"]); ?></p>
+                <p class="titre3">Répons</p>
+                <p><?php print_r( $textes["lectures"]["lectures"]["repons_patristique"] ) ; ?></p>
+                </section>
             <?php $evang = count($textes['messes']['messes'][0]['lectures']) ;
                     $evang-- ;?>
             <p class="titre3"><?php print_r($textes["messes"]["messes"][0]["lectures"][$evang]['intro_lue']); ?></p>
@@ -173,8 +185,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p class="titre3">Antienne de Zacharie</p>
                 <p><?php print_r($cet_office["antienne_zacharie"]); ?></p>
                 </section>
-            <p class="titre3">Intercession</p>
-            <p><?php print_r($cet_office["intercession"]); ?></p>
+            <section class="intercessions">
+                <p class="titre3">Intercession</p>
+                <p><?php print_r($cet_office["intercession"]); ?></p>
+                </section>
             <p class="titre3">Notre Père</p>
             <p class="titre3">Oraison</p>
             <p><?php print_r($cet_office["oraison"]); ?></p>
@@ -259,11 +273,14 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     <p><?php print_r($cet_office["antienne_1"]); ?></p>
                 </section>
             <section class="psaume2">
-                    <p class="titre3">Antienne 2</p>
+                <p class="titre3">Antienne 2</p>
                     <p><?php
                         $antienne = $cet_office["antienne_2"] ;
                         print_r($antienne); ?> </p>
-                    <?php } ?>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume2">
+                <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_2"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_2"]["texte"]); ?></p>
                 <?php if ( $cet_office["antienne_3"] ) {
@@ -276,16 +293,21 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                     <p><?php
                             $antienne = $cet_office["antienne_3"] ;
                             print_r($antienne); ?></p>
-                    <?php } ?>
+                    <?php } else { ?> 
+                </section>
+            <section class="psaume3">
+                <?php }?>
                 <p class="titre3">Psaume : <?php print_r($cet_office["psaume_3"]["reference"]); ?></p>
                 <p><?php print_r($cet_office["psaume_3"]["texte"]); ?></p>
                 <p class="titre3">Antienne</p>
                 <p><?php print_r($antienne); ?></p>
                 </section>
-            <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
-            <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
-            <p class="titre3">Répons</p>
-            <p><?php print_r( $cet_office["repons"] ); ?></p>
+            <section class="parole_Dieu">
+                <p class="titre3">Parole de Dieu : <?php print_r("(" . $cet_office["pericope"]["reference"] . ")"); ?></p>
+                <p><?php print_r($cet_office["pericope"]["texte"]); ?></p>
+                <p class="titre3">Répons</p>
+                <p><?php print_r( $cet_office["repons"] ); ?></p>
+                </section>
             <section class="cant_ev">
                 <p class="titre3">Antienne du Magnificat</p>
                 <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
@@ -294,8 +316,10 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
                 <p class="titre3">Antienne du Magnificat</p>
                 <p><?php print_r($cet_office["antienne_magnificat"]); ?></p>
                 </section>
-            <p class="titre3">Intercession</p>
-            <p><?php print_r($cet_office["intercession"]); ?></p>
+            <section class="intercessions">
+                <p class="titre3">Intercession</p>
+                <p><?php print_r($cet_office["intercession"]); ?></p>
+                </section>
             <p class="titre3">Notre Père</p>
             <p class="titre3">Oraison</p>
             <p><?php print_r($cet_office["oraison"]); ?></p>
