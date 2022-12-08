@@ -37,7 +37,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 				<?php
 					$no_chapitre = 0 ;
 					$no_verset = 0 ;
-					print '</br><div class="editeur" contentEditable="true"><pre>' ;
+					print '</br><div class="editeur" contentEditable="true">' ;
 					foreach ($pericope->versets as $verset) {
 						$old_chap = $no_chapitre ;
 						$no_chapitre = $verset["chapitre"] ;
@@ -51,7 +51,7 @@ if ( $references = filter_input(INPUT_POST, 'reference', FILTER_SANITIZE_STRING)
 							print '<p class="verset_pericope" >' . $verset["texte"] . "</p>";
 						}
 					}
-					print '</pre></div>' ;
+					print '</div>' ;
 		} else {
 			?>
 			<h1 class="titre1"> Erreurs </h1>
