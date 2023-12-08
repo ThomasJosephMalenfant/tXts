@@ -455,16 +455,17 @@ if ( $semaine_nb = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT) ) {
             }
 
             $dom = new DOMDocument;
-            $dom->loadHTML($cet_office["psaume_2"]["texte"]);            
-            if ($dom->getElementsByTagName('br')->length > 34) {
-                if ($dom->getElementsByTagName('br')->length > 70) {
-                    $classe2 = 'class="psaume2 triple"'; 
-                } else {
-                    $classe2 = 'class="psaume2 double"';
+            $classe2 = 'class="psaume2"';
+            if ( $dom->loadHTML($cet_office["psaume_2"]["texte"]) ) {            
+                if ($dom->getElementsByTagName('br')->length > 34) {
+                    if ($dom->getElementsByTagName('br')->length > 70) {
+                        $classe2 = 'class="psaume2 triple"'; 
+                    } else {
+                        $classe2 = 'class="psaume2 double"';
+                    }
                 }
-            } else {
-                $classe2 = 'class="psaume2"';
             }
+
             ?>
             <section <?php print_r($classe1); ?>>
                 <p class="titre3">Antienne 1</p>
